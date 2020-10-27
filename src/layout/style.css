@@ -5,6 +5,9 @@
 
 /*------------- This is for NAVBAR  --------------------*/
 
+.container{
+  margin: 20px 0px;
+}
 
 .navbar-brand {
     margin: 0 !important;
@@ -31,6 +34,7 @@
     color: white !important;
     padding: 7px 0 5px 0 !important;
     letter-spacing: 0.0625em;
+
   }
   .navft
   {
@@ -40,6 +44,7 @@
   }
   .navhead{
     color: #212529 ;
+    margin: 10px 0;
   }
   /* .navbar-search{
     width: 250px;
@@ -76,7 +81,7 @@
       
       text-transform: uppercase;
       font-weight: 500 !important;
-      font-size: 0.75rem !important;
+      font-size: 18px !important;
       margin: 0 !important;
       padding-left: 8px !important;
       padding-right: 8px !important;

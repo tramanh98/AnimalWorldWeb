@@ -203,21 +203,43 @@ class NavFoot extends React.Component {
                                     <i className="fa fa-fw fa-home"></i>
                                 </a>
                             </li>
+                            <li className="nav-item dropdown">
+                                <a className="nav-link font-navbar" href="#" id="navbardrop" data-toggle="dropdown">
+                                    TÌM HIỂU
+                                </a>
+                                <div className="dropdown-menu">
+                                    <a className="dropdown-item" onClick = {this.lastestPost}>ĐỘNG VẬT HOANG DÃ</a>
+                                    <a className="dropdown-item" onClick = {this.lastestPost}>ĐỘNG VẬT QUÝ HIẾM</a>
+                                    <a className="dropdown-item" onClick = {this.lastestPost}>ĐỘNG VẬT NGUY HIỂM</a>
+                                    <a className="dropdown-item" onClick = {this.lastestPost}>NƯỚC - ĐẠI DƯƠNG</a>
+                                    <a className="dropdown-item" onClick = {this.lastestPost}>TRÊN CẠN</a>
+                                    <a className="dropdown-item" onClick = {this.lastestPost}>THÚ NUÔI TRONG NHÀ</a>             
+                                </div>
+                            </li> 
 
                             <li className="nav-item dropdown">
                                 <a className="nav-link font-navbar" href="#" id="navbardrop" data-toggle="dropdown">
-                                    Loài động vật
+                                    LỚP ĐỘNG VẬT
                                 </a>
                                 <div className="dropdown-menu">
-                                    <a className="dropdown-item" onClick = {this.lastestPost}>Item 11</a>
-                                    <a className="dropdown-item" onClick = {this.lastestPost}>Item 12</a>
-                                    <a className="dropdown-item" onClick = {this.lastestPost}>Item 13</a>
+                                    <a className="dropdown-item" onClick = {this.lastestPost}>BÒ SÁT</a>
+                                    <a className="dropdown-item" onClick = {this.lastestPost}>CÁ</a>
+                                    <a className="dropdown-item" onClick = {this.lastestPost}>CHIM</a>
+                                    <a className="dropdown-item" onClick = {this.lastestPost}>CÔN TRÙNG</a>
+                                    <a className="dropdown-item" onClick = {this.lastestPost}>CÓ VÚ</a>
+                                    <a className="dropdown-item" onClick = {this.lastestPost}>CHÂN THÙY</a>
+                                    <a className="dropdown-item" onClick = {this.lastestPost}>GIÁP SÁT</a>
                                 </div>
                             </li> 
 
                             <li className="nav-item">
                                 <a className="nav-link font-navbar" onClick = {this.lastestPost}>
-                                    Top bài đăng
+                                    TOP BÀI ĐĂNG
+                                </a>
+                            </li>  
+                            <li className="nav-item">
+                                <a className="nav-link font-navbar" onClick = {this.lastestPost}>
+                                    ĐANG THEO DÕI
                                 </a>
                             </li>  
                         </ul> 
