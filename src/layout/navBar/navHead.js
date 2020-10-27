@@ -117,7 +117,7 @@ class NavHead extends Component  {
                     {/* <Link className="navbar-brand" to="/home" style={{width: "fit-content"}}>
                         <img src="../img/logo/logo2.png" style={{width: "60%"}}/>
                     </Link> */}
-                    <button onClick={this.home} style={{width: "fit-content"}} type="button" className="btn">Đây là phần logo</button>
+                    <button onClick={this.home} style={{width: "fit-content"}} type="button" className="btn">ANIMAL WORLD</button>
                 </div>
                 <div className="p-2">
                     <button onClick={this.handlePost} style={{width: "fit-content"}} type="button" className="btn btn-outline-dark">Đăng bài của bạn</button>
