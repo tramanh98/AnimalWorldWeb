@@ -3,80 +3,72 @@ import { withRouter, useHistory } from "react-router-dom";
 import '../style.css';
 import If from '../../services/if'
 // import { NavAvatar } from '../Avatar';
-// import { Badge, Popover, Button } from 'antd';
-// import { BellFilled, SearchOutlined } from '@ant-design/icons';
+import { Badge, Popover, Button, Avatar } from 'antd';
+import { BellFilled, SearchOutlined } from '@ant-design/icons';
 // import { AuthContext, useAuthContext } from "../../others/contexts/auth.context";
 // import { logout } from '../../api/api'
 
-// const Loginus = props => (
-//     <Login {...props} />
-// );
-// const Registerus = () => (
-//     <Register />
-// );
+
+const ThongBao = () => {
+    const text = <span>Thông báo</span>;
+    const content = (
+        <div>
+            <p>Không có thông báo nào</p>
+
+        </div>
+    );
+    return (
+        <Popover placement="bottom" title={text} content={content} trigger="click">
+            <Button type="link">
+                <Badge count={5} dot>
+                    <BellFilled style={{ fontSize: '25px', color: '#212529', padding: '0' }} />
+                </Badge>
+            </Button>
+        </Popover>
+    );
+};
 
 
-// const ThongBao = () => {
-//     const text = <span>Thông báo</span>;
-//     const content = (
-//         <div>
-//             <p>Không có thông báo nào</p>
+const Profile = (props) => {
+    // const { onLogout } = useAuthContext();
+    // const history = useHistory();
+    // const logoutAPI = async () =>{
+    //     const res = await logout()
+    //     console.log(res)
+    // }
+    const qltk = () =>{
+        props.history.push('/manage/account')
+    }
+    const qlbd = () =>{
+        props.history.push('/manage/posts')
+    }
 
-//         </div>
-//     );
-//     return (
-//         <Popover placement="bottom" title={text} content={content} trigger="click">
-//             <Button type="link">
-//                 <Badge count={5} dot>
-//                     <BellFilled style={{ fontSize: '25px', color: '#212529', padding: '0' }} />
-//                 </Badge>
-//             </Button>
-//         </Popover>
-//     );
-// };
-
-
-// const Profile = () => {
-//     const { onLogout } = useAuthContext();
-//     const history = useHistory();
-//     const logoutAPI = async () =>{
-//         const res = await logout()
-//         console.log(res)
-//     }
-//     const handleClick = () => {
-//         logoutAPI();
-//         onLogout();
-//     };
-
-//     const content = (
-//         <div>
-//             <Link to="/profile/index">
-//                 <Button type="link">
-//                     Quản lý tài khoản
-//                 </Button>
-//             </Link>
+    const content = (
+        <div>
+            <Button type="link" onClick={() => qltk()}>
+                Quản lý tài khoản
+            </Button>
             
-//             <br />
-//             <Link to="/profile/edit">
-//             <Button type="link">
-//                 Chỉnh sửa tài khoản
-//             </Button>
-//             </Link>
-            
-//             <br />
-//             <Button type="link" onClick={() => handleClick()}>
-//                 Thoát
-//             </Button>
-//         </div>
-//     );
-//     return (
-//         <Popover placement="bottom" content={content} trigger="click">
-//             <Button type="link">
-//                 <NavAvatar />
-//             </Button>
-//         </Popover>
-//     );
-// };
+            <br />
+            <Button type="link" onClick={() => qlbd()}>
+                Quản lý bài đăng
+            </Button>
+            <br />
+            <Button type="link">
+                Thoát
+            </Button>
+        </div>
+    );
+    return (
+        <Popover placement="bottom" content={content} trigger="click">
+            <Button type="link">
+                <Avatar style={{ backgroundColor: "#f56a00", verticalAlign: 'middle' }} size="large">
+                    U
+                </Avatar>
+            </Button>
+        </Popover>
+    );
+};
 
 class NavHead extends Component  {
     constructor(props) {
@@ -123,12 +115,14 @@ class NavHead extends Component  {
                     <button onClick={this.handlePost} style={{width: "fit-content"}} type="button" className="btn btn-outline-dark">Đăng bài của bạn</button>
                 </div>
                 <div className="p-2">
-                    <button onClick={this.getPermission} style={{width: "fit-content"}} type="button" className="btn">Đăng nhập</button>
+                    {/* <button onClick={this.getPermission} style={{width: "fit-content"}} type="button" className="btn">Đăng nhập</button> */}
+                    <ThongBao/>
                     {/* <If condition={!user} component={Loginus} /> */}
                     {/* <If condition={user} component={ThongBao} /> */}
                 </div>
                 <div className="p-2">
-                    <button onClick={this.getPermission} style={{width: "fit-content"}} type="button" className="btn">Đăng ký</button>
+                    {/* <button onClick={this.getPermission} style={{width: "fit-content"}} type="button" className="btn">Đăng ký</button> */}
+                    <Profile {...this.props}/>
                     {/* <If condition={!user} component={Registerus} /> */}
                     {/* <If condition={user} component={Profile} /> */}
                 </div>

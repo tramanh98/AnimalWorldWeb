@@ -5,6 +5,8 @@ import {Results} from './pages/results/index'
 import {Detail} from './pages/detail/index'
 import {Home} from './pages/home/index'
 import {Posting} from './pages/posting/index'
+import {ManagePosts} from "./pages/dashboard/posts"
+import {ManageAccount} from './pages/dashboard/profile'
 function App() {
   return (
     <DefaultLayout>
@@ -17,6 +19,10 @@ function App() {
         <Route path="/result" component={Results} />
         <Redirect exact path="/" to="/permission" />
         <Route path="/permission" component={Permission} />
+        <Redirect exact path="/" to="/manage/account" />
+        <Route path="/manage/account" component={ManageAccount} />
+        <Redirect exact path="/" to="/manage/posts" />
+        <Route path="/manage/posts" component={ManagePosts} />
         {/* <Redirect exact path="/" to="/profile" /> */}
 
         {/* <ProtectedRoute path="/profile/edit" component={EditProfile} />
