@@ -3,7 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import {Permission} from './pages/login_register/index'
 import {Results} from './pages/results/index'
 import {Detail} from './pages/detail/index'
-import {Home} from './pages/home/index'
+import {HomePage} from './pages/home/mainHome'
 import {Posting} from './pages/posting/index'
 import {ManagePosts} from "./pages/dashboard/posts"
 import {ManageAccount} from './pages/dashboard/profile'
@@ -12,7 +12,7 @@ function App() {
     <DefaultLayout>
       <Switch>
         <Redirect exact path="/" to="/home" />
-        <Route path="/home" component={Home} />
+        <Route path="/home" component={HomePage} />
         <Redirect exact path="/" to="/detail" />
         <Route path="/detail/:idMotel" component={Detail} />
         <Redirect exact path="/" to="/result" />
