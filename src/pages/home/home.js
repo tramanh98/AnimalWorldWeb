@@ -12,7 +12,6 @@ export const Home = () => {
                 <div className="row">
                     <div className="col-md-8">
                         <div className ="ss1-container-bn">
-                            
                             <img src="../images/bn.png" alt="Notebook" style={{width: "100%"}}/>
                             
                             <div className = "content">

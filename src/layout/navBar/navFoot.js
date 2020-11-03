@@ -3,7 +3,8 @@
 import React from "react";
 import { withRouter, useHistory } from "react-router-dom";
 // import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
-import '../style.css'
+// import '../style.css'
+
 // import If from '../../services/if'
 // import { AuthContext, useAuthContext } from "../../others/contexts/auth.context";
 // const { SubMenu } = Menu;
