@@ -4,6 +4,8 @@ import QuillEditor from '../../components/editor/QuillEditor';
 import classes from '../../data/classes.json'
 import species from '../../data/species.json'
 import FrameImgCropper from '../../components/IMGcropper/index'
+import {CropDemo} from '../../components/IMGcropper/crop'
+import CropperIMG from '../../components/IMGcropper/cropper'
 const { Title } = Typography;
 const { Option } = Select;
 
@@ -105,7 +107,7 @@ export const Posting = () => {
                         // onOk={this.handleOk}
                         onCancel={handleCancel}
                         >
-                            <FrameImgCropper handleCancel = {handleCancel} src = {avaImg}/>
+                            <CropperIMG handleCancel = {handleCancel} src = {avaImg}/>
                         </Modal>
                     </Form.Item>
 
