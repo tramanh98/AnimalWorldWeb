@@ -3,6 +3,7 @@ import React from "react";
 import '../style.css';
 import Aux from '../../services/auxiliary'
 import { FramePosts } from '../../components/framePost'
+import {RightCol} from '../../components/rightcol'
 export const Home = () => {
     return(
     
@@ -12,7 +13,7 @@ export const Home = () => {
                     <div className="col-md-8">
                         <div className ="ss1-container-bn">
                             
-                            <img src="../images/tiger.jpg" alt="Notebook" style={{width: "100%"}}/>
+                            <img src="../images/bn.png" alt="Notebook" style={{width: "100%"}}/>
                             
                             <div className = "content">
                             
@@ -28,7 +29,7 @@ export const Home = () => {
                     </div>
                     <div className="col-md-4">
                         <div className ="ss1-container-bn">
-                            <img src="../images/soi-do-thegioidongvat2.jpg" alt="Notebook" style={{width: "100%"}}/>
+                            <img src="../images/bn.png" alt="Notebook" style={{width: "100%"}}/>
                             
                             <div className = "content">
                                 <span className="date">Dec 25, 2016</span>
@@ -135,49 +136,7 @@ export const Home = () => {
                     </div>
 
                     <div className ="col-md-4">
-
-                        <div className = "topicName">
-                            <h5>Trending </h5>
-                        </div>
-                        <div className = "fstpart-col2">
-                            <FramePosts type = {3} />
-                            <hr class="my-4"/>
-                            <FramePosts type = {3} />
-                            <hr class="my-4"/>
-                            <FramePosts type = {3} />
-                            <hr class="my-4"/>
-                            <FramePosts type = {3} />
-                            <hr class="my-4"/>
-                            <FramePosts type = {3} />
-                        </div>
-
-                        <div className = "topicName">
-                            <h5>Bài vừa đăng</h5>
-                        </div>
-                        <div className = "scdpart-col2">
-                            <div className ="ss1-container-bn">
-                                <img src="../images/bn.png" alt="Notebook" style={{width: "100%"}}/>
-                                <div className = "content">
-                                    <span className="date">Dec 25, 2016</span>
-                                    <h3>Every Start has an End</h3>
-                                    <span className="category">Inspirational</span>
-                                </div>
-                            </div>
-                            <div className = "row">
-                                <div className = "col-md-6">
-                                    <FramePosts type = {4} />
-                                </div>
-                                <div className = "col-md-6">
-                                    <FramePosts type = {4} />
-                                </div>
-                                <div className = "col-md-6">
-                                    <FramePosts type = {4} />
-                                </div>
-                                <div className = "col-md-6">
-                                    <FramePosts type = {4} />
-                                </div>
-                            </div>
-                        </div>
+                        <RightCol/>
                     </div>
                     
                 </div>

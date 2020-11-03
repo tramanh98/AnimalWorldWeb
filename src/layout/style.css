@@ -98,6 +98,16 @@
   
   
   }
+
+  .scroll-style {
+    height: 50px;
+    color: green;
+    
+  }
+  .make-style {
+    height: 100px;
+    transition: height 2s ;
+  }
   
   /* IPAD pro */
   @media screen and (min-width: 1000px) {

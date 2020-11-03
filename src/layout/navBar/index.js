@@ -9,7 +9,7 @@ const NavBar = () => {
     return (
     <Aux>
         <NavHead />
-        <NavFoot />
+        <NavFoot home = {true} />
     </Aux>
     );
 }

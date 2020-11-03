@@ -91,6 +91,7 @@ export const Posting = () => {
                     </Form.Item>
                     <Form.Item
                         className="avatar"
+                        label="Ảnh đại diện bài viết"
                         name="image"
                     >
                         <input
@@ -110,12 +111,14 @@ export const Posting = () => {
                             <CropperIMG handleCancel = {handleCancel} src = {avaImg}/>
                         </Modal>
                     </Form.Item>
-
-                    <QuillEditor
-                        placeholder={"Start Posting Something"}
-                        onEditorChange={onEditorChange}
-                        onFilesChange={onFilesChange}
-                    />
+                    <Form.Item label="Nội dung">
+                        <QuillEditor
+                            placeholder={"Start Posting Something"}
+                            onEditorChange={onEditorChange}
+                            onFilesChange={onFilesChange}
+                        />
+                    </Form.Item>
+                    
 
                     <Form.Item >
                         <div style={{ textAlign: 'center', margin: '2rem', }}>

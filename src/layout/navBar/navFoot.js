@@ -61,17 +61,28 @@ import '../style.css'
 //     );
 // };
 class NavFoot extends React.Component {
-  state = { visible: false, classNm: 'transcl sticky-top navbar navbar-expand-sm nv'};
+  state = { 
+    visible: false, 
+    classNm: 'transcl sticky-top navbar navbar-expand-sm ',
+    classNavf: 'top-style'
+};
 //   static contextType = AuthContext;
     componentDidMount() {
         if(this.props.home){
             document.addEventListener("scroll", () => {
                 document.scrollingElement.scrollTop > 20 ? 
-                this.setState({ classNm: "navbar navbar-expand-sm sticky-top nv"}) : 
-                this.setState({ classNm: "transcl sticky-top navbar navbar-expand-sm nv"});
+                this.setState({ 
+                    classNm: "navbar navbar-expand-sm sticky-top ",
+                    classNavf: 'scroll-style'
+
+            }) : 
+                this.setState({ 
+                    classNm: "transcl sticky-top navbar navbar-expand-sm ",
+                    classNavf: 'top-style'
+                });
             });
         }
-        else this.setState({ classNm: "navbar navbar-expand-sm sticky-top nv"})
+        else this.setState({ classNm: "navbar navbar-expand-sm sticky-top "})
     }
 
     // showDrawer = () => {
@@ -196,6 +207,7 @@ class NavFoot extends React.Component {
                         </Menu>
                     </Drawer> */}
                 <div className="container">
+                    <div className = {this.state.classNavf}>
                     <div className="collapse navbar-collapse" id="collapsibleNavbar">
                         <ul className="navbar-nav">
                             <li className="nav-item">
@@ -243,6 +255,7 @@ class NavFoot extends React.Component {
                                 </a>
                             </li>  
                         </ul> 
+                    </div>
                     </div>
                 </div>
  
