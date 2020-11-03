@@ -1,0 +1,47 @@
+[
+    {
+        "lop": "tat-ca",
+        "loai":   ["Lớp"],
+        "startIndex":0      
+    },
+    {
+        "lop": "Lop-A",
+        "loai":   ["Tất cả",
+                    "Loài A1",
+                    "Loài A2",
+                    "Loài A3",
+                    "Loài A4"
+                    ],
+        "startIndex":0      
+    },
+    {
+        "lop": "Lop-B",
+        "loai":   ["Tất cả",
+                    "Loài B1",
+                    "Loài B2",
+                    "Loài B3",
+                    "Loài B4"
+                    ],
+        "startIndex":4   
+    },
+    {
+        "lop": "Lop-C",
+        "loai":   ["Tất cả",
+                    "Loài C1",
+                    "Loài C2",
+                    "Loài C3",
+                    "Loài C4"
+                    ],
+        "startIndex":8     
+    },
+    {
+        "lop": "Lop-D",
+        "loai":   ["Tất cả",
+                    "Loài D1",
+                    "Loài D2",
+                    "Loài D3",
+                    "Loài D4"
+                    ],
+        "startIndex":12      
+    }
+]

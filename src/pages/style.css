@@ -37,3 +37,21 @@
 .fstpart-col2{
     padding: 10px;
 }
+
+/********************** LOGIN REGISTER PAGE **************************/
+
+.bg-form{
+    position: relative;
+    max-width: 100%; /* Maximum width */
+    margin: 0 auto; /* Center it */
+}
+.form-lg-rgt{
+    position: absolute;
+    right: 0;
+    top: 40px;
+    margin: 20px;
+    min-width: 600px;
+    padding: 16px;
+    background-color: rgba(109, 101, 91, 0.55);
+    border-radius: 1rem;
+}
