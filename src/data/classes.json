@@ -1,0 +1,23 @@
+
+[
+    {
+        "type": "ALL",
+        "name": "Tất cả"
+    },
+    {
+        "type": "A",
+        "name": "Lớp A"
+    },
+    {
+        "type": "B",
+        "name": "Lớp B"
+    },
+    {
+        "type": "C",
+        "name": "Lớp C"
+    },
+    {
+        "type": "D",
+        "name": "Lớp D"
+    }
+]
