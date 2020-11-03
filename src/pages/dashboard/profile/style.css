@@ -1,0 +1,55 @@
+/* body{
+    margin: 25px;
+    padding: 10px 50px;
+} */
+
+.avt img{
+    float: left;
+    width: 100px;
+    margin: 20px;
+}
+
+.info {
+    
+    padding: 40px 20px;
+    
+   
+}
+
+ .nav-bar  li{
+    padding: 10px 50px;
+}
+.nav-bar ul{
+    margin: 30px 0px; 
+    border-top: solid 0.3px;
+    
+}
+
+.nav-bar a{
+    color: dimgray;
+} 
+
+.edit{
+    padding: 2px 5px;
+    margin: 0px 10px;
+    border-radius: 5px;
+    border: solid 0.5px lightgrey;
+    font-weight: 500;
+}
+
+.edit:hover{
+    color: rgba(78, 155, 255, 0.788);
+    border: solid 0.5px rgba(78, 155, 255, 0.788);
+}
+
+.follow{
+    font-size: 12px;
+    padding: 0px 3px;
+    margin: 0px 10px;
+    border-radius: 5px;
+    color:  white;
+    border: solid 0.5px rgba(78, 155, 255, 0.788);
+    background-color: rgb(64, 156, 231);
+    font-weight: 500;
+}
+

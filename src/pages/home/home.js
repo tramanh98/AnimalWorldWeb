@@ -13,7 +13,7 @@ export const Home = () => {
                         <div className ="ss1-container-bn">
                             
                             <img src="../images/tiger.jpg" alt="Notebook" style={{width: "100%"}}/>
-                            
+
                             <div className = "content">
                             
                                 <span className="date">Dec 25, 2016</span>

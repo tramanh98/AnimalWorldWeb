@@ -10,203 +10,199 @@
 } */
 
 .navbar-brand {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: fit-content;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: fit-content;
+}
+.sticky-top
+{
+  z-index: 10 !important;
+
+}
+.navbar
+{
+  z-index: 100 !important;
+}
+.mr-auto , .p-2 {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.navbar-search{
+  margin: 5px 0;
+}
+.nav-link{
+  color: white !important;
+  padding: 7px 0 5px 0 !important;
+  letter-spacing: 0.0625em;
+
+}
+.navft
+{
+  background-color: #caad6f;
+  color: #212529;
+  padding: 0 80px ;
+}
+.navhead{
+  color: #212529 ;
+  margin: 10px 0;
+}
+.btn-menu-mobile{
+  width: 20px;
+  height: 2px;
+  background-color: whitesmoke;
+  margin: 5px 0;
+}
+
+
+.nav-mobile{
+  display: flex;
+  justify-content: right;
+}
+
+.nav-icon-mobile{
+  margin-right: 15.5rem;
+}
+/* for ipad */
+@media screen and (min-width: 600px) {
+
+  .nav-mobile{
+    display: none;
+
   }
-  .sticky-top
-  {
-    z-index: 10 !important;
+  .transcl{
+    background-color: #83a09a !important;
+  }
   
+  .font-navbar{
+    
+    text-transform: uppercase;
+    font-weight: 500 !important;
+    font-size: 18px !important;
+    margin: 0 !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+  .navbar-search{
+    width: 150px;
+    border-radius: 20px;
   }
   .navbar
   {
-    z-index: 100 !important;
+    padding: 0 15px 0 10px !important;
+    background-color: #83a09a !important;
   }
-  .mr-auto , .p-2 {
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-  .navbar-search{
-    margin: 5px 0;
-  }
-  .nav-link{
-    color: white !important;
-    padding: 7px 0 5px 0 !important;
-    letter-spacing: 0.0625em;
+
+
+}
+
+/* IPAD pro */
+@media screen and (min-width: 1000px) {
+
+  .nav-mobile{
+    display: none;
 
   }
-  .navft
+  .transcl{
+    background-color: #83a09a !important;
+  }
+  .navbar{
+    padding: 0 25px 0 20px !important;
+    background-color: #83a09a !important;
+  }
+  .font-navbar{
+    /* font-family: "Montserrat" !important; */
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 0.9rem !important;
+    margin: 0 !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+  .navbar-search{
+    width: 200px;
+    border-radius: 20px;
+  }
+}
+/* desktop */
+@media screen and (min-width: 1300px) {
+
+  .nav-mobile{
+    display: none;
+
+  }
+  .transcl{
+    background-color: #83a09a !important;
+  }
+  .navbar
   {
-    background-color: #caad6f;
-    color: #212529;
-    padding: 0 80px ;
+    padding: 0 100px !important;
+    background-color: #83a09a  !important;
+  }
+  .font-navbar{
+    font-family: Arial !important;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 1rem !important;
+    margin: 0 !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+}
+
+a.subnav_link:link {
+  color: #212529;
+}
+a.subnav_link:hover {
+  cursor: pointer;
+  color: #27496b; }
+
+a.subnav_link:visited {
+  color: #212529; }
+
+a.subnav_link:active {
+  color: black; }
+
+/* for mobile */
+@media screen and (max-width: 600px) {
+  /* .navbar-search{
+    width: 200px;
+  } */
+  .navother{
+    display: none;
+  }
+  .navbar{
+    padding: 10px 15px !important;
+    background-color: #83a09a !important;
+  }
+  .navbar-search{
+    display: none;
+  }
+  .transcl{
+    background-color: #caad6f00 !important;
   }
   .navhead{
-    color: #212529 ;
-    margin: 10px 0;
+    display: none;
   }
-  /* .navbar-search{
-    width: 250px;
-    border-radius: 20px;
-  } */
-  .btn-menu-mobile{
-    width: 20px;
-    height: 2px;
-    background-color: whitesmoke;
-    margin: 5px 0;
+  .my-account-mobile{
+    margin: 10px;
   }
-  
-  
-  .nav-mobile{
-    display: flex;
-    justify-content: right;
+  .my-account-mobile .subnav_link{
+    margin: 20px auto;
   }
-  
-  .nav-icon-mobile{
-    margin-right: 15.5rem;
+  .my-account-mobile h6{
+    font-size: small;
+    color: gray;
   }
-  /* for ipad */
-  @media screen and (min-width: 600px) {
-  
-    .nav-mobile{
-      display: none;
-  
-    }
-    .transcl{
-      background-color: #83a09a !important;
-    }
-    
-    .font-navbar{
-      
-      text-transform: uppercase;
-      font-weight: 500 !important;
-      font-size: 18px !important;
-      margin: 0 !important;
-      padding-left: 8px !important;
-      padding-right: 8px !important;
-    }
-    .navbar-search{
-      width: 150px;
-      border-radius: 20px;
-    }
-    .navbar
-    {
-      padding: 0 15px 0 10px !important;
-      background-color: #83a09a !important;
-    }
-  
-  
-  }
-  
-  /* IPAD pro */
-  @media screen and (min-width: 1000px) {
-  
-    .nav-mobile{
-      display: none;
-  
-    }
-    .transcl{
-      background-color: #83a09a !important;
-    }
-    .navbar{
-      padding: 0 25px 0 20px !important;
-      background-color: #83a09a !important;
-    }
-    .font-navbar{
-      /* font-family: "Montserrat" !important; */
-      text-transform: uppercase;
-      font-weight: 400;
-      font-size: 0.9rem !important;
-      margin: 0 !important;
-      padding-left: 10px !important;
-      padding-right: 10px !important;
-    }
-    .navbar-search{
-      width: 200px;
-      border-radius: 20px;
-    }
-  }
-  /* desktop */
-  @media screen and (min-width: 1300px) {
-  
-    .nav-mobile{
-      display: none;
-  
-    }
-    .transcl{
-      background-color: #83a09a !important;
-    }
-    .navbar
-    {
-      padding: 0 100px !important;
-      background-color: #83a09a  !important;
-    }
-    .font-navbar{
-      font-family: Arial !important;
-      text-transform: uppercase;
-      font-weight: 500;
-      font-size: 1rem !important;
-      margin: 0 !important;
-      padding-left: 10px !important;
-      padding-right: 10px !important;
-    }
-  }
-  
-  a.subnav_link:link {
-    color: #212529;
-  }
-  a.subnav_link:hover {
-    cursor: pointer;
-    color: #27496b; }
-  
-  a.subnav_link:visited {
-    color: #212529; }
-  
-  a.subnav_link:active {
-    color: black; }
-  
-  /* for mobile */
-  @media screen and (max-width: 600px) {
-    /* .navbar-search{
-      width: 200px;
-    } */
-    .navother{
-      display: none;
-    }
-    .navbar{
-      padding: 10px 15px !important;
-      background-color: #83a09a !important;
-    }
-    .navbar-search{
-      display: none;
-    }
-    .transcl{
-      background-color: #caad6f00 !important;
-    }
-    .navhead{
-      display: none;
-    }
-    .my-account-mobile{
-      margin: 10px;
-    }
-    .my-account-mobile .subnav_link{
-      margin: 20px auto;
-    }
-    .my-account-mobile h6{
-      font-size: small;
-      color: gray;
-    }
-  
-  }
-  
-  .local{
-    width: 800px !important;
-  }
-  
-  .nav-item a:hover {
-    background-color: #578a80 !important;
-  }
+
+}
+
+.local{
+  width: 800px !important;
+}
+
+.nav-item a:hover {
+  background-color: #578a80 !important;
+}
   
   /* drawer */
   .site-drawer-render-in-current-wrapper {
