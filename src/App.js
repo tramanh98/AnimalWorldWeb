@@ -6,7 +6,7 @@ import {Detail} from './pages/detail/index'
 import {HomePage} from './pages/home/mainHome'
 import {Posting} from './pages/posting/index'
 import {ManagePosts} from "./pages/dashboard/posts"
-import {ManageAccount} from './pages/dashboard/profile'
+import {ManageAccount} from './pages/dashboard/profile/index'
 function App() {
   return (
     <DefaultLayout>

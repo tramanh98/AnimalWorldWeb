@@ -11,7 +11,7 @@ export const Home = () => {
                 <div className="row">
                     <div className="col-md-8">
                         <div className ="ss1-container-bn">
-                            <img src="../images/bn.png" alt="Notebook" style={{width: "100%"}}/>
+                            <img src="../images/Hesperornis1.jpg" alt="Notebook" style={{width: "100%"}}/>
                             <div className = "content">
                                 <span className="date">Dec 25, 2016</span>
                                 <h3>Every Start has an End</h3>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter, useHistory } from "react-router-dom";
-import '../style.css';
+// import '../style.css';
 import If from '../../services/if'
 // import { NavAvatar } from '../Avatar';
 import { Badge, Popover, Button, Avatar } from 'antd';
