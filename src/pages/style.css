@@ -38,6 +38,28 @@
     padding: 10px;
 }
 
+.ss1-container-bn h3{
+    color: white;
+}
+
+.tag{
+    position: absolute;
+    margin: -465px 0px 0px 5px;
+    padding: 0px 5px;
+    background-color: rgba(248, 248, 248, 0.726);
+    border-radius: 5px;
+}
+
+.category{
+    color: white;
+    background-color: rgba(12, 48, 78, 0.733);
+    padding: 0px 5px;
+    border-radius: 5px;
+}
+
+.view, .like{
+    text-align: right;
+}
 /********************** LOGIN REGISTER PAGE **************************/
 
 .bg-form{
