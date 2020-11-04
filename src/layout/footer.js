@@ -46,7 +46,7 @@ export const Footer = () =>
 
                     {/* <h6 className="text-uppercase font-weight-bold" >2HOME</h6>
                     <hr style={{width: '60px'}}/> */}
-                    <img src="../img/logo/logo2.png" className="foot-logo"/>
+                    <img src="../images/logo.png" className="foot-logo"/>
                     <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
                       consectetur
                       adipisicing elit.</p>
@@ -54,7 +54,7 @@ export const Footer = () =>
                   </div>
                   <div className="col-6 col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 footer-react">
 
-                    <h6 className="text-uppercase font-weight-bold" >Về 2home</h6>
+                    <h6 className="text-uppercase font-weight-bold" >Về Animal World</h6>
                     
                     <hr style={{width: '60px'}}/>
                     <p >
@@ -96,7 +96,7 @@ export const Footer = () =>
                     <p>
                       <i className="fas fa-home mr-3"></i> Khu phố 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam.</p>
                     <p>
-                      <i className="fas fa-envelope mr-3"></i> support@2home.com</p>
+                      <i className="fas fa-envelope mr-3"></i> support@animalworld.com</p>
                     <p>
                       <i className="fas fa-phone mr-3"></i> 0917.686.101 </p>
 
@@ -107,7 +107,7 @@ export const Footer = () =>
               </div>
               <hr style={{width: "100%"}}/>
               <div className="footer-copyright text-center py-3 font-footer">Copyright ©2020 All rights reserved | This template is made by
-                <a href="https://dungtran.top/"> dungtran.top</a>
+                <a href="https://dungtran.top/"> nhom21@mail.com</a>
               </div>
 
               </footer>

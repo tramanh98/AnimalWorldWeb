@@ -71,7 +71,7 @@ class NavFoot extends React.Component {
     componentDidMount() {
         if(this.props.home){
             document.addEventListener("scroll", () => {
-                document.scrollingElement.scrollTop > 20 ? 
+                document.scrollingElement.scrollTop > 30 ? 
                 this.setState({ 
                     classNm: "navbar navbar-expand-sm sticky-top ",
                     classNavf: 'scroll-style'

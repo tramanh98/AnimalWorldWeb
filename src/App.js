@@ -1,6 +1,7 @@
 import {DefaultLayout} from './layout/defaultLayout'
 import { Route, Switch, Redirect } from "react-router-dom";
-import {Permission} from './pages/login_register/index'
+import {LoginForm} from './pages/login_register/login'
+import {RegisterForm} from './pages/login_register/register'
 import {Results} from './pages/results/index'
 import {Detail} from './pages/detail/index'
 import {HomePage} from './pages/home/mainHome'
@@ -17,8 +18,10 @@ function App() {
         <Route path="/detail/:idMotel" component={Detail} />
         <Redirect exact path="/" to="/result" />
         <Route path="/result" component={Results} />
-        <Redirect exact path="/" to="/permission" />
-        <Route path="/permission" component={Permission} />
+        <Redirect exact path="/" to="/login" />
+        <Route path="/login" component={LoginForm} />
+        <Redirect exact path="/" to="/register" />
+        <Route path="/register" component={RegisterForm} />
         <Redirect exact path="/" to="/manage/account" />
         <Route path="/manage/account" component={ManageAccount} />
         <Redirect exact path="/" to="/manage/posts" />

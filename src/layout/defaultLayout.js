@@ -10,10 +10,10 @@ import { withRouter, useHistory } from "react-router-dom";
 export const DefaultLayout = props => {
     return (
         <React.Fragment>
-            <Layout>
+            <Layout style={{backgroundColor: "white"}}>
                 <NavBar/>
                 <Aux>
-                    <div className = "container">
+                    <div className = "container pt-3">
                         {props.children}
                     </div>
                 </Aux>

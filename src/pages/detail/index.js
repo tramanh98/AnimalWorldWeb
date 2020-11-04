@@ -1,5 +1,5 @@
 import AllComments from './comment'
-
+import {RightCol} from '../../components/rightcol'
 export const Detail = () => {
     return(
         <div className = "row">
@@ -22,7 +22,7 @@ export const Detail = () => {
                 <AllComments/>
             </div>
             <div className = "col-md-4">
-
+                <RightCol/>
             </div>
             
 
