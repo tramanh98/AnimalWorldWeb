@@ -28,7 +28,7 @@ export const Home = () => {
                     </div>
                     <div className="col-md-4">
                         <div className ="ss1-container-bn">
-                            <img src="../images/soi-do-thegioidongvat2.jpg" alt="Notebook" style={{width: "100%"}}/>
+                            <img src="../images/cho-doberman.jpg" alt="Notebook" style={{width: "100%"}}/>
                             
                             <div className = "content">
                                 <span className="date">Dec 25, 2016</span>
@@ -37,7 +37,7 @@ export const Home = () => {
                             </div>
                         </div>
                         <div className ="ss1-container-bn">
-                            <img src="../images/bn.png" alt="Notebook" style={{width: "100%"}}/>
+                            <img src="../images/Hesperornis1.jpg" alt="Notebook" style={{width: "100%"}}/>
                            
                             <div className = "content">
                                 <span className="date">Dec 25, 2016</span>
