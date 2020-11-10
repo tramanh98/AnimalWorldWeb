@@ -14,7 +14,7 @@ class NavFoot extends React.Component {
   state = { 
     visible: false, 
     classNm: 'transcl sticky-top navbar navbar-expand-sm ',
-    stylepd: "15px 10px",
+    stylepd: "10px 10px",
     stylefz: "35px",
     positionst: 'static',
     topst: '0',

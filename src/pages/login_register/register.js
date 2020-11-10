@@ -19,7 +19,7 @@ export const RegisterForm = () => {
       };
     
     return(
-        <div style={{ maxWidth: '500px', margin: '2rem auto' }}>
+        <div className ="lg-rgt-form py-5 px-4" style={{ maxWidth: '600px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center' }}>
                 <Title level={2} >Register</Title>
             </div>
@@ -87,8 +87,8 @@ export const RegisterForm = () => {
                         </Checkbox>
                     </Form.Item>
                     <Form.Item >
-                        <Button type="primary" htmlType="submit" >
-                        Submit
+                        <Button type="primary" htmlType="submit" style={{width: "100%"}}>
+                        Register
                         </Button>
                     </Form.Item>
                 </Form>

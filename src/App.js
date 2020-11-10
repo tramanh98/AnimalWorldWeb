@@ -6,7 +6,7 @@ import {Results} from './pages/results/index'
 import {Detail} from './pages/detail/index'
 import {HomePage} from './pages/home/mainHome'
 import {Posting} from './pages/posting/index'
-import {ManagePosts} from "./pages/dashboard/posts"
+import SetProFile from "./pages/dashboard/posts/index"
 import {ManageAccount} from './pages/dashboard/profile/index'
 function App() {
   return (
@@ -24,8 +24,8 @@ function App() {
         <Route path="/register" component={RegisterForm} />
         <Redirect exact path="/" to="/manage/account" />
         <Route path="/manage/account" component={ManageAccount} />
-        <Redirect exact path="/" to="/manage/posts" />
-        <Route path="/manage/posts" component={ManagePosts} />
+        <Redirect exact path="/" to="/setting" />
+        <Route path="/setting" component={SetProFile} />
         {/* <Redirect exact path="/" to="/profile" /> */}
 
         {/* <ProtectedRoute path="/profile/edit" component={EditProfile} />

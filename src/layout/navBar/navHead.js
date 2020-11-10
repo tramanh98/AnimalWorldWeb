@@ -4,10 +4,9 @@ import { withRouter, useHistory } from "react-router-dom";
 import If from '../../services/if'
 // import { NavAvatar } from '../Avatar';
 import { Badge, Popover, Button, Avatar } from 'antd';
-import { BellFilled, SearchOutlined, EditFilled } from '@ant-design/icons';
-// import { AuthContext, useAuthContext } from "../../others/contexts/auth.context";
-// import { logout } from '../../api/api'
-
+import { BellFilled, UserOutlined, EditTwoTone } from '@ant-design/icons';
+import { logout } from '../../api/api'
+import { connect, useDispatch } from "react-redux";
 
 const ThongBao = () => {
     const text = <span>Thông báo</span>;
@@ -28,19 +27,44 @@ const ThongBao = () => {
     );
 };
 
+const loginButton = (props) =>{
+    const routeToLogin = () =>{
+        props.history.push('/login');
+    }
+    return(
+        <Button type="link" className="btnlgin" onClick = {routeToLogin}>ĐĂNG NHẬP</Button>
+    );
+}
 
+const registerButton = (props) =>{
+    const routeToRegister = () =>{
+        props.history.push('/register')
+    }
+    return(
+
+        <Button type="link" className="btnlgin" onClick = {routeToRegister} >ĐĂNG KÍ</Button>
+    );
+}
 const Profile = (props) => {
     // const { onLogout } = useAuthContext();
-    // const history = useHistory();
-    // const logoutAPI = async () =>{
-    //     const res = await logout()
-    //     console.log(res)
-    // }
+    const history = useHistory();
+    const dispatch = useDispatch()
+    const logoutAPI = async () =>{
+        const res = await logout()
+        console.log(res)
+        localStorage.removeItem("typetoken")
+        localStorage.removeItem("token")
+        // do something to redux
+        dispatch({
+            type: 'LOGOUT'
+        })
+        history.push('/home')
+    }
     const qltk = () =>{
         props.history.push('/manage/account')
     }
     const qlbd = () =>{
-        props.history.push('/manage/posts')
+        props.history.push('/setting')
     }
 
     const content = (
@@ -54,7 +78,7 @@ const Profile = (props) => {
                 Quản lý bài đăng
             </Button>
             <br />
-            <Button type="link">
+            <Button type="link" onClick={logoutAPI}>
                 Thoát
             </Button>
         </div>
@@ -62,9 +86,14 @@ const Profile = (props) => {
     return (
         <Popover placement="bottom" content={content} trigger="click">
             <a>
-            <Avatar style={{ backgroundColor: "#f56a00", verticalAlign: 'middle' }} size="large">
-                U
-            </Avatar>
+                {
+                    props.user.avatar ? 
+                    <Avatar
+                         src={props.user.avatar}
+                    /> :
+                    <Avatar style={{ verticalAlign: 'middle' }} icon={<UserOutlined />} size="large"/>
+
+                }
             </a>
         </Popover>
     );
@@ -74,40 +103,22 @@ class NavHead extends Component  {
     constructor(props) {
         super(props);
         this.handlePost = this.handlePost.bind(this);
-        this.getPermission = this.getPermission.bind(this);
         this.home = this.home.bind(this);
-        this.routeToLogin = this.routeToLogin.bind(this);
-        this.routeToRegister = this.routeToRegister.bind(this)
       };
-    // static contextType = AuthContext;
 
     handlePost = () => {
-        this.props.history.push('/posting');
-        // const { user } = this.context;
-        // console.log(user)
-        // if(user){
-        //     console.log(this.props.history)
-        //     this.props.history.push('/posting');
-        // }
-        // else {
-        //     this.setState({visible: true})
-        // }
-    }
-    routeToLogin = () =>{
-        this.props.history.push('/login');
-    }
-    routeToRegister = () =>{
-        this.props.history.push('/register')
+        if(this.props.user){
+            console.log(this.props.history)
+            this.props.history.push('/posting');
+        }
+        else {
+            this.props.history.push('/login');
+        }
     }
     home = () =>{
         this.props.history.push('/home');
     }
-    getPermission = () =>{
-        this.props.history.push('/permission');
-    }
     render() {
-        // const { user } = this.context;
-        // const { visible } = this.state;
 
     return (
         <div className="wrap-navbar-head">
@@ -117,30 +128,19 @@ class NavHead extends Component  {
                         <a onClick={this.home} >
                             <img src="../images/logo1.png" style={{width: "20%", backgroundColor: "red"}} />
                         </a>
-                        {/* <Link className="navbar-brand" to="/home" style={{width: "fit-content"}}>
-                            <img src="../img/logo/logo2.png" style={{width: "60%"}}/>
-                        </Link> */}
-                        {/* <button onClick={this.home} style={{width: "fit-content"}} type="button" className="btn">ANIMAL WORLD</button> */}
                     </div>
                     <div className="p-2">
                         <a onClick={this.handlePost}>
-                            <EditFilled style={{ fontSize: '27px', color: '#212529', margin: '0 5px' }}/>
+                            <EditTwoTone style={{ fontSize: '27px', color: '#212529', margin: '0 5px' }}/>
                         </a>
-                        {/* <button onClick={this.handlePost} style={{width: "fit-content"}} type="button" className="btn btn-outline-dark">Đăng bài của bạn</button> */}
                     </div>
                     <div className="p-2" >
-                        {/* <button onClick={this.getPermission} style={{width: "fit-content"}} type="button" className="btn">Đăng nhập</button> */}
-                        {/* <ThongBao/> */}
-                        <Button type="link" className="btnlgin" onClick = {this.routeToLogin}>ĐĂNG NHẬP</Button>
-                        {/* <If condition={!user} component={Loginus} /> */}
-                        {/* <If condition={user} component={ThongBao} /> */}
+                        <If condition={!this.props.user} props={this.props} component={loginButton} />
+                        <If condition={this.props.user} component={ThongBao} />
                     </div>
                     <div className="p-2">
-                        {/* <button onClick={this.getPermission} style={{width: "fit-content"}} type="button" className="btn">Đăng ký</button> */}
-                        {/* <Profile {...this.props}/> */}
-                        <Button type="link" className="btnlgin" onClick = {this.routeToRegister} >ĐĂNG KÍ</Button>
-                        {/* <If condition={!user} component={Registerus} /> */}
-                        {/* <If condition={user} component={Profile} /> */}
+                        <If condition={!this.props.user} props={this.props} component={registerButton} />
+                        <If condition={this.props.user} props={this.props} component={Profile} />
                     </div>
                 </div>
             </div>
@@ -151,7 +151,9 @@ class NavHead extends Component  {
     }
 
 }
+const mapStateToProps = (state) => ({
+    user: state.currentUser
+});
 
-export default withRouter(NavHead);
-
+export default connect(mapStateToProps)(withRouter(NavHead));
 

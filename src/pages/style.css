@@ -80,3 +80,8 @@ body{
     background-color: rgba(109, 101, 91, 0.55);
     border-radius: 1rem;
 }
+
+.lg-rgt-form{
+    box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.2);
+
+}
