@@ -28,15 +28,16 @@ export const LoginForm = () => {
         localStorage.setItem("typetoken", data.token_type)
         console.log(res)
         
-        const {profile} = profiledt.data
-        console.log(profile)
+        // const {data} = profiledt.data
+        // console.log(data)
         const storetoRedux = {
             isLogin: true,
-            avatar: profile.avatar,
-            username: profile.username, 
-            fname: profile.first_name,
-            lname: profile.last_name,
-            email: profile.email,
+            idUser: profiledt.data.id,
+            avatar: profiledt.data.avatar,
+            username: profiledt.data.username, 
+            fname: profiledt.data.first_name,
+            lname: profiledt.data.last_name,
+            email: profiledt.data.email,
         }
         // do something to redux
         dispatch({
@@ -56,15 +57,16 @@ export const LoginForm = () => {
         localStorage.setItem("token",data.access_token)
         localStorage.setItem("typetoken", data.token_type)
 
-        const {profile} = profiledt.data
-        console.log(profile)
+        // const {profile} = profiledt.data
+        // console.log(profile)
         const storetoRedux = {
             isLogin: true,
-            avatar: profile.avatar,
-            username: profile.username, 
-            fname: profile.first_name,
-            lname: profile.last_name,
-            email: profile.email,
+            idUser: profiledt.data.id,
+            avatar: profiledt.data.avatar,
+            username: profiledt.data.username, 
+            fname: profiledt.data.first_name,
+            lname: profiledt.data.last_name,
+            email: profiledt.data.email,
         }
         // do something to redux
         dispatch({
@@ -84,14 +86,15 @@ export const LoginForm = () => {
         localStorage.setItem("token",lg.data.key)
         localStorage.setItem("typetoken", 'Token')
 
-        const {profile} = profiledt.data
+        // const {profile} = profiledt.data
         const storetoRedux = {
             isLogin: true,
-            avatar: profile.avatar,
-            username: profile.username, 
-            fname: profile.first_name,
-            lname: profile.last_name,
-            email: profile.email,
+            idUser: profiledt.data.id,
+            avatar: profiledt.data.avatar,
+            username: profiledt.data.username, 
+            fname: profiledt.data.first_name,
+            lname: profiledt.data.last_name,
+            email: profiledt.data.email,
         }
         // do something to redux
         dispatch({

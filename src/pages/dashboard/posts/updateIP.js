@@ -2,11 +2,15 @@ import React, {Component, useState} from 'react';
 import { Form, Input, Button, DatePicker, Avatar, Checkbox } from 'antd';
 import './style.css';
 import { UserOutlined, EditOutlined } from '@ant-design/icons';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
+
 export const UpdateInforPersonal = () =>{
-    const [gender, setGender] = useState('male');
-    const handleChangeGender = (event) =>{
-        setGender(event.target.value)
-    }
+    // const [gender, setGender] = useState('male');
+    const [phone, setPhone] = useState('');
+    // const handleChangeGender = (event) =>{
+    //     setGender(event.target.value)
+    // }
     return(
         <div className="edit-personal-info" >
             <Form layout="vertical" >
@@ -26,21 +30,21 @@ export const UpdateInforPersonal = () =>{
                     <Form.Item label="Username" rules={[{ required: true  }]} >
                         <Input prefix="@phuongvii" disabled/>
                     </Form.Item>
-                    <Form.Item name='name' label="Display Name" rules={[{ required: true, message: 'Name is empty!'  }]} >
-                        <Input />
+                    <Form.Item name='fname' label="First name" style={{ display: 'inline-block', marginRight:'30px'}} rules={[{ required: true, message: 'First name is empty!'  }]} >
+                        <Input style={{ width: '300px', }}/>
                     </Form.Item>
-                    <Form.Item name='birthday' label="Birthday" rules={[{ required: true, message: 'Choose birthday!'  }]} style={{ display: 'inline-block'  , margin: '0px 200px 0px 0px'}}>
-                        <DatePicker />
+                    <Form.Item name='lname' label="Last name" style={{ display: 'inline-block'}} rules={[{ required: true, message: 'Last name is empty!'  }]} >
+                        <Input style={{ width: '300px', }}/>
                     </Form.Item>
-                    <Form.Item name="gender" label="Gender" rules={[{ required: true }]} style={{ display: 'inline-block', padding:'3px'}} >
-                        <select value={gender} onChange={handleChangeGender}
-                            placeholder="Select a option and change input text above"
-                            style={{  padding:'4px'}}
-                        >
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
+                    <Form.Item name='phone' label="Number Phone" style={{ display: 'inline-block', marginRight:'30px'}} rules={[{ required: true, message: 'Number phone is empty!'  }]} >
+                        <PhoneInput
+                            country={'us'}
+                            value={phone}
+                            onChange={phone => setPhone(phone)}
+                            />
+                    </Form.Item>
+                    <Form.Item name='email'  label="Email" style={{ display: 'inline-block'}}  rules={[{ required: true , type: 'email', message: 'Email is invalid!'  }]}>
+                        <Input style={{ width: '300px', }}/>
                     </Form.Item>
                     <Form.Item >
                         <div style={{ textAlign: 'right'}}>

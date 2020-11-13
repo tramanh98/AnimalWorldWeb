@@ -1,20 +1,6 @@
 import httpClient from './http-client';
 import { message, notification } from 'antd';
-
-// const restoreInforUser = (iduser, fname, lname, email, type_tk, image, username, token, onLogin ) =>{
-    
-//     const dt = {  
-//                     iduser: iduser, 
-//                     fname: fname, 
-//                     lname: lname,
-//                     email: email,
-//                     typeToken: type_tk,
-//                     image: image,
-//                     username: username, 
-//                     token: token 
-//                 }
-//     onLogin({ user: dt });
-// }
+import { useDispatch, useSelector } from 'react-redux'
 
 const Login_Fb = async (token) =>{
     try {
@@ -26,18 +12,9 @@ const Login_Fb = async (token) =>{
             token: token
         })
         return response2;
-        // .then((response) =>{
-        //     const { data } = response;
-        //     console.log("login successful " + inforfb);
-        //     restoreInforUser('','','','',data.token_type, inforfb.image, inforfb.username, data.access_token, onLogin )
-        //     message.success('Đăng nhập thành công') 
-        //     return 'success'  
-        //     }
-        // )
         ;
 
     } catch (error) {
-        // notifi_error(error)
         return 'error' 
     }
 }
@@ -52,13 +29,7 @@ const Login_GG = async (token) =>{
             token: token
         });
         return response2;
-        // const { data } = response2;
-        // console.log(response2);
-        // // console.log("login successful ");
-        // restoreInforUser('','','','', data.token_type, infor_gg.image, infor_gg.username, data.access_token, onLogin )
-        // return "success"
     } catch (error) {
-        // notifi_error(error)
         return 'error'
     }
 }
@@ -104,8 +75,72 @@ const Login_sv = async (email, password) =>{
         });
         return response
     } catch(error) {
-        // notifi_error(error)
         return error
     }
 }
-export { Login_Fb, Login_GG, getProfile, updateAvatar, logout, Login_sv}
+
+const Register_sv = async (values) =>{
+    try {
+        console.log(values)
+        const response = await httpClient.post(`auth/registration/`, {
+            username: String(values.usrname),
+            firstName: String(values.fname),
+            lastName:  String(values.lname) ,
+            email: String(values.email),
+            password1: String(values.password1),
+            password2: String(values.password2),
+        });
+        return response
+    } catch (error) {
+        return 'error'
+    }
+}
+
+const getTagsFollowing = async (idUser) => {
+    try {
+        const response = await httpClient.get(`api/get/followingtag/${idUser}/`);
+        return response
+    } catch (error) {
+        return 'error'
+    }
+}
+
+const apiFollowTag = async (idTag) =>{
+    const token = window.localStorage.getItem('token');
+    const typetoken = window.localStorage.getItem('typetoken'); 
+    try {
+        const response = await httpClient.post(`api/follow/animal/`,
+        {
+            animal: parseInt(idTag)
+        },
+        {
+            headers: {
+                Authorization: `${typetoken} ${token}`,
+            }
+        });
+        return response
+    } catch (error) {
+        return 'error'
+    }
+}
+
+// idFollow  khác với idTag 
+const apiUnfollowTag = async (idFollow) =>{
+    const token = window.localStorage.getItem('token');
+    const typetoken = window.localStorage.getItem('typetoken'); 
+    try {
+        const response = await httpClient.delete(`api/unfollow/animal/${idFollow}/`,
+        {
+            headers: {
+                Authorization: `${typetoken} ${token}`,
+            }
+        });
+        return response
+    } catch (error) {
+        return 'error'
+    }
+}
+export { Login_Fb, Login_GG, getProfile, updateAvatar, 
+    logout, Login_sv, Register_sv, getTagsFollowing, apiFollowTag,
+    apiUnfollowTag
+}

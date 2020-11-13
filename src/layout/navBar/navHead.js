@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { withRouter, useHistory } from "react-router-dom";
 // import '../style.css';
 import If from '../../services/if'
@@ -47,6 +47,7 @@ const registerButton = (props) =>{
 }
 const Profile = (props) => {
     // const { onLogout } = useAuthContext();
+    const [visible, setVisible] = useState(false)
     const history = useHistory();
     const dispatch = useDispatch()
     const logoutAPI = async () =>{
@@ -58,33 +59,39 @@ const Profile = (props) => {
         dispatch({
             type: 'LOGOUT'
         })
+        setVisible(false)
         history.push('/home')
     }
     const qltk = () =>{
+        setVisible(false)
         props.history.push('/manage/account')
     }
     const qlbd = () =>{
+        setVisible(false)
         props.history.push('/setting')
     }
 
     const content = (
         <div>
             <Button type="link" onClick={() => qltk()}>
-                Quản lý tài khoản
+                Your blogs
             </Button>
             
             <br />
             <Button type="link" onClick={() => qlbd()}>
-                Quản lý bài đăng
+                Manage account
             </Button>
             <br />
             <Button type="link" onClick={logoutAPI}>
-                Thoát
+                Logout
             </Button>
         </div>
     );
     return (
-        <Popover placement="bottom" content={content} trigger="click">
+        <Popover placement="bottom" content={content} trigger="click" 
+        visible={visible}
+        onVisibleChange={visible => setVisible(visible)}
+        >
             <a>
                 {
                     props.user.avatar ? 

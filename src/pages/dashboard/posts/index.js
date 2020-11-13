@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import { Form, Input, Button, DatePicker, Gender, Checkbox } from 'antd';
 import './style.css';
-import {UpdateInforContact} from './updateIC'
+import TagFollowing from './updateIC'
 import {UpdateInforPersonal} from './updateIP'
 import {UpdatePassword} from './updatePW'
 import {SetTheme} from './setTheme'
@@ -42,12 +42,12 @@ export default class SetProFile extends Component {
                     </li>
                     <li className="el-menu-item" onClick = {(e) => this.handleOnclick(e, 2)}>
                         <a href="#">
-                        <span>Change contact information</span>
+                        <span>Change password</span>
                         </a>
                     </li>
                     <li className="el-menu-item" onClick = {(e) => this.handleOnclick(e, 3)}>
                         <a href="#">
-                        <span>Change password</span>
+                        <span>Following Tag</span>
                         </a>
                     </li>
                     <li className="el-menu-item" onClick = {(e) => this.handleOnclick(e, 4)}>
@@ -60,8 +60,8 @@ export default class SetProFile extends Component {
             <div className="col-md-9">
                 {
                     this.state.type == 1 ? <UpdateInforPersonal/> : 
-                    this.state.type == 2 ? <UpdateInforContact/> :
-                    this.state.type == 3 ? <UpdatePassword/> : <SetTheme/>
+                    this.state.type == 2 ? <UpdatePassword/> :
+                    this.state.type == 3 ? <TagFollowing/> : <SetTheme/>
                 }
             </div>
         </div>

@@ -1,6 +1,9 @@
 import { Tabs, Typography } from 'antd';
 import '../style.css'
 import { Form, Input, Button, InputNumber, Checkbox } from 'antd';
+import {Register_sv, getProfile} from '../../api/api'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from "react-router-dom";
 const { TabPane } = Tabs;
 const { Title } = Typography;
 const validateMessages = {
@@ -14,8 +17,31 @@ const validateMessages = {
     },
   };
 export const RegisterForm = () => {
-    const onFinish = values => {
-        console.log(values);
+    const dispatch = useDispatch()
+    const history = useHistory();
+    const onFinish = async (values) => {
+        // console.log(values);
+        const rgt = await Register_sv(values)
+        console.log(rgt)
+        const profiledt = await getProfile(`Token ${rgt.data.key}`)
+        localStorage.setItem("token",rgt.data.key)
+        localStorage.setItem("typetoken", 'Token')
+
+        const {profile} = profiledt.data
+        const storetoRedux = {
+            isLogin: true,
+            avatar: profile.avatar,
+            username: profile.username, 
+            fname: profile.first_name,
+            lname: profile.last_name,
+            email: profile.email,
+        }
+        // do something to redux
+        dispatch({
+            type: 'LOGIN_USER',
+            payload: storetoRedux
+        })
+        history.push("/home");
       };
     
     return(
@@ -25,13 +51,16 @@ export const RegisterForm = () => {
             </div>
             <div>
                 <Form layout="vertical" name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-                    <Form.Item name={['user', 'fname']} label="Full name" rules={[{ required: true }]}>
+                    <Form.Item name='fname' label="First name" rules={[{ required: true }]}>
                         <Input />
                     </Form.Item>
-                    <Form.Item name={['user', 'username']} label="User name" rules={[{ required: true }]}>
+                    <Form.Item name='lname' label="Last name" rules={[{ required: true }]}>
                         <Input />
                     </Form.Item>
-                    <Form.Item name={['user', 'email']} label="Email" rules={[{ type: 'email', required: true }]}>
+                    <Form.Item name='usrname' label="User name" rules={[{ required: true }]}>
+                        <Input />
+                    </Form.Item>
+                    <Form.Item name='email' label="Email" rules={[{ type: 'email', required: true }]}>
                         <Input />
                     </Form.Item>
                     <Form.Item

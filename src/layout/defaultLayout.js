@@ -17,14 +17,15 @@ export const DefaultLayout = props => {
         
         if (token) {
             const response = await getProfile(`${typetoken} ${token}`)
-            const {profile} = response.data
+            // const {profile} = response.data
             const storetoRedux = {
                 isLogin: true,
-                avatar: profile.avatar,
-                username: profile.username, 
-                fname: profile.first_name,
-                lname: profile.last_name,
-                email: profile.email,
+                idUser: response.data.id,
+                avatar: response.data.avatar,
+                username: response.data.username, 
+                fname: response.data.first_name,
+                lname: response.data.last_name,
+                email: response.data.email,
             }
             dispatch({
                 type: 'LOGIN_USER',
@@ -55,23 +56,3 @@ export const DefaultLayout = props => {
     )
 }
 
-// class DefaultLayout extends Component{
-
-//     render(){
-//         return(
-//         <React.Fragment>
-//             <Layout>
-//                 <NavBar/>
-//                 <Aux>
-//                     <div className = "container">
-//                         {props.children}
-//                     </div>
-//                 </Aux>
-//                 <Footer />
-//             </Layout>
-//         </React.Fragment>
-//         );
-
-//     }
-// }
-// export default withRouter(DefaultLayout);

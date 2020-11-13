@@ -19,5 +19,41 @@
     {
         "type": "D",
         "name": "Lớp D"
+    },
+    {
+        "type": "E",
+        "name": "Lớp E"
+    },
+    {
+        "type": "F",
+        "name": "Lớp F"
+    },
+    {
+        "type": "G",
+        "name": "Lớp G"
+    },
+    {
+        "type": "H",
+        "name": "Lớp H"
+    },
+    {
+        "type": "I",
+        "name": "Lớp I"
+    },
+    {
+        "type": "J",
+        "name": "Lớp J"
+    },
+    {
+        "type": "K",
+        "name": "Lớp K"
+    },
+    {
+        "type": "L",
+        "name": "Lớp L"
+    },
+    {
+        "type": "M",
+        "name": "Lớp M"
     }
 ]

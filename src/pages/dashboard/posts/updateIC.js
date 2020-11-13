@@ -1,44 +1,62 @@
 import React, {Component, useState} from 'react';
 import { Form, Input, Button, DatePicker, Gender, Checkbox } from 'antd';
 import './style.css';
-import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
-export const UpdateInforContact = () =>{
-    const [phone, setPhone] = useState('');
-    return(
-        <div className="edit-contact-info">
-            <Form layout="vertical" >
-                <Input.Group>
-                    <Form.Item name='phone' label="Number Phone" style={{ display: 'inline-block', marginRight:'30px'}} rules={[{ required: true, message: 'Number phone is empty!'  }]} >
-                        <PhoneInput
-                            country={'us'}
-                            value={phone}
-                            onChange={phone => setPhone(phone)}
-                            />
-                    </Form.Item>
-                    <Form.Item name='email'  label="Email" style={{ display: 'inline-block'}}  rules={[{ required: true , type: 'email', message: 'Email is invalid!'  }]}>
-                        <Input style={{ width: '300px', }}/>
-                    </Form.Item>
-                
-                    <Form.Item label="Address" style={{ display: 'inline-block', marginRight:'30px'}}>
-                        <Input style={{ width: '300px', }}/>
-                    </Form.Item>
-                    <Form.Item label="Company" style={{ display: 'inline-block'}} >
-                        <Input style={{ width: '300px', }}/>
-                    </Form.Item>
-                
-                    <Form.Item >
-                        <div style={{ textAlign: 'right'}}>
-                            <Button htmlType="submit" style={{ margin: '5px', }}>
-                                Cancel 
-                            </Button>
-                            <Button htmlType="submit" style={{ margin: '5px', }}>
-                            Update
-                            </Button>
-                        </div>
-                    </Form.Item>
-                </Input.Group>
-            </Form> 
-        </div>
-    );
+import {TagAnimal} from '../../../components/tagAnimal'
+import classes from '../../../data/classes.json'
+import {getTagsFollowing} from '../../../api/api'
+import { connect } from "react-redux";
+class TagFollowing extends Component{
+    constructor(props) {
+        super(props);
+        this.state = {
+            arrTag: [],
+            arrObj: [],
+            allowRender: false
+        }
+      };
+    async componentDidMount(){
+        // console.log(this.props.user)
+        const response = await getTagsFollowing(this.props.user.idUser)
+        const {followingtag} = response.data
+        const arr = []
+        for( var item of followingtag){
+            arr.push(item.animal)
+        }
+        this.setState({
+            arrTag: arr,
+            arrObj: followingtag,
+            allowRender: true
+        })
+        console.log(response)
+    }
+    render(){
+        console.log(this.state.arrTag)
+        return(
+            this.state.allowRender ? 
+            <div className="edit-contact-info">
+                {
+                    classes.map((obj, index) =>(
+                        index != 0 ?
+                            this.state.arrTag.includes(index) ?
+                            <TagAnimal id={index} name = {obj.name} isFollow = {true}/> :
+                            <TagAnimal id={index} name = {obj.name} isFollow = {false}/>
+                        : ''
+                    ))
+                }
+            </div>
+            : 
+            <>
+            </>
+            
+            
+        );
+    }
+
 }
+
+const mapStateToProps = (state) => ({
+    user: state.currentUser
+});
+
+export default connect(mapStateToProps)(TagFollowing);
