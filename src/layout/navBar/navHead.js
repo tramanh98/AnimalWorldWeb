@@ -6,7 +6,7 @@ import If from '../../services/if'
 import { Badge, Popover, Button, Avatar } from 'antd';
 import { BellFilled, UserOutlined, EditTwoTone } from '@ant-design/icons';
 import { logout } from '../../api/api'
-import { connect, useDispatch } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 
 const ThongBao = () => {
     const text = <span>Thông báo</span>;
@@ -47,6 +47,7 @@ const registerButton = (props) =>{
 }
 const Profile = (props) => {
     // const { onLogout } = useAuthContext();
+    const user = useSelector((state) => state.currentUser);
     const [visible, setVisible] = useState(false)
     const history = useHistory();
     const dispatch = useDispatch()
@@ -64,7 +65,7 @@ const Profile = (props) => {
     }
     const qltk = () =>{
         setVisible(false)
-        props.history.push('/manage/account')
+        props.history.push(`/manage/account/${user.idUser}`)
     }
     const qlbd = () =>{
         setVisible(false)

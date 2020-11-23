@@ -214,6 +214,11 @@ class QuillEditor extends React.Component {
 
     componentDidMount() {
         this._isMounted = true;
+        if(this.props.defaultValue){
+            this.setState({
+                editorHtml: this.props.defaultValue
+            })
+        }
     }
 
     componentWillUnmount() {

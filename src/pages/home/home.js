@@ -57,11 +57,11 @@ export const Home = () => {
                         </div>
                         <div className = "firstPart">
                             <FramePosts type = {1} />
-                            <hr class="my-4"/>
+                            <hr className="my-4"/>
                             <FramePosts type = {1} />
-                            <hr class="my-4"/>
+                            <hr className="my-4"/>
                             <FramePosts type = {1} />
-                            <hr class="my-4"/>
+                            <hr className="my-4"/>
                             <FramePosts type = {1} />
                         </div>
 
@@ -96,11 +96,11 @@ export const Home = () => {
                                 <div className = "col-md-6">
                                     <div>
                                         <FramePosts type = {3} />
-                                        <hr class="my-4"/>
+                                        <hr className="my-4"/>
                                         <FramePosts type = {3} />
-                                        <hr class="my-4"/>
+                                        <hr className="my-4"/>
                                         <FramePosts type = {3} />
-                                        <hr class="my-4"/>
+                                        <hr className="my-4"/>
                                         <FramePosts type = {3} />
                                     </div>
                                 </div>

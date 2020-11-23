@@ -32,15 +32,18 @@ class TagFollowing extends Component{
     }
     render(){
         console.log(this.state.arrTag)
+        const {arrObj, arrTag} = this.state
         return(
             this.state.allowRender ? 
             <div className="edit-contact-info">
                 {
                     classes.map((obj, index) =>(
                         index != 0 ?
-                            this.state.arrTag.includes(index) ?
-                            <TagAnimal id={index} name = {obj.name} isFollow = {true}/> :
-                            <TagAnimal id={index} name = {obj.name} isFollow = {false}/>
+                            arrTag.includes(index) ?
+                            <TagAnimal idFollow = {arrObj[arrTag.indexOf(index)].id} key ={index}
+                            idTag={index} name = {obj.name} isFollow = {true}/> :
+                            <TagAnimal idFollow = {null} key ={index}
+                            idTag={index} name = {obj.name} isFollow = {false}/>
                         : ''
                     ))
                 }

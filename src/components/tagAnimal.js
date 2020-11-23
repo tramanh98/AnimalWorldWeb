@@ -5,15 +5,27 @@ import './style.css';
 import {apiFollowTag, apiUnfollowTag } from '../api/api'
 export const TagAnimal = (props) => {
     const [follow, setFollow] = useState(props.isFollow)
+    const [idfollow, setIdfollow] = useState(props.idFollow)
+
     const handleFollowAnimal = async () =>{
-        setFollow(true)
-        // API 
-        console.log(props.id)
-        const response = await apiFollowTag(props.id)
+        const response = await apiFollowTag(props.idTag)
+        const {data} = response
+        if(response.status == 201) // create success
+        {
+            setFollow(true)
+            setIdfollow(data.id)
+        }
         console.log(response)
     }
-    const handleUnfollowAnimal = () =>{
-        setFollow(false)
+    const handleUnfollowAnimal = async () =>{
+        const response = await apiUnfollowTag(idfollow)
+        if(response.status == 204)  // delete success
+        {
+            setFollow(false)
+            setIdfollow(null)
+            console.log('deleted')
+        }
+
     }
 
     return(

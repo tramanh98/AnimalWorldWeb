@@ -1,11 +1,10 @@
-import React, { Component, useEffect, useState } from 'react';
-import { Typography, Button, Form, message, Select, Input, Modal } from 'antd';
+import React, { Component, useEffect, useState, useRef } from 'react';
+import { Typography, Button, Form, message, Select, Input, Modal, Radio } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
 import QuillEditor from '../../components/editor/QuillEditor';
 import classes from '../../data/classes.json'
-import species from '../../data/species.json'
-import FrameImgCropper from '../../components/IMGcropper/index'
-import {CropDemo} from '../../components/IMGcropper/crop'
 import CropperIMG from '../../components/IMGcropper/cropper'
+import {uploadImg, postBlog} from '../../api/api'
 const { Title } = Typography;
 const { Option } = Select;
 
@@ -13,39 +12,52 @@ export const Posting = () => {
     const [content, setContent] = useState("")
     const [files, setFiles] = useState([])
     const [avaImg, setAvaImg] = useState([])
-    const [IDclass, setIDclass] = useState(0);
     const [visible, setVisible] = useState(false);
+    const [urlImg, setUrlImg] = useState('')
+
+    const hiddenFileInput = useRef(null);
+    // Programatically click the hidden file input element
+    // when the Button component is clicked
+    const handleClick = event => {
+      hiddenFileInput.current.click();
+    };
+    // Call a function (passed as a prop from the parent component)
+    // to handle the user-selected file 
+    const handleChange = event => {
+      console.log("image changed")
+      console.log(event.target.files[0])
+      setFiles(event.target.files[0])
+      setAvaImg(event.target.files)
+      setVisible(true)
+    //   props.handleFile(fileUploaded);
+    };
+
+
     const onEditorChange = (value) => {
         setContent(value)
         console.log(content)
     }
-    const handleChangeClass = value => {
-        setIDclass(value)
-    }
-    const handleChangeSpecies = value =>{
-        console.log(value)
-    }
     const onFilesChange = (files) => {
-        setFiles(files)
+        console.log("image uploaded")
+        // setFiles(files)
     }
     const handleCancel = () =>{
         setVisible(false)
     }
-    const onImageChange = event => {
-        console.log("image changed")
-        setAvaImg(event.target.files)
-        setVisible(true)
-        // console.log(event.target.files);
-        // var arrFile = [event.target.files]
-        // var arrURL = [URL.createObjectURL(event.target.files[0])]
-        // setUrlImg(UrlImg => [...UrlImg, arrURL])
-        // setFileImg(FileImg => [...FileImg, arrFile ])
-        // console.log(FileImg);
-        // console.log(UrlImg);
 
-    };
-    const onSubmit = (event) =>{
+    const handleCropImg = async (img) =>{
+        const file = new File([img], `${files.name}`, { type: img.type })
+        const response = await uploadImg(file)
+        console.log(response.data.image)
+        setUrlImg(`http://127.0.0.1:8000${response.data.image}`)
+        setVisible(false)
+    }
+
+
+    const onSubmit = async (event) =>{
         console.log(event)
+        const response = await postBlog(event, urlImg, content)
+        console.log(response)
     }
         return(
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
@@ -53,20 +65,17 @@ export const Posting = () => {
                 <Title level={2} > Đăng bài viết của bạn</Title>
             </div>
 
-            
-
-            <Form layout="vertical" onSubmit={onSubmit} >
-                
+            <Form layout="vertical" onFinish={onSubmit} >
                 <Input.Group>
-                    <Form.Item name='title' label="Tiêu đề" rules={[{ required: true, message: 'Nhập tiêu đề !'  }]} >
+                    <Form.Item name='title' label="Tiêu đề" rules={[{ required: true, message: 'Nhập tiêu đề !'}]} >
                         <Input />
                     </Form.Item>
                     <Form.Item
-                        name='class'
+                        name='typeClass'
                         label="Lớp động vật"
                         rules={[{ required: true, message: 'Chọn lớp động vật!' }]}
                     >
-                        <Select placeholder="Lớp" onChange={handleChangeClass}>
+                        <Select placeholder="Lớp" >
                             {
                                 classes.map((obj, index) => (
                                     index != 0 ?
@@ -75,40 +84,71 @@ export const Posting = () => {
                             }
                         </Select>
                     </Form.Item>
-                    <Form.Item
-                        name='species'
-                        label="Loài động vật"
-                        rules={[{ required: true, message: 'Chọn loài động vật!' }]}
-                    >
-                        <Select onChange= {handleChangeSpecies} placeholder="Loài">
-                            {
-                                species[IDclass].loai.map((obj, index) => (
-                                    index != 0 ?
-                                        <Option key={index} value={index}>{obj}</Option> : ''
-                                ))
-                            }
-                        </Select>
+                    <Form.Item name="dangerous" label="Nguy hiểm" rules={[{ required: true}]}>
+                        <Radio.Group>
+                            <Radio value={false}>Không</Radio>
+                            <Radio value={true}>Có</Radio>
+                        </Radio.Group>
                     </Form.Item>
+                    <Form.Item name="underwater" label="Sống dưới nước" rules={[{ required: true}]}>
+                        <Radio.Group>
+                            <Radio value={false}>Không</Radio>
+                            <Radio value={true}>Có</Radio>
+                        </Radio.Group>
+                    </Form.Item>
+                    <Form.Item name="terrestrial" label="Sống trên cạn" rules={[{ required: true}]}>
+                        <Radio.Group>
+                            <Radio value={false}>Không</Radio>
+                            <Radio value={true}>Có</Radio>
+                        </Radio.Group>
+                    </Form.Item>
+                    
+                    <Form.Item name="pets" label="Thú nuôi" rules={[{ required: true}]}>
+                        <Radio.Group>
+                            <Radio value={false}>Không</Radio>
+                            <Radio value={true}>Có</Radio>
+                        </Radio.Group>
+                    </Form.Item>
+                    
+                    <Form.Item name="wild" label="Hoang dã" rules={[{ required: true}]}>
+                        <Radio.Group>
+                            <Radio value={false}>Không</Radio>
+                            <Radio value={true}>Có</Radio>
+                        </Radio.Group>
+                    </Form.Item>
+                    
+                    <Form.Item name="rare" label="Quý hiếm" rules={[{ required: true}]}>
+                        <Radio.Group>
+                            <Radio value={false}>Không</Radio>
+                            <Radio value={true}>Có</Radio>
+                        </Radio.Group>
+                    </Form.Item>
+
                     <Form.Item
                         className="avatar"
                         label="Ảnh đại diện bài viết"
-                        name="image"
                     >
+                        <Button icon={<UploadOutlined />} onClick={handleClick}>Upload</Button>
                         <input
-                            name="files"
                             type="file"
-                            onChange={(e)=>onImageChange(e)}
-                            alt="image"
+                            ref={hiddenFileInput}
+                            onChange={handleChange}
+                            style={{display: 'none'}} 
                         />
+                        <div className="my-2">
+                            {urlImg ? <img src={urlImg} style={{width: '40%'}}/> : ''}
+                        </div>
+                        
                         <Modal
                         title="Image"
                         visible={visible}
                         footer={null}
                         z-index={10000}
-                        // onOk={this.handleOk}
                         onCancel={handleCancel}
                         >
-                            <CropperIMG handleCancel = {handleCancel} src = {avaImg}/>
+                            <CropperIMG handleCancel = {handleCancel} avatar = {false}
+                            onHandleCrop = {handleCropImg} src = {avaImg}/>
+
                         </Modal>
                     </Form.Item>
                     <Form.Item label="Nội dung">

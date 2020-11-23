@@ -10,13 +10,13 @@ export const RightCol = () => {
             </div>
             <div className = "fstpart-col2">
                 <FramePosts type = {3} />
-                <hr class="my-4"/>
+                <hr className="my-4"/>
                 <FramePosts type = {3} />
-                <hr class="my-4"/>
+                <hr className="my-4"/>
                 <FramePosts type = {3} />
-                <hr class="my-4"/>
+                <hr className="my-4"/>
                 <FramePosts type = {3} />
-                <hr class="my-4"/>
+                <hr className="my-4"/>
                 <FramePosts type = {3} />
             </div>
 

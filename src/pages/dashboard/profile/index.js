@@ -1,54 +1,91 @@
 import './style.css';
-import { Collapse, Tabs } from 'antd';
-
-
-
+import React, { Component, useEffect, useState, useRef } from 'react';
+import { Collapse, Tabs, message, Avatar } from 'antd';
+import { Link } from "react-router-dom";
+import { UserOutlined } from '@ant-design/icons';
+import {PrivateFramePost} from '../../../components/framePost'
+import {ApiDeleteArticle, GetInforUser, GetAllUserArticle} from '../../../api/api'
 const { TabPane } = Tabs;
-
-
-
-
-
-
-
 const { Panel } = Collapse;
-const text = (
-    <p style={{ paddingLeft: 24 }}>
-        A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found
-        as a welcome guest in many households across the world.
-    </p>
-);
-export const ManageAccount = () => {
+export const ManageAccount = (props) => {
+    const [profile, setProfile] = useState(null)
+    const [allArticles, setAllarticles] = useState(null)
     const callback = (key) => {
         console.log(key);
     }
+    useEffect( async () => {
+        // call API
+        const res1 = await GetInforUser(props.match.params.idUser)
+        console.log(res1)
+        if(res1.status === 200){
+            setProfile(res1.data)
+        }
+        const res2 = await GetAllUserArticle(props.match.params.idUser)
+        console.log(res2)
+        if(res2.status === 200){
+            setAllarticles(res2.data.results)
+        }
+      }, []);
+
+    const handleDeleteArticle = async (id) =>{
+        const response = await ApiDeleteArticle(id)
+        console.log(response)
+        if(response.status == 204){
+            message.success('Deleted Success');
+        }
+    }
+
+    const handleRouteToUpdate = (id) =>{
+        props.history.push(`/update/${id}`)
+    }
+    const editProfile = () =>{
+        props.history.push('/setting')
+    }
     return (
         <div>
-            <div className="profile">
-                <div className="avt">
-                    <img className="rounded-circle d-inline-block " src="../images/avt1.jpg" alt="" />
-                </div>
-
-
-                <div className=" info">
-
-                    <h2 className="d-inline-block">Full name</h2>
-
-                    <button className="edit">Edit Profile</button>
-                    <p className="text-muted d-block">@user</p>
-                    <p>something about me.</p>
-
-
-                </div>
-
-
+            <div className="d-flex my-4">
+                {
+                    profile ? 
+                    <>
+                        <div className="avt">
+                            { 
+                                profile.avatar ? 
+                                <Avatar src = {profile.avatar} size={100}/> : 
+                                <Avatar style={{ verticalAlign: 'middle' }} icon={<UserOutlined />} size={100}/> 
+                                    
+                            }
+                        </div>
+                        <div className="ml-3 mt-1">
+                            <h3 className="d-inline-block">{`${profile.first_name} ${profile.last_name}`}</h3>
+                            <button className="edit" onClick={editProfile}>Edit Profile</button>
+                            <p className="text-muted d-block">@{profile.username}</p>
+                        </div> 
+                    </>
+                    : ''
+                }
             </div>
 
-            <div>
-
+            <div className = "row">
+                <div className="col-md-9">
                 <Tabs defaultActiveKey="1" onChange={callback}>
                     <TabPane tab="Post" key="1">
-                        Content of Tab Pane 1
+                        <div>
+                            {
+                                allArticles ? 
+                                allArticles.map((obj, index) =>(
+                                    <>
+                                    <PrivateFramePost 
+                                        idArticle = {obj.id}
+                                        onClickDelete = {handleDeleteArticle}
+                                        onClickUpdate = {handleRouteToUpdate}
+                                        {...obj}
+                                    />
+                                    <hr/>
+                                    </>
+                                )) : ''
+                            }
+                            
+                        </div>
                     </TabPane>
                     <TabPane tab="Following" key="2">
                     <Collapse bordered={false} defaultActiveKey={['1']}>
@@ -67,6 +104,10 @@ export const ManageAccount = () => {
                     </TabPane>
                     
                 </Tabs>
+                </div>
+                <div className = "col-md-3">
+                        
+                </div>
 
             </div>
 

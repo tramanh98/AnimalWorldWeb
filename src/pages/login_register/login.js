@@ -20,12 +20,14 @@ export const LoginForm = () => {
         console.log(response)
         const res = await Login_Fb(response.accessToken)  // chuyển đổi token 
         const {data} = res
-        // lưu riêng avatar của user 
-        const avt = await updateAvatar(`${data.token_type} ${data.access_token}`, response.picture.data.url )
-        const profiledt = await getProfile(`${data.token_type} ${data.access_token}`)
-        // lưu token và loại token xuống local storage 
+
         localStorage.setItem("token",data.access_token)
         localStorage.setItem("typetoken", data.token_type)
+        // lưu riêng avatar của user 
+        const avt = await updateAvatar(response.picture.data.url )
+        const profiledt = await getProfile(`${data.token_type} ${data.access_token}`)
+        // lưu token và loại token xuống local storage 
+
         console.log(res)
         
         // const {data} = profiledt.data
@@ -51,11 +53,11 @@ export const LoginForm = () => {
         console.log(response)
         const res = await Login_GG(response.tokenObj.access_token)
         const {data} = res
-        const avt = await updateAvatar(`${data.token_type} ${data.access_token}`, response.profileObj.imageUrl )
-        const profiledt = await getProfile(`${data.token_type} ${data.access_token}`)
-
         localStorage.setItem("token",data.access_token)
         localStorage.setItem("typetoken", data.token_type)
+        const avt = await updateAvatar(response.profileObj.imageUrl )
+        const profiledt = await getProfile(`${data.token_type} ${data.access_token}`)
+
 
         // const {profile} = profiledt.data
         // console.log(profile)

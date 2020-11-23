@@ -15,7 +15,7 @@ const Login_Fb = async (token) =>{
         ;
 
     } catch (error) {
-        return 'error' 
+        return error 
     }
 }
 
@@ -30,7 +30,7 @@ const Login_GG = async (token) =>{
         });
         return response2;
     } catch (error) {
-        return 'error'
+        return error
     }
 }
 
@@ -47,18 +47,26 @@ const getProfile = async (token) =>{
     return response       
 }
 
-const updateAvatar = async (token, url) =>{
-    const response = await httpClient.put(`account/avatar/update/`,
-    {
-        avatar: {avatar: url}
-    },
-    {
-        headers: {
-            Authorization: token,
+const updateAvatar = async (url) =>{
+    const token = window.localStorage.getItem('token');
+    const typetoken = window.localStorage.getItem('typetoken'); 
+    try{
+        const response = await httpClient.put(`account/avatar/update/`,
+        {
+            avatar: {avatar: url}
+        },
+        {
+            headers: {
+                Authorization: `${typetoken} ${token}`,
+            }
         }
+        )
+        return response 
     }
-    )
-    return response       
+    catch(error){
+        return error
+    }
+      
 }
 
 const logout = async () =>{
@@ -92,7 +100,7 @@ const Register_sv = async (values) =>{
         });
         return response
     } catch (error) {
-        return 'error'
+        return error
     }
 }
 
@@ -101,7 +109,7 @@ const getTagsFollowing = async (idUser) => {
         const response = await httpClient.get(`api/get/followingtag/${idUser}/`);
         return response
     } catch (error) {
-        return 'error'
+        return error
     }
 }
 
@@ -120,7 +128,7 @@ const apiFollowTag = async (idTag) =>{
         });
         return response
     } catch (error) {
-        return 'error'
+        return error
     }
 }
 
@@ -137,10 +145,265 @@ const apiUnfollowTag = async (idFollow) =>{
         });
         return response
     } catch (error) {
-        return 'error'
+        return error
     }
 }
-export { Login_Fb, Login_GG, getProfile, updateAvatar, 
+
+const uploadImg = async (blob) =>{
+    let formData = new FormData();
+    formData.append("image", blob);
+    try {
+        const response = await httpClient.post(`api/img/upload/`, formData,
+        {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        });
+        return response
+    } catch (error) {
+        return error
+    }
+
+}
+
+const postBlog = async (intro, img, content) =>{
+    const token = window.localStorage.getItem('token');
+    const typetoken = window.localStorage.getItem('typetoken'); 
+    try {
+        const response = await httpClient.post(`api/create/article/`,
+        {
+                title: intro.title ,
+                image: img ,
+                content: content ,
+                typeClass: intro.typeClass ,
+                dangerous: intro.dangerous ,
+                underwater: intro.underwater ,
+                terrestrial: intro.terrestrial ,
+                pets: intro.pets ,
+                wild: intro.wild ,
+                rare: intro.rare ,
+        },
+        {
+            headers: {
+                Authorization: `${typetoken} ${token}`,
+            }
+        });
+        return response
+    } catch (error) {
+        return error
+    }
+}
+
+const getDetailBlog = async (id) =>{
+    const response = await httpClient.get(`api/get/article/${id}`)
+    return response
+}
+
+const apiComment = async (idPost, content) =>{
+    
+    const token = window.localStorage.getItem('token');
+    const typetoken = window.localStorage.getItem('typetoken'); 
+    try {
+        const response = await httpClient.post(`api/write/comment/`,
+        {
+            article: idPost,
+            content: content
+        },
+        {
+            headers: {
+                Authorization: `${typetoken} ${token}`,
+            }
+        });
+        return response
+    } catch (error) {
+        return error
+    }
+
+}
+
+const likeComment = async (idComment) =>{
+    const token = window.localStorage.getItem('token');
+    const typetoken = window.localStorage.getItem('typetoken'); 
+    try {
+        const response = await httpClient.post(`api/vote/comment/`,
+        {
+            comment: idComment,
+            vote: '1'
+        },
+        {
+            headers: {
+                Authorization: `${typetoken} ${token}`,
+            }
+        });
+        return response
+    } catch (error) {
+        return error
+    }
+}
+
+const dislikeComment = async (idVoteCmt) =>{
+    const token = window.localStorage.getItem('token');
+    const typetoken = window.localStorage.getItem('typetoken'); 
+    try {
+        const response = await httpClient.delete(`api/delete/vote/comment/${idVoteCmt}/`,
+        {
+            headers: {
+                Authorization: `${typetoken} ${token}`,
+            }
+        });
+        return response
+    } catch (error) {
+        return error
+    }
+}
+
+const updatePost = async (idPost, intro, img, content) =>{
+    const token = window.localStorage.getItem('token');
+    const typetoken = window.localStorage.getItem('typetoken'); 
+    try {
+        const response = await httpClient.put(`api/update/article/${idPost}/`,
+        {
+                title: intro.title ,
+                image: img ,
+                content: content ,
+                typeClass: intro.typeClass ,
+                dangerous: intro.dangerous ,
+                underwater: intro.underwater ,
+                terrestrial: intro.terrestrial ,
+                pets: intro.pets ,
+                wild: intro.wild ,
+                rare: intro.rare ,
+        },
+        {
+            headers: {
+                Authorization: `${typetoken} ${token}`,
+            }
+        });
+        return response
+    } catch (error) {
+        return error
+    }
+}
+
+const EditProfile = async (values) =>{
+    const token = window.localStorage.getItem('token');
+    const typetoken = window.localStorage.getItem('typetoken'); 
+    try{
+        const response = await httpClient.put(`account/myprofile/`,
+        {
+            profileUpdate: {
+                first_name: values.fname,
+                last_name: values.lname,
+                phone: values.phone 
+            }
+        },
+        {   headers: {
+                Authorization: `${typetoken} ${token}`,
+            }
+        })
+        return response
+    }
+    catch(error){
+        return error
+    }
+}
+
+const GetArticleToUpdate = async (idPost) =>{
+    try{
+        const response = await httpClient.get(`api/get/your/article/${idPost}`)
+        return response
+    }
+    catch(error){
+        return error
+    }
+}
+
+const ApiDeleteArticle = async (idPost) =>{
+    const token = window.localStorage.getItem('token');
+    const typetoken = window.localStorage.getItem('typetoken'); 
+    try {
+        const response = await httpClient.delete(`api/delete/article/${idPost}/`,
+        {
+            headers: {
+                Authorization: `${typetoken} ${token}`,
+            }
+        });
+        return response
+    } catch (error) {
+        return error
+    } 
+}
+
+const GetInforUser = async (idUser) =>{
+    try{
+        const response = await httpClient.get(`api/get/infor/user/${idUser}`)
+        return response
+    }
+    catch(error){
+        return error
+    } 
+}
+
+// lấy tất cả các bài báo của user đó ( của mình hoặc của người khác)
+const GetAllUserArticle = async (idUser) =>{
+    try{
+        const response = await httpClient.get(`api/get/all/articles/?idUser=${idUser}`)
+        return response
+    }
+    catch(error){
+        return error
+    } 
+}
+
+const GetCommentsArticle = async (idPost) =>{
+    try{
+        const response = await httpClient.get(`api/get/comments/?idPost=${idPost}`)
+        return response
+    }
+    catch(error){
+        return error
+    } 
+}
+
+const VoteArticle = async (idPost) =>{
+    const token = window.localStorage.getItem('token');
+    const typetoken = window.localStorage.getItem('typetoken'); 
+    try {
+        const response = await httpClient.post(`api/vote/article/`,
+        {
+            article: idPost,
+            vote: '1'
+        },
+        {
+            headers: {
+                Authorization: `${typetoken} ${token}`,
+            }
+        });
+        return response
+    } catch (error) {
+        return error
+    }
+}
+
+const UnvoteArticle = async (idVote) =>{
+    const token = window.localStorage.getItem('token');
+    const typetoken = window.localStorage.getItem('typetoken'); 
+    try {
+        const response = await httpClient.delete(`api/delete/vote/article/${idVote}/`,
+        {
+            headers: {
+                Authorization: `${typetoken} ${token}`,
+            }
+        });
+        return response
+    } catch (error) {
+        return error
+    }
+}
+export { 
+    Login_Fb, Login_GG, getProfile, updateAvatar, 
     logout, Login_sv, Register_sv, getTagsFollowing, apiFollowTag,
-    apiUnfollowTag
+    apiUnfollowTag, uploadImg, postBlog, getDetailBlog, apiComment, 
+    likeComment, dislikeComment, updatePost, EditProfile, GetArticleToUpdate, ApiDeleteArticle,
+    GetInforUser, GetAllUserArticle, GetCommentsArticle, VoteArticle, UnvoteArticle
 }
