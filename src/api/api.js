@@ -211,7 +211,7 @@ const apiComment = async (idPost, content) =>{
         },
         {
             headers: {
-                Authorization: `${typetoken} ${token}`,
+                Authorization: `${typetoken} ${token}`, 
             }
         });
         return response
