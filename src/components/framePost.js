@@ -6,47 +6,47 @@ import { Button, Popconfirm } from 'antd';
 import "antd/dist/antd.css"
 import ReactHtmlParser from 'react-html-parser'
 {/*** đây là frame cho các bài viết, chứa thông tin cơ bản****/ }
-const FramePost1 = () =>{
+const FramePost1 = (props) =>{
     return(
         <div className = "row frameInforBasic">  
             <div className = "col-md-6">
-                <Link to ={'/detail/1'}><img src="../images/bn.png" alt="Notebook" style={{width: "100%"}}/></Link>
+                <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
             </div>
             <div className = "col-md-6 sumtp1">
-                <Link to ={'/detail/1'}><h3>21 Crazy-Fast Dessert Recipes That Crush Sugar</h3></Link>
-                <p>Nsectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p>
+                <Link to ={`/detail/${props.id}`}><h3>{props.title}</h3></Link>
+                <p>{ReactHtmlParser(props.content)}</p>
             </div>
         </div>
     )
 }
 
-const FramePost2 = () =>{
+const FramePost2 = (props) =>{
     return(
         <div className = "framepost-type2">
-            <Link to ={'/detail/1'}><img src="../images/bn.png" alt="Notebook" style={{width: "100%"}}/></Link>
-            <Link to ={'/detail/1'}><h3>21 Crazy-Fast Dessert Recipes That Crush Sugar</h3></Link>
-            <p>Nsectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p>
+            <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
+            <Link to ={`/detail/${props.id}`}><h3>{props.title}</h3></Link>
+            <p>{ReactHtmlParser(props.content)}</p>
         </div>
     )
 }
 
-const FramePost3 = () =>{
+const FramePost3 = (props) =>{
     return(
         <div className = "frameInforBasic row">  {/*** đây là frame cho các bài viết, chứa thông tin cơ bản****/ }
             <div className = "col-md-4">
-                <Link to ={'/detail/1'}><img src="../images/bn.png" alt="Notebook" style={{width: "100%"}}/></Link>
+                <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
             </div>
             <div className = "col-md-8">
-                <Link to ={'/detail/1'}><h6>21 Crazy-Fast Dessert Recipes That Crush Sugar</h6></Link>
+                <Link to ={`/detail/${props.id}`}><h6>{props.title}</h6></Link>
             </div>
         </div>
     )
 }
-const FramePost4 = () =>{
+const FramePost4 = (props) =>{
     return (
         <div className = "framepost-type4">
-            <Link to ={'/detail/1'}><img src="../images/bn.png" alt="Notebook" style={{width: "100%"}}/></Link>
-            <Link to ={'/detail/1'}><h5>21 Crazy-Fast Dessert Recipes That Crush Sugar</h5></Link>
+            <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
+            <Link to ={`/detail/${props.id}`}><h5>{props.title}</h5></Link>
         </div>
     )
 }
@@ -97,13 +97,17 @@ export const PrivateFramePost = (props) =>{
     );
 }
 
-export const FramePosts = (props) => {
-    const { type } = props
-    return type == 1 ? (
-        <FramePost1/>
-    ): 
-    ( type == 2 ? <FramePost2/> : 
-        ( type == 3 ? <FramePost3/> 
-            : <FramePost4/>)
-    );
+export{
+    FramePost1, FramePost2, FramePost3, FramePost4
+
 }
+// export const FramePosts = (props) => {
+//     const { type } = props
+//     return type == 1 ? (
+//         <FramePost1/>
+//     ): 
+//     ( type == 2 ? <FramePost2/> : 
+//         ( type == 3 ? <FramePost3/> 
+//             : <FramePost4/>)
+//     );
+// }

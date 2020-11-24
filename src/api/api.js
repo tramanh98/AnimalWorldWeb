@@ -400,10 +400,75 @@ const UnvoteArticle = async (idVote) =>{
         return error
     }
 }
+
+const latestPost = async (page) =>{
+    try {
+        if(page == 1){
+            const response = await httpClient.get(`api/latest/article`);
+            return response
+        }
+        else{
+            const res = await httpClient.get(`api/latest/article?page=${page}`);
+            return res
+        }
+    } catch (error) {
+        return error
+    }
+}
+
+const trendingPost = async (page) =>{
+
+    try {
+        if(page == 1){
+            const response = await httpClient.get(`api/trending/article`);
+            return response
+        }
+        else{
+            const res = await httpClient.get(`api/trending/article?page=${page}`);
+            return res
+        }
+    } catch (error) {
+        return error
+    }  
+}
+
+const favoritePost = async (page) =>{
+
+    try {
+        if(page == 1){
+            const response = await httpClient.get(`api/favorite/article`);
+            return response
+        }
+        else{
+            const res = await httpClient.get(`api/favorite/article?page=${page}`);
+            return res
+        }
+    } catch (error) {
+        return error
+    }  
+}
+
+const animalClassPost = async (page, idClass) =>{
+
+    try {
+        if(page == 1){
+            const response = await httpClient.get(`api/filter/animalclass/article/?idClass=${idClass}`);
+            return response
+        }
+        else{
+            const res = await httpClient.get(`api/filter/animalclass/article/?idClass=${idClass}&page=${page}`);
+            return res
+        }
+    } catch (error) {
+        return error
+    }  
+}
+
 export { 
     Login_Fb, Login_GG, getProfile, updateAvatar, 
     logout, Login_sv, Register_sv, getTagsFollowing, apiFollowTag,
     apiUnfollowTag, uploadImg, postBlog, getDetailBlog, apiComment, 
     likeComment, dislikeComment, updatePost, EditProfile, GetArticleToUpdate, ApiDeleteArticle,
-    GetInforUser, GetAllUserArticle, GetCommentsArticle, VoteArticle, UnvoteArticle
+    GetInforUser, GetAllUserArticle, GetCommentsArticle, VoteArticle, UnvoteArticle, latestPost,
+    trendingPost, favoritePost,animalClassPost
 }

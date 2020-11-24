@@ -13,6 +13,7 @@
     "bootstrap": "^4.5.3",
     "classnames": "^2.2.6",
     "cropperjs": "^1.5.9",
+    "query-string": "^6.13.7",
     "react": "^17.0.1",
     "react-avatar-editor": "^11.0.12",
     "react-axios": "^2.0.3",

@@ -1,7 +1,7 @@
 
 import React from "react";
 import '../pages/style.css';
-import { FramePosts } from './framePost'
+import { FramePost1, FramePost2, FramePost3, FramePost4 } from './framePost'
 export const RightCol = () => {
     return(
         <>
@@ -9,15 +9,8 @@ export const RightCol = () => {
                 <h5>Trending </h5>
             </div>
             <div className = "fstpart-col2">
-                <FramePosts type = {3} />
+                <FramePost3  />
                 <hr className="my-4"/>
-                <FramePosts type = {3} />
-                <hr className="my-4"/>
-                <FramePosts type = {3} />
-                <hr className="my-4"/>
-                <FramePosts type = {3} />
-                <hr className="my-4"/>
-                <FramePosts type = {3} />
             </div>
 
             <div className = "topicName">
@@ -34,16 +27,7 @@ export const RightCol = () => {
                 </div>
                 <div className = "row">
                     <div className = "col-md-6">
-                        <FramePosts type = {4} />
-                    </div>
-                    <div className = "col-md-6">
-                        <FramePosts type = {4} />
-                    </div>
-                    <div className = "col-md-6">
-                        <FramePosts type = {4} />
-                    </div>
-                    <div className = "col-md-6">
-                        <FramePosts type = {4} />
+                        <FramePost4 />
                     </div>
                 </div>
             </div>

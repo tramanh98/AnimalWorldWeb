@@ -13,7 +13,7 @@ const validateMessages = {
       number: '${label} is not a validate number!',
     },
     number: {
-      range: '${label} must be between ${min} and ${max}',
+      range: '${label} must be between ${min} and ${max}', 
     },
   };
 export const RegisterForm = () => {
