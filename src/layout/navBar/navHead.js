@@ -1,5 +1,5 @@
 import React, { Component, useState } from "react";
-import { withRouter, useHistory } from "react-router-dom";
+import { withRouter,  useHistory } from "react-router-dom";
 // import '../style.css';
 import If from '../../services/if'
 // import { NavAvatar } from '../Avatar';
@@ -107,6 +107,8 @@ const Profile = (props) => {
     );
 };
 
+
+
 class NavHead extends Component  {
     constructor(props) {
         super(props);
@@ -130,11 +132,11 @@ class NavHead extends Component  {
 
     return (
         <div className="wrap-navbar-head">
-            <div className="nav-head">
+            <div className="nav-head navother">
                 <div className="d-flex align-items-center">
                     <div className="mr-auto p-2 flex-grow-1" style={{width: "300px"}}>
                         <a onClick={this.home} >
-                            <img src="../images/logo1.png" style={{width: "20%", backgroundColor: "red"}} />
+                            <img src="../images/logo1.png" style={{width: "20%"}} />
                         </a>
                     </div>
                     <div className="p-2">
@@ -152,6 +154,7 @@ class NavHead extends Component  {
                     </div>
                 </div>
             </div>
+            
 
         </div>
 

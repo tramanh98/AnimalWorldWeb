@@ -61,8 +61,11 @@
     margin-right: 15.5rem;
   } */
   /* for ipad */
-  @media screen and (min-width: 600px) {
+  /* @media screen and (min-width: 600px) {
   
+    #wrap-navbar{
+      display: none;
+    }
     .nav-mobile{
       display: none;
   
@@ -91,7 +94,7 @@
     }
   
   
-  }
+  } */
   
   /* IPAD pro */
   @media screen and (min-width: 1000px) {
@@ -170,7 +173,7 @@
     }
     .navbar{
       padding: 10px 15px !important;
-      background-color: #83a09a !important;
+      background-color:#c1c7c6 !important;
     }
     .navbar-search{
       display: none;
@@ -279,7 +282,7 @@
 
 
 /* mobile */
-@media screen and (max-width: 600px) {
+/* @media screen and (max-width: 600px) {
     .footer-react hr{
         margin: 4px 0 0 0 !important;
     }
@@ -309,6 +312,20 @@
     .foot-logo{
         width: 40%;
     }
+} */
+@media screen and (min-width: 600px) {
+.foot-logo{
+  display: none;
 }
-
-
+}
+@media screen and (max-width: 600px) {
+  .foot-logo{
+    display: block;
+  }
+  .mb-0{
+    display: none;
+  }
+.footer-none {
+  display: none;
+}
+}
