@@ -8,6 +8,7 @@ const NavBar = () => {
 
     return (
     <Aux>
+        
         <NavHead />
         <NavFoot home ={true}/>
     </Aux>

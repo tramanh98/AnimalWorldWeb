@@ -90,3 +90,11 @@ body{
 .vote-article{
     margin-top: 200px;
 }
+
+
+/*.....Mobile...*/
+@media screen and (max-width: 600px) {
+    .scdpart-col2, .fstpart-col2, .topicName-trending , .topicName-postnew{
+        display: none;
+    }
+  }

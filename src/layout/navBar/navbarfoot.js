@@ -1,14 +1,119 @@
-// import { Drawer} from 'antd';
-// import { Menu, Row, Col} from 'antd';
+import { Drawer} from 'antd';
+import { Menu, Row, Col} from 'antd';
 import React from "react";
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { withRouter, useHistory } from "react-router-dom";
-// import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
+import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 import './style.css'
+import { Badge, Popover, Button, Avatar } from 'antd';
+import { BellFilled, UserOutlined, EditTwoTone } from '@ant-design/icons';
+import { logout } from '../../api/api'
+import { connect, useDispatch, useSelector } from "react-redux";
 
-// import If from '../../services/if'
-// import { AuthContext, useAuthContext } from "../../others/contexts/auth.context";
-// const { SubMenu } = Menu;
 
+import If from '../../services/if'
+
+const { SubMenu } = Menu;
+
+const ThongBao = () => {
+    const text = <span>Thông báo</span>;
+    const content = (
+        <div>
+            <p>Không có thông báo nào</p>
+
+        </div>
+    );
+    return (
+        <Popover placement="bottom" title={text} content={content} trigger="click" >
+            <Button type="link">
+                <Badge count={5} dot>
+                    <BellFilled style={{ fontSize: '25px', color: '#212529', margin: '0 5px' }} />
+                </Badge>
+            </Button>
+        </Popover>
+    );
+};
+
+const loginButton = (props) =>{
+        const routeToLogin = () =>{
+            props.history.push('/login')
+    }
+    return(
+        <Button type="link" className="btnlgin" onClick = {routeToLogin}>ĐĂNG NHẬP</Button>
+    );
+}
+
+const registerButton = (props) =>{
+    const routeToRegister = () =>{
+        props.history.push('/register')
+    }
+    return(
+
+        <Button type="link" className="btnlgin" onClick = {routeToRegister} >ĐĂNG KÍ</Button>
+    );
+}
+const Profile = (props) => {
+    // const { onLogout } = useAuthContext();
+    const user = useSelector((state) => state.currentUser);
+    const [visible, setVisible] = useState(false)
+    const history = useHistory();
+    const dispatch = useDispatch()
+    const logoutAPI = async () =>{
+        const res = await logout()
+        console.log(res)
+        localStorage.removeItem("typetoken")
+        localStorage.removeItem("token")
+        // do something to redux
+        dispatch({
+            type: 'LOGOUT'
+        })
+        setVisible(false)
+        history.push('/home')
+    }
+    const qltk = () =>{
+        setVisible(false)
+        props.history.push(`/manage/account/${user.idUser}`)
+    }
+    const qlbd = () =>{
+        setVisible(false)
+        props.history.push('/setting')
+    }
+
+    const content = (
+        <div>
+            <Button type="link" onClick={() => qltk()}>
+                Your blogs
+            </Button>
+            
+            <br />
+            <Button type="link" onClick={() => qlbd()}>
+                Manage account
+            </Button>
+            <br />
+            <Button type="link" onClick={logoutAPI}>
+                Logout
+            </Button>
+        </div>
+    );
+    return (
+        <Popover placement="bottom" content={content} trigger="click" 
+        visible={visible}
+        onVisibleChange={visible => setVisible(visible)}
+        >
+            <a>
+                {
+                    props.user.avatar ? 
+                    <Avatar
+                         src={props.user.avatar}
+                    /> :
+                    <Avatar style={{ verticalAlign: 'middle' }} icon={<UserOutlined />} size="large"/>
+
+                }
+            </a>
+        </Popover>
+    );
+};
 
 class NavFoot extends React.Component {
   state = { 
@@ -56,12 +161,104 @@ class NavFoot extends React.Component {
         else this.setState({ classNm: "navbar navbar-expand-sm sticky-top "})
     }
 
+     showDrawer = () => {
+        this.setState({
+        visible: true,
+        });
+    };
 
+    onClose = () => {
+        this.setState({
+        visible: false,
+        });
+    };
 
+    handleClick = () =>{
+        this.setState({
+            visible: false,
+            });
+
+    }
+
+    onClickLocal = (e) =>{
+        console.log(e.target.value)
+    }
+
+    home = () =>{
+        this.props.history.push('/home');
+    }
     render() {
-    // const { user } = this.context;
+    const { user } = this.context;
     return (
-        <div id="wrap-navbar">
+        
+        <nav className={this.state.classNm}  >
+                <div className="nav-mobile">
+                    <div onClick={this.showDrawer} className="nav-icon-mobile" >
+                        <div className="btn-menu-mobile"></div>
+                        <div className="btn-menu-mobile"></div>
+                        <div className="btn-menu-mobile"></div>
+                    </div>
+                    <div style={{width: "100px"}}>
+                        <Link to="/home" style={{width: "fit-content"}}>
+                        <img src="../images/logo.png" style={{width: "40%"}}/>
+                        </Link>
+                    </div>
+                     
+                </div>
+
+                    <Drawer
+                    title="ANIMAlWORLD"
+                    placement="left"
+                    onClose={this.onClose}
+                    visible={this.state.visible}
+                    getContainer={false}
+                    bodyStyle={{ padding: 0 }}
+                    width={300}
+                    >
+                       
+                        <div className="my-account-mobile" onClick={this.handleClick}>
+                        <If condition={!this.props.user} props={this.props} component={loginButton}  props={{
+                                visible: false}
+                                }/>
+                        <If condition={this.props.user} component={ThongBao} />
+                        <If condition={!this.props.user} props={this.props}  component={registerButton} />
+                        <If condition={this.props.user} props={this.props} component={Profile} />
+                        <div className="btnlgin">
+                        <Link to="/posting" style={{width: "fit-content"}}>
+                        <EditTwoTone style={{ fontSize: '27px', color: '#212529', margin: '0 5px 0 20px' }}/>
+                         </Link>
+                    </div>
+                        </div>
+                        <hr style={{width: "100%"}}></hr>
+                        <Menu
+                            onClick={this.handleClick}
+                            style={{ width: 300, margin: 0 }}
+                            defaultSelectedKeys={['1']}
+                            mode="inline"
+                        >
+                            <Menu.Item key="1"><Link to="/home">Trang chủ</Link></Menu.Item>
+                            <SubMenu key="sub1" title="TÌM HIỂU">
+                                <Menu.Item><a className= "nav-foot-item">ĐỘNG VẬT HOANG DÃ</a></Menu.Item>
+                                <Menu.Item><a className= "nav-foot-item">ĐỘNG VẬT QUÝ HIẾM</a></Menu.Item>
+                                <Menu.Item><a className= "nav-foot-item">ĐỘNG VẬT NGUY HIỂM</a></Menu.Item>
+                                <Menu.Item><a className= "nav-foot-item">NƯỚC - ĐẠI DƯƠNG</a></Menu.Item>
+                            </SubMenu>
+                            <SubMenu key="sub2" title="LỚP">
+                                <Menu.Item><a className= "nav-foot-item">BÒ SÁT</a></Menu.Item>
+                                <Menu.Item><a className= "nav-foot-item">LỚP CÁ</a></Menu.Item>
+                                <Menu.Item><a className= "nav-foot-item">CÔN TRÙNG</a></Menu.Item>
+                                <Menu.Item><a className= "nav-foot-item">GIÁP XÁC</a></Menu.Item>
+                                <Menu.Item><a className= "nav-foot-item">HÌNH NHỆN</a></Menu.Item>
+                                <Menu.Item><a className= "nav-foot-item">LƯỠNG CƯ</a></Menu.Item>
+                                <Menu.Item><a className= "nav-foot-item">NHIỀU CHÂN</a></Menu.Item>
+                                <Menu.Item><a className= "nav-foot-item">SAO BIỂN</a></Menu.Item>
+                                <Menu.Item><a className= "nav-foot-item">SAN HÔ</a></Menu.Item>
+                            </SubMenu>
+                            <Menu.Item><a className= "nav-foot-item">TOP BÀI ĐĂNG</a></Menu.Item>
+                            <Menu.Item><a className= "nav-foot-item">ĐANG THEO DÕI</a></Menu.Item>
+                        </Menu>
+                    </Drawer>
+        <div className="navother" id="wrap-navbar">
             <div id="navbar-foot" 
             style={{padding: this.state.stylepd,
                 position: this.state.positionst,
@@ -91,11 +288,16 @@ class NavFoot extends React.Component {
                         LỚP ĐỘNG VẬT
                     </a>
                     <div className="dropdown-menu-nav-foot" style={{top: this.state.mnTop}}>
-                        <a className= "nav-foot-item" >BÒ SÁT</a><br/>
-                        <a className= "nav-foot-item" >BÒ SÁT</a><br/> 
-                        <a className= "nav-foot-item" >BÒ SÁT</a><br/> 
-                        <a className= "nav-foot-item" >BÒ SÁT</a><br/>  
-                        <a className= "nav-foot-item" >BÒ SÁT</a><br/>  
+                    <a className= "nav-foot-item" >BÒ SÁT</a><br/>
+                        <a className= "nav-foot-item" >LỚP CÁ</a><br/> 
+                        <a className= "nav-foot-item" >LỚP CHIM</a><br/> 
+                        <a className= "nav-foot-item" >CÔN TRÙNG</a><br/>  
+                        <a className= "nav-foot-item" >GIÁP XÁC</a><br/> 
+                        <a className= "nav-foot-item" >HÌNH NHỆN</a><br/> 
+                        <a className= "nav-foot-item" >LƯỠNG CƯ</a><br/> 
+                        <a className= "nav-foot-item" >NHIỀU CHÂN</a><br/> 
+                        <a className= "nav-foot-item" >SAO BIỂN</a><br/> 
+                        <a className= "nav-foot-item" >SAN HÔ</a><br/>  
                     </div>
                 </div>
                 <a href="#contact">TOP BÀI ĐĂNG</a>
@@ -103,7 +305,7 @@ class NavFoot extends React.Component {
             </div>
         </div>
         
-      
+      </nav>
     );
   }
 }

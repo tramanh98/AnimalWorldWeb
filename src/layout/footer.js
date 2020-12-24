@@ -13,6 +13,7 @@ export const Footer = () =>
 
                     <div className="col-6 col-md-6 col-lg-5 text-md-left  contact-with-us">
                       <h6 className="mb-0">KẾT NỐI VỚI CHÚNG TÔI</h6>
+                      <img src="../images/logo.png" className="foot-logo"/>
                     </div>
                     <div className="col-6 col-md-6 col-lg-7 text-right icon-social">
                       <a className="fb-ic">
@@ -38,9 +39,9 @@ export const Footer = () =>
                 </div>
               </div>
 
-              <div className="container text-md-left foot-ft-magin ">
+              <div className="container text-md-left foot-ft-magin footer-none">
 
-                <div className="row">
+                <div className="row ">
 
                   <div className="col-12 col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 footer-react">
 
@@ -106,7 +107,7 @@ export const Footer = () =>
 
               </div>
               <hr style={{width: "100%"}}/>
-              <div className="footer-copyright text-center py-3 font-footer">Copyright ©2020 All rights reserved | This template is made by
+              <div className="footer-copyright text-center py-3 font-footer">Copyright ©2020 All rights reserved | Project by Team 21
                 <a href="https://dungtran.top/"> nhom21@mail.com</a>
               </div>
 

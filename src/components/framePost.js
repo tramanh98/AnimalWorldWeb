@@ -24,8 +24,11 @@ const FramePost2 = (props) =>{
     return(
         <div className = "framepost-type2">
             <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
-            <Link to ={`/detail/${props.id}`}><h3>{props.title}</h3></Link>
-            <p className = "description">{ReactHtmlParser(props.content)}</p>
+
+            <Link to ={`/detail/${props.id}`}><h5>{props.title}</h5></Link>
+            <p className = "description">
+                    {ReactHtmlParser(props.content)}
+            </p>
         </div>
     )
 }
@@ -38,6 +41,9 @@ const FramePost3 = (props) =>{
             </div>
             <div className = "col-md-8">
                 <Link to ={`/detail/${props.id}`}><h6>{props.title}</h6></Link>
+                <p className = "description">
+                    {ReactHtmlParser(props.content)}
+                </p>
             </div>
         </div>
     )
@@ -47,6 +53,9 @@ const FramePost4 = (props) =>{
         <div className = "framepost-type4">
             <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
             <Link to ={`/detail/${props.id}`}><h5>{props.title}</h5></Link>
+            <p className = "description">
+                {ReactHtmlParser(props.content)}
+            </p>
         </div>
     )
 }
