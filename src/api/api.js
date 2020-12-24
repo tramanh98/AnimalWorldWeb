@@ -89,7 +89,6 @@ const Login_sv = async (email, password) =>{
 
 const Register_sv = async (values) =>{
     try {
-        console.log(values)
         const response = await httpClient.post(`auth/registration/`, {
             username: String(values.usrname),
             firstName: String(values.fname),

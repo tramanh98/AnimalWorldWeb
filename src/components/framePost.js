@@ -14,7 +14,7 @@ const FramePost1 = (props) =>{
             </div>
             <div className = "col-md-6 sumtp1">
                 <Link to ={`/detail/${props.id}`}><h3>{props.title}</h3></Link>
-                <p>{ReactHtmlParser(props.content)}</p>
+                <p className = "description">{ReactHtmlParser(props.content)}</p>
             </div>
         </div>
     )
@@ -25,7 +25,7 @@ const FramePost2 = (props) =>{
         <div className = "framepost-type2">
             <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
             <Link to ={`/detail/${props.id}`}><h3>{props.title}</h3></Link>
-            <p>{ReactHtmlParser(props.content)}</p>
+            <p className = "description">{ReactHtmlParser(props.content)}</p>
         </div>
     )
 }
