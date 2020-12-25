@@ -27,14 +27,14 @@ export const RegisterForm = () => {
         localStorage.setItem("token",rgt.data.key)
         localStorage.setItem("typetoken", 'Token')
 
-        const {profile} = profiledt.data
+        const {data} = profiledt
         const storetoRedux = {
             isLogin: true,
-            avatar: profile.avatar,
-            username: profile.username, 
-            fname: profile.first_name,
-            lname: profile.last_name,
-            email: profile.email,
+            avatar: data.avatar,
+            username: data.username, 
+            fname: data.first_name,
+            lname: data.last_name,
+            email: data.email,
         }
         // do something to redux
         dispatch({
