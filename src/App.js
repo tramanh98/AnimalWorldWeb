@@ -30,7 +30,6 @@ function App() {
         {/* <Redirect exact path="/" to="/profile" /> */}
         <Redirect exact path="/" to="/update/:idBlog" />
         <Route path="/update/:idBlog" component={UpdatePost} />
-        
         {/* <ProtectedRoute path="/profile/edit" component={EditProfile} />
         <ProtectedRoute path="/profile/index" component={ListRoom} /> */}
 

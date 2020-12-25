@@ -34,3 +34,19 @@ export const RightCol = () => {
     
     );
 }
+
+// const FramePost1 = (props) =>{
+//     return(
+//         <div className = "row frameInforBasic">  
+//             <div className = "col-md-6">
+//                 <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
+//             </div>
+//             <div className = "col-md-6 sumtp1">
+//                 <Link to ={`/detail/${props.id}`}><h5>{props.title}</h5></Link>
+//                 <p className = "description">
+//                     {ReactHtmlParser(props.content)}
+//                 </p>
+//             </div>
+//         </div>
+//     )
+// }
