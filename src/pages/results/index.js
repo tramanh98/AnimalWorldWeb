@@ -1,6 +1,7 @@
 import {RightCol} from '../../components/rightcol'
 import {useState, useEffect} from "react"
 import queryString from 'query-string'
+import { Pagination } from 'antd';
 import {trendingPost, favoritePost, animalClassPost} from '../../api/api'
 import { FramePost1, FramePost2, FramePost3, FramePost4} from '../../components/framePost'
 const TrendingPost = () =>{
@@ -19,8 +20,6 @@ return(
     <div>
         <div className = "topicName"><h5>Được xem nhiều</h5></div>
             <div className = "fourPart">
-                
-                 
                     {
                         article.slice(0,6).map((obj,index)=>(
                             <div className = "">
@@ -48,6 +47,7 @@ const  FavoritePost = () =>{
         }
 
     }, []);
+    
 return(
     article ? 
     <div>
@@ -88,8 +88,10 @@ export const Results = (props) => {
             <h1>NGÀNH CHÂN KHỚP</h1>
             <div className = "row">
                 <div className = "col-md-8">
-                    <FramePost1 type = {1} />
+                    <FramePost1  />
                     <hr class="my-4"/>
+
+                    <Pagination onChange = {this.changePage} defaultCurrent={1} total={this.state.countResult} />
                 </div>
                 <div className ="col-md-4">
                    <TrendingPost/>
