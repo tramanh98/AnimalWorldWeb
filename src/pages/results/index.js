@@ -78,11 +78,13 @@ export const Results = (props) => {
     const [countResult, setCountResult] = useState(null)
     const [loading, setLoading] = useState(true)
     const [pageSize, setPageSize] = useState(0)
-    useEffect( async () =>{
+    useEffect( () =>{
+    console.log("this is result page")
+    async function fetchData() {
         const value = queryString.parse(props.location.search)
         console.log(value.idClass)
         setLoading(true)
-        if(value.idClass != undefined){
+        if(value.idClass !== undefined){
             console.log(value.idClass)
             const res = await animalClassPost(1, value.idClass )
             if(res.status === 200){
@@ -109,6 +111,8 @@ export const Results = (props) => {
         }
         setCurrentPage(1)
         setLoading(false)
+    }
+    fetchData();
 
     }, []);
 
@@ -147,7 +151,7 @@ export const Results = (props) => {
     // const indexOfFirstPost = indexOfLastPost - postsPerPage;
     // const paginate = pageNumber => setCurrentPage(pageNumber);
     return(
-        article ? 
+        loading ? 
         <Spin tip="Loading..." size="large" ></Spin> :
         <div>
             <h1>NGÀNH CHÂN KHỚP</h1>

@@ -91,7 +91,7 @@ const MammaliaPost = () =>{
                         article.slice(0,4).map((obj,index)=>(
                             <>
                                 <FramePost1 {...obj}/>
-                                <hr className="my-4"/>
+                                {/* <hr className="my-4"/> */}
                             </>
 
                         ))
@@ -126,7 +126,7 @@ const MammaliaPost = () =>{
                                 article.slice(0,4).map((obj,index)=>(
                                     <div className = "col-md-6">
                                         <FramePost2 {...obj}/>
-                                        <hr className="my-4"/>
+                                        {/* <hr className="my-4"/> */}
                                     </div>
         
                                 ))
@@ -165,8 +165,8 @@ const MammaliaPost = () =>{
                                     {
                                         article.slice(1,5).map((obj,index)=>(
                                         <>
-                                            <FramePost3 />
-                                            <hr className="my-4"/>
+                                            <FramePost3 {...obj}/>
+                                            {/* <hr className=""/> */}
                                         </>
                                         ))
                                     }
@@ -204,7 +204,7 @@ const MammaliaPost = () =>{
                             article.slice(0,6).map((obj,index)=>(
                                 <div className = "col-md-4">
                                     <FramePost2 {...obj}/>
-                                    <hr className="my-4"/>
+                                    {/* <hr className="my-4"/> */}
                                 </div>
 
                             ))
@@ -232,13 +232,11 @@ const MammaliaPost = () =>{
             <div>
                 <div className = "topicName"><h5>Được xem nhiều</h5></div>
                     <div className = "fourPart">
-                        
-                         
                             {
                                 article.slice(0,6).map((obj,index)=>(
                                     <div className = "">
                                         <RightCol {...obj}/>
-                                        <hr/>
+                                        {/* <hr/> */}
                                     </div>
     
                                 ))
@@ -272,7 +270,7 @@ const MammaliaPost = () =>{
                                 article.slice(0,6).map((obj,index)=>(
                                     <div>
                                         <RightCol {...obj}/>
-                                        <hr/>
+                                        {/* <hr/> */}
                                     </div>
     
                                 ))

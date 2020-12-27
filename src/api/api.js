@@ -448,9 +448,8 @@ const favoritePost = async (page) =>{
 }
 
 const animalClassPost = async (page, idClass) =>{
-
     try {
-        if(page == 1){
+        if(page === 1){
             const response = await httpClient.get(`api/filter/animalclass/article/?idClass=${idClass}`);
             return response
         }

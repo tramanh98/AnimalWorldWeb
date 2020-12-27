@@ -13,8 +13,8 @@ const FramePost1 = (props) =>{
                <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
             </div>
             <div className = "col-md-6 sumtp1">
-                <Link to ={`/detail/${props.id}`}><h3>{props.title}</h3></Link>
-                <p className = "description">{ReactHtmlParser(props.content)}</p>
+                    <Link to ={`/detail/${props.id}`}><h4 className="fontANW">{props.title}</h4></Link>
+                    <p className = "description">{ReactHtmlParser(props.content)}</p>
             </div>
         </div>
     )
@@ -25,7 +25,7 @@ const FramePost2 = (props) =>{
         <div className = "framepost-type2">
             <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
 
-            <Link to ={`/detail/${props.id}`}><h5>{props.title}</h5></Link>
+            <Link to ={`/detail/${props.id}`}><h5 className="fontANW">{props.title}</h5></Link>
             <p className = "description">
                     {ReactHtmlParser(props.content)}
             </p>
@@ -39,20 +39,20 @@ const FramePost3 = (props) =>{
             <div className = "col-md-4">
                 <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
             </div>
-            <div className = "col-md-8">
-                <Link to ={`/detail/${props.id}`}><h6>{props.title}</h6></Link>
-                <p className = "description">
+            <div className = "col-md-8 pl-1">
+                <Link to ={`/detail/${props.id}`}><h6  className="fontANW">{props.title}</h6></Link>
+                {/* <p className = "description">
                     {ReactHtmlParser(props.content)}
-                </p>
+                </p> */}
             </div>
         </div>
     )
 }
 const FramePost4 = (props) =>{
     return (
-        <div className = "framepost-type4">
+        <div className = " ">
             <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
-            <Link to ={`/detail/${props.id}`}><h5>{props.title}</h5></Link>
+            <Link to ={`/detail/${props.id}`}><h5 className="fontANW">{props.title}</h5></Link>
             <p className = "description">
                 {ReactHtmlParser(props.content)}
             </p>
@@ -110,13 +110,3 @@ export{
     FramePost1, FramePost2, FramePost3, FramePost4
 
 }
-// export const FramePosts = (props) => {
-//     const { type } = props
-//     return type == 1 ? (
-//         <FramePost1/>
-//     ): 
-//     ( type == 2 ? <FramePost2/> : 
-//         ( type == 3 ? <FramePost3/> 
-//             : <FramePost4/>)
-//     );
-// }
