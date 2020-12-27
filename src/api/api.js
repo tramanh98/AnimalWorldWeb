@@ -462,6 +462,20 @@ const animalClassPost = async (page, idClass) =>{
         return error
     }  
 }
+const filterAnimal = async (page, idType) =>{
+    try {
+        if(page == 1){
+            const response = await httpClient.get(`api/filter/article/?option=${idType}`);
+            return response
+        }
+        else{
+            const res = await httpClient.get(`api/filter/article/?option=${idType}&page=${page}`);
+            return res
+        }
+    } catch (error) {
+        return error
+    }  
+}
 
 export { 
     Login_Fb, Login_GG, getProfile, updateAvatar, 
@@ -469,5 +483,5 @@ export {
     apiUnfollowTag, uploadImg, postBlog, getDetailBlog, apiComment, 
     likeComment, dislikeComment, updatePost, EditProfile, GetArticleToUpdate, ApiDeleteArticle,
     GetInforUser, GetAllUserArticle, GetCommentsArticle, VoteArticle, UnvoteArticle, latestPost,
-    trendingPost, favoritePost,animalClassPost
+    trendingPost, favoritePost,animalClassPost, filterAnimal
 }

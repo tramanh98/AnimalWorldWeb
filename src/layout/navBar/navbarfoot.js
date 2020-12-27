@@ -10,10 +10,8 @@ import { Badge, Popover, Button, Avatar } from 'antd';
 import { BellFilled, UserOutlined, EditTwoTone } from '@ant-design/icons';
 import { logout } from '../../api/api'
 import { connect, useDispatch, useSelector } from "react-redux";
-
-
 import If from '../../services/if'
-
+import classes from '../../data/classes.json'
 const { SubMenu } = Menu;
 
 const ThongBao = () => {
@@ -177,13 +175,18 @@ class NavFoot extends React.Component {
         this.setState({
             visible: false,
             });
-
     }
 
     onClickLocal = (e) =>{
         console.log(e.target.value)
     }
-
+    classAnimalSearch = (e, index) =>{
+        console.log(index)
+        this.props.history.push(`/result?idClass=${index}`);
+    }
+    animalSearch = (e, index) =>{
+        this.props.history.push(`/result?sa=${index}`);
+    }
     home = () =>{
         this.props.history.push('/home');
     }
@@ -238,29 +241,48 @@ class NavFoot extends React.Component {
                         >
                             <Menu.Item key="1"><Link to="/home">Trang chủ</Link></Menu.Item>
                             <SubMenu key="sub1" title="TÌM HIỂU">
-                                <Menu.Item><a className= "nav-foot-item">ĐỘNG VẬT HOANG DÃ</a></Menu.Item>
-                                <Menu.Item><a className= "nav-foot-item">ĐỘNG VẬT QUÝ HIẾM</a></Menu.Item>
-                                <Menu.Item><a className= "nav-foot-item">ĐỘNG VẬT NGUY HIỂM</a></Menu.Item>
-                                <Menu.Item><a className= "nav-foot-item">NƯỚC - ĐẠI DƯƠNG</a></Menu.Item>
+                                <Menu.Item>
+                                    <a onClick={(e) => this.animalSearch(e, 1)} className= "nav-foot-item">ĐỘNG VẬT HOANG DÃ</a>
+                                </Menu.Item>
+                                <Menu.Item>
+                                    <a onClick={(e) => this.animalSearch(e, 2)} className= "nav-foot-item">ĐỘNG VẬT QUÝ HIẾM</a>
+                                </Menu.Item>
+                                <Menu.Item>
+                                    <a onClick={(e) => this.animalSearch(e, 3)} className= "nav-foot-item">ĐỘNG VẬT NGUY HIỂM</a>
+                                </Menu.Item>
+                                <Menu.Item>
+                                    <a onClick={(e) => this.animalSearch(e, 4)} className= "nav-foot-item">NƯỚC - ĐẠI DƯƠNG</a>
+                                </Menu.Item>
                             </SubMenu>
                             <SubMenu key="sub2" title="LỚP">
-                                <Menu.Item><a className= "nav-foot-item">BÒ SÁT</a></Menu.Item>
-                                <Menu.Item><a className= "nav-foot-item">LỚP CÁ</a></Menu.Item>
-                                <Menu.Item><a className= "nav-foot-item">CÔN TRÙNG</a></Menu.Item>
-                                <Menu.Item><a className= "nav-foot-item">GIÁP XÁC</a></Menu.Item>
-                                <Menu.Item><a className= "nav-foot-item">HÌNH NHỆN</a></Menu.Item>
-                                <Menu.Item><a className= "nav-foot-item">LƯỠNG CƯ</a></Menu.Item>
-                                <Menu.Item><a className= "nav-foot-item">NHIỀU CHÂN</a></Menu.Item>
-                                <Menu.Item><a className= "nav-foot-item">SAO BIỂN</a></Menu.Item>
-                                <Menu.Item><a className= "nav-foot-item">SAN HÔ</a></Menu.Item>
+                            {
+                                classes.map((obj, index) => (
+                                    index != 0 ? 
+                                    <Menu.Item>
+                                        <a onClick={(e) => this.classAnimalSearch(e, index)} className= "nav-foot-item">{obj.name}</a> 
+                                    </Menu.Item>
+                                    : ''
+
+                                ))
+                            }
+                                {/* <Menu.Item><a onClick={(e) => this.classAnimalSearch(e, 1)} className= "nav-foot-item">BÒ SÁT</a></Menu.Item>
+                                <Menu.Item><a onClick={(e) => this.classAnimalSearch(e, 2)} className= "nav-foot-item">LỚP CÁ</a></Menu.Item>
+                                <Menu.Item><a onClick={(e) => this.classAnimalSearch(e, 3)} className= "nav-foot-item">CÔN TRÙNG</a></Menu.Item>
+                                <Menu.Item><a onClick={(e) => this.classAnimalSearch(e, 1)} className= "nav-foot-item">GIÁP XÁC</a></Menu.Item>
+                                <Menu.Item><a onClick={(e) => this.classAnimalSearch(e, 1)} className= "nav-foot-item">HÌNH NHỆN</a></Menu.Item>
+                                <Menu.Item><a onClick={(e) => this.classAnimalSearch(e, 1)} className= "nav-foot-item">LƯỠNG CƯ</a></Menu.Item>
+                                <Menu.Item><a onClick={(e) => this.classAnimalSearch(e, 1)} className= "nav-foot-item">NHIỀU CHÂN</a></Menu.Item>
+                                <Menu.Item><a onClick={(e) => this.classAnimalSearch(e, 1)} className= "nav-foot-item">SAO BIỂN</a></Menu.Item>
+                                <Menu.Item><a onClick={(e) => this.classAnimalSearch(e, 1)} className= "nav-foot-item">SAN HÔ</a></Menu.Item> */}
                             </SubMenu>
-                            <Menu.Item><a className= "nav-foot-item">TOP BÀI ĐĂNG</a></Menu.Item>
-                            <Menu.Item><a className= "nav-foot-item">ĐANG THEO DÕI</a></Menu.Item>
+                            <Menu.Item><a onClick={this.topPost} className= "nav-foot-item">TOP BÀI ĐĂNG</a></Menu.Item>
+                            <Menu.Item><a onClick={this.followingPost} className= "nav-foot-item">ĐANG THEO DÕI</a></Menu.Item>
                         </Menu>
                     </Drawer>
         <div className="navother" id="wrap-navbar">
             <div id="navbar-foot" 
-            style={{padding: this.state.stylepd,
+            style={{
+                padding: this.state.stylepd,
                 position: this.state.positionst,
                 top: this.state.topst,
                 width: this.state.widthst,
@@ -277,18 +299,18 @@ class NavFoot extends React.Component {
                         TÌM HIỂU
                     </a>
                     <div className="dropdown-menu-nav-foot" style={{top: this.state.mnTop}}>
-                        <a className= "nav-foot-item">ĐỘNG VẬT HOANG DÃ</a> <br/>
-                        <a className= "nav-foot-item">ĐỘNG VẬT QUÝ HIẾM</a> <br/>
-                        <a className= "nav-foot-item">ĐỘNG VẬT NGUY HIỂM</a> <br/>
-                        <a className= "nav-foot-item">NƯỚC - ĐẠI DƯƠNG</a>        
+                        <a onClick={(e) => this.animalSearch(e, 1)} className= "nav-foot-item">ĐỘNG VẬT HOANG DÃ</a> <br/>
+                        <a onClick={(e) => this.animalSearch(e, 2)} className= "nav-foot-item">ĐỘNG VẬT QUÝ HIẾM</a> <br/>
+                        <a onClick={(e) => this.animalSearch(e, 3)} className= "nav-foot-item">ĐỘNG VẬT NGUY HIỂM</a> <br/>
+                        <a onClick={(e) => this.animalSearch(e, 4)} className= "nav-foot-item">NƯỚC - ĐẠI DƯƠNG</a>
                     </div>
                 </div>
                 <div className="nav-foot-dropdown">
                     <a className="dropbtn">
                         LỚP ĐỘNG VẬT
                     </a>
-                    <div className="dropdown-menu-nav-foot" style={{top: this.state.mnTop}}>
-                    <a className= "nav-foot-item" >BÒ SÁT</a><br/>
+                    <div className="dropdown-menu-nav-foot" style={{top: this.state.mnTop, textTransform: 'uppercase'}}>
+                        {/* <a className= "nav-foot-item" >BÒ SÁT</a><br/>
                         <a className= "nav-foot-item" >LỚP CÁ</a><br/> 
                         <a className= "nav-foot-item" >LỚP CHIM</a><br/> 
                         <a className= "nav-foot-item" >CÔN TRÙNG</a><br/>  
@@ -297,7 +319,18 @@ class NavFoot extends React.Component {
                         <a className= "nav-foot-item" >LƯỠNG CƯ</a><br/> 
                         <a className= "nav-foot-item" >NHIỀU CHÂN</a><br/> 
                         <a className= "nav-foot-item" >SAO BIỂN</a><br/> 
-                        <a className= "nav-foot-item" >SAN HÔ</a><br/>  
+                        <a className= "nav-foot-item" >SAN HÔ</a><br/>   */}
+                        {
+                            classes.map((obj, index) => (
+                                index != 0 ? 
+                                <>
+                                    <a onClick={(e) => this.classAnimalSearch(e, index)} className= "nav-foot-item">{obj.name}</a> 
+                                    <br/>
+                                </>
+                                : ''
+
+                            ))
+                        }
                     </div>
                 </div>
                 <a href="#contact">TOP BÀI ĐĂNG</a>
