@@ -12,6 +12,7 @@ import { logout } from '../../api/api'
 import { connect, useDispatch, useSelector } from "react-redux";
 import If from '../../services/if'
 import classes from '../../data/classes.json'
+import featureFilter from '../../data/featureFilter.json'
 const { SubMenu } = Menu;
 
 const ThongBao = () => {
@@ -184,159 +185,151 @@ class NavFoot extends React.Component {
         console.log(index)
         this.props.history.push(`/result?idClass=${index}`);
     }
-    animalSearch = (e, index) =>{
-        this.props.history.push(`/result?sa=${index}`);
+    animalSearch = (e, ft) =>{
+        this.props.history.push(`/result?sa=${ft}`);
     }
     home = () =>{
         this.props.history.push('/home');
+    }
+    topPost = () =>{
+        this.props.history.push(`/result?q=top`);
+    }
+    followingPost = () =>{
+        this.props.history.push(`/result?q=following`);
     }
     render() {
     const { user } = this.context;
     return (
         
         <nav className={this.state.classNm}  >
-                <div className="nav-mobile">
-                    <div onClick={this.showDrawer} className="nav-icon-mobile" >
-                        <div className="btn-menu-mobile"></div>
-                        <div className="btn-menu-mobile"></div>
-                        <div className="btn-menu-mobile"></div>
-                    </div>
-                    <div style={{width: "100px"}}>
-                        <Link to="/home" style={{width: "fit-content"}}>
-                        <img src="../images/logo.png" style={{width: "40%"}}/>
-                        </Link>
-                    </div>
-                     
+            <div className="nav-mobile">
+                <div onClick={this.showDrawer} className="nav-icon-mobile" >
+                    <div className="btn-menu-mobile"></div>
+                    <div className="btn-menu-mobile"></div>
+                    <div className="btn-menu-mobile"></div>
                 </div>
+                <div style={{width: "100px"}}>
+                    <Link to="/home" style={{width: "fit-content"}}>
+                    <img src="../images/logo.png" style={{width: "40%"}}/>
+                    </Link>
+                </div>
+                    
+            </div>
 
-                    <Drawer
-                    title="ANIMAlWORLD"
-                    placement="left"
-                    onClose={this.onClose}
-                    visible={this.state.visible}
-                    getContainer={false}
-                    bodyStyle={{ padding: 0 }}
-                    width={300}
-                    >
-                       
-                        <div className="my-account-mobile" onClick={this.handleClick}>
-                        <If condition={!this.props.user} props={this.props} component={loginButton}  props={{
-                                visible: false}
-                                }/>
-                        <If condition={this.props.user} component={ThongBao} />
-                        <If condition={!this.props.user} props={this.props}  component={registerButton} />
-                        <If condition={this.props.user} props={this.props} component={Profile} />
-                        <div className="btnlgin">
-                        <Link to="/posting" style={{width: "fit-content"}}>
-                        <EditTwoTone style={{ fontSize: '27px', color: '#212529', margin: '0 5px 0 20px' }}/>
-                         </Link>
-                    </div>
+            <Drawer
+            title="ANIMAlWORLD"
+            placement="left"
+            onClose={this.onClose}
+            visible={this.state.visible}
+            getContainer={false}
+            bodyStyle={{ padding: 0 }}
+            width={300}
+            >
+                
+                <div className="my-account-mobile" onClick={this.handleClick}>
+                <If condition={!this.props.user} props={this.props} component={loginButton}  props={{
+                        visible: false}
+                        }/>
+                <If condition={this.props.user} component={ThongBao} />
+                <If condition={!this.props.user} props={this.props}  component={registerButton} />
+                <If condition={this.props.user} props={this.props} component={Profile} />
+                <div className="btnlgin">
+                <Link to="/posting" style={{width: "fit-content"}}>
+                <EditTwoTone style={{ fontSize: '27px', color: '#212529', margin: '0 5px 0 20px' }}/>
+                    </Link>
+            </div>
+                </div>
+                <hr style={{width: "100%"}}></hr>
+                <Menu
+                    onClick={this.handleClick}
+                    style={{ width: 300, margin: 0 }}
+                    defaultSelectedKeys={['1']}
+                    mode="inline"
+                >
+                    <Menu.Item key="1"><Link to="/home">Trang chủ</Link></Menu.Item>
+                    <SubMenu key="sub1" title="TÌM HIỂU">
+                    {
+                        featureFilter.map((obj, index) => (
+                            index != 0 ? 
+                            <a onClick={(e) => this.animalSearch(e, obj.feature)} className= "nav-foot-item">{obj.name}</a> 
+                            : ''
+                        ))
+                    }
+                    </SubMenu>
+                    <SubMenu key="sub2" title="LỚP">
+                    {
+                        classes.map((obj, index) => (
+                            index != 0 ? 
+                            <Menu.Item>
+                                <a onClick={(e) => this.classAnimalSearch(e, index)} className= "nav-foot-item">{obj.name}</a> 
+                            </Menu.Item>
+                            : ''
+
+                        ))
+                    }
+                    </SubMenu>
+                    <Menu.Item><a onClick={this.topPost} className= "nav-foot-item">TOP BÀI ĐĂNG</a></Menu.Item>
+                    <Menu.Item><a onClick={this.followingPost} className= "nav-foot-item">ĐANG THEO DÕI</a></Menu.Item>
+                </Menu>
+            </Drawer>
+
+
+
+
+            <div className="navother" id="wrap-navbar">
+                <div id="navbar-foot" 
+                style={{
+                    padding: this.state.stylepd,
+                    position: this.state.positionst,
+                    top: this.state.topst,
+                    width: this.state.widthst,
+                    borderBottom: this.state.border_navfoot,
+                    borderTop: this.state.border_navfoot,
+                    boxShadow: this.state.box_shadow
+                }} >
+                    
+                    <a>
+                        <i className="fa fa-fw fa-home" style={{color: "black"}}></i>
+                    </a>
+                    <div className="nav-foot-dropdown" >
+                        <a className="dropbtn">
+                            TÌM HIỂU
+                        </a>
+                        <div className="dropdown-menu-nav-foot" style={{top: this.state.mnTop}}>
+                        {
+                            featureFilter.map((obj, index) => (
+                                index !== 0 ? 
+                                <>
+                                    <a onClick={(e) => this.animalSearch(e, obj.feature)} className= "nav-foot-item">{obj.name}</a> 
+                                    <br/>
+                                </>
+                                : ''
+                            ))
+                        }
                         </div>
-                        <hr style={{width: "100%"}}></hr>
-                        <Menu
-                            onClick={this.handleClick}
-                            style={{ width: 300, margin: 0 }}
-                            defaultSelectedKeys={['1']}
-                            mode="inline"
-                        >
-                            <Menu.Item key="1"><Link to="/home">Trang chủ</Link></Menu.Item>
-                            <SubMenu key="sub1" title="TÌM HIỂU">
-                                <Menu.Item>
-                                    <a onClick={(e) => this.animalSearch(e, 1)} className= "nav-foot-item">ĐỘNG VẬT HOANG DÃ</a>
-                                </Menu.Item>
-                                <Menu.Item>
-                                    <a onClick={(e) => this.animalSearch(e, 2)} className= "nav-foot-item">ĐỘNG VẬT QUÝ HIẾM</a>
-                                </Menu.Item>
-                                <Menu.Item>
-                                    <a onClick={(e) => this.animalSearch(e, 3)} className= "nav-foot-item">ĐỘNG VẬT NGUY HIỂM</a>
-                                </Menu.Item>
-                                <Menu.Item>
-                                    <a onClick={(e) => this.animalSearch(e, 4)} className= "nav-foot-item">NƯỚC - ĐẠI DƯƠNG</a>
-                                </Menu.Item>
-                            </SubMenu>
-                            <SubMenu key="sub2" title="LỚP">
+                    </div>
+                    <div className="nav-foot-dropdown">
+                        <a className="dropbtn">
+                            LỚP ĐỘNG VẬT
+                        </a>
+                        <div className="dropdown-menu-nav-foot" style={{top: this.state.mnTop, textTransform: 'uppercase'}}>
                             {
                                 classes.map((obj, index) => (
-                                    index != 0 ? 
-                                    <Menu.Item>
+                                    index !== 0 ? 
+                                    <>
                                         <a onClick={(e) => this.classAnimalSearch(e, index)} className= "nav-foot-item">{obj.name}</a> 
-                                    </Menu.Item>
+                                        <br/>
+                                    </>
                                     : ''
 
                                 ))
                             }
-                                {/* <Menu.Item><a onClick={(e) => this.classAnimalSearch(e, 1)} className= "nav-foot-item">BÒ SÁT</a></Menu.Item>
-                                <Menu.Item><a onClick={(e) => this.classAnimalSearch(e, 2)} className= "nav-foot-item">LỚP CÁ</a></Menu.Item>
-                                <Menu.Item><a onClick={(e) => this.classAnimalSearch(e, 3)} className= "nav-foot-item">CÔN TRÙNG</a></Menu.Item>
-                                <Menu.Item><a onClick={(e) => this.classAnimalSearch(e, 1)} className= "nav-foot-item">GIÁP XÁC</a></Menu.Item>
-                                <Menu.Item><a onClick={(e) => this.classAnimalSearch(e, 1)} className= "nav-foot-item">HÌNH NHỆN</a></Menu.Item>
-                                <Menu.Item><a onClick={(e) => this.classAnimalSearch(e, 1)} className= "nav-foot-item">LƯỠNG CƯ</a></Menu.Item>
-                                <Menu.Item><a onClick={(e) => this.classAnimalSearch(e, 1)} className= "nav-foot-item">NHIỀU CHÂN</a></Menu.Item>
-                                <Menu.Item><a onClick={(e) => this.classAnimalSearch(e, 1)} className= "nav-foot-item">SAO BIỂN</a></Menu.Item>
-                                <Menu.Item><a onClick={(e) => this.classAnimalSearch(e, 1)} className= "nav-foot-item">SAN HÔ</a></Menu.Item> */}
-                            </SubMenu>
-                            <Menu.Item><a onClick={this.topPost} className= "nav-foot-item">TOP BÀI ĐĂNG</a></Menu.Item>
-                            <Menu.Item><a onClick={this.followingPost} className= "nav-foot-item">ĐANG THEO DÕI</a></Menu.Item>
-                        </Menu>
-                    </Drawer>
-        <div className="navother" id="wrap-navbar">
-            <div id="navbar-foot" 
-            style={{
-                padding: this.state.stylepd,
-                position: this.state.positionst,
-                top: this.state.topst,
-                width: this.state.widthst,
-                borderBottom: this.state.border_navfoot,
-                borderTop: this.state.border_navfoot,
-                boxShadow: this.state.box_shadow
-            }} >
-                
-                <a>
-                    <i className="fa fa-fw fa-home" style={{color: "black"}}></i>
-                </a>
-                <div className="nav-foot-dropdown" >
-                    <a className="dropbtn">
-                        TÌM HIỂU
-                    </a>
-                    <div className="dropdown-menu-nav-foot" style={{top: this.state.mnTop}}>
-                        <a onClick={(e) => this.animalSearch(e, 1)} className= "nav-foot-item">ĐỘNG VẬT HOANG DÃ</a> <br/>
-                        <a onClick={(e) => this.animalSearch(e, 2)} className= "nav-foot-item">ĐỘNG VẬT QUÝ HIẾM</a> <br/>
-                        <a onClick={(e) => this.animalSearch(e, 3)} className= "nav-foot-item">ĐỘNG VẬT NGUY HIỂM</a> <br/>
-                        <a onClick={(e) => this.animalSearch(e, 4)} className= "nav-foot-item">NƯỚC - ĐẠI DƯƠNG</a>
+                        </div>
                     </div>
+                    <a onClick={this.topPost} >TOP BÀI ĐĂNG</a>
+                    <a onClick={this.followingPost}>ĐANG THEO DÕI</a>
                 </div>
-                <div className="nav-foot-dropdown">
-                    <a className="dropbtn">
-                        LỚP ĐỘNG VẬT
-                    </a>
-                    <div className="dropdown-menu-nav-foot" style={{top: this.state.mnTop, textTransform: 'uppercase'}}>
-                        {/* <a className= "nav-foot-item" >BÒ SÁT</a><br/>
-                        <a className= "nav-foot-item" >LỚP CÁ</a><br/> 
-                        <a className= "nav-foot-item" >LỚP CHIM</a><br/> 
-                        <a className= "nav-foot-item" >CÔN TRÙNG</a><br/>  
-                        <a className= "nav-foot-item" >GIÁP XÁC</a><br/> 
-                        <a className= "nav-foot-item" >HÌNH NHỆN</a><br/> 
-                        <a className= "nav-foot-item" >LƯỠNG CƯ</a><br/> 
-                        <a className= "nav-foot-item" >NHIỀU CHÂN</a><br/> 
-                        <a className= "nav-foot-item" >SAO BIỂN</a><br/> 
-                        <a className= "nav-foot-item" >SAN HÔ</a><br/>   */}
-                        {
-                            classes.map((obj, index) => (
-                                index != 0 ? 
-                                <>
-                                    <a onClick={(e) => this.classAnimalSearch(e, index)} className= "nav-foot-item">{obj.name}</a> 
-                                    <br/>
-                                </>
-                                : ''
-
-                            ))
-                        }
-                    </div>
-                </div>
-                <a href="#contact">TOP BÀI ĐĂNG</a>
-                <a href="#contact">ĐANG THEO DÕI</a>
             </div>
-        </div>
         
       </nav>
     );

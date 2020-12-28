@@ -10,7 +10,7 @@ const initialState = {
     // email: '',
   }
   
-  export default function reducer(state = initialState, action) {
+  export const reducer = (state = initialState, action) => {
       switch (action.type) {
         case 'LOGIN_USER':
           return {...state, currentUser: action.payload}

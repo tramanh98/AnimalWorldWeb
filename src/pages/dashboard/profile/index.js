@@ -1,30 +1,45 @@
 import './style.css';
 import React, { Component, useEffect, useState, useRef } from 'react';
-import { Collapse, Tabs, message, Avatar } from 'antd';
+import { Collapse, Tabs, message, Avatar, Pagination } from 'antd';
 import { Link } from "react-router-dom";
 import { UserOutlined } from '@ant-design/icons';
 import {PrivateFramePost} from '../../../components/framePost'
 import {ApiDeleteArticle, GetInforUser, GetAllUserArticle} from '../../../api/api'
+import { useSelector, useDispatch } from 'react-redux';
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
 export const ManageAccount = (props) => {
+    const user = useSelector((state) => state.currentUser);
     const [profile, setProfile] = useState(null)
     const [allArticles, setAllarticles] = useState(null)
+    const [isOwner, setIsOwner] = useState(null)
+    const [countResult, setCountResult] = useState(null)
+    const [currentPage, setCurrentPage] = useState(1);
+    const [loading, setLoading] = useState(true)
     const callback = (key) => {
         console.log(key);
     }
     useEffect( async () => {
         // call API
+        setLoading(true)
         const res1 = await GetInforUser(props.match.params.idUser)
         console.log(res1)
         if(res1.status === 200){
             setProfile(res1.data)
+            if(user.idUser === res1.data.id){
+                setIsOwner(true)
+            }
+            else{
+                setIsOwner(false)
+            }
         }
-        const res2 = await GetAllUserArticle(props.match.params.idUser)
+        const res2 = await GetAllUserArticle(1, props.match.params.idUser)
         console.log(res2)
         if(res2.status === 200){
             setAllarticles(res2.data.results)
+            setCountResult(res2.data.count)
         }
+        setLoading(false)
       }, []);
 
     const handleDeleteArticle = async (id) =>{
@@ -41,6 +56,19 @@ export const ManageAccount = (props) => {
     const editProfile = () =>{
         props.history.push('/setting')
     }
+
+    const changePage = async (page, pagesize)=>{
+        setLoading(true)
+        const res = await GetAllUserArticle(page, props.match.params.idUser)
+        if(res.status === 200){
+            console.log(res)
+            const {data} = res
+            setAllarticles(data.results)
+        }
+        setCurrentPage(page)
+        setLoading(false)
+    }
+
     return (
         <div>
             <div className="d-flex my-4">
@@ -57,7 +85,9 @@ export const ManageAccount = (props) => {
                         </div>
                         <div className="ml-3 mt-1">
                             <h3 className="d-inline-block">{`${profile.first_name} ${profile.last_name}`}</h3>
-                            <button className="edit" onClick={editProfile}>Edit Profile</button>
+                            {
+                                isOwner ? <button className="edit" onClick={editProfile}>Edit Profile</button> :''
+                            }
                             <p className="text-muted d-block">@{profile.username}</p>
                         </div> 
                     </>
@@ -69,23 +99,30 @@ export const ManageAccount = (props) => {
                 <div className="col-md-9">
                 <Tabs defaultActiveKey="1" onChange={callback}>
                     <TabPane tab="Post" key="1">
-                        <div>
-                            {
-                                allArticles ? 
-                                allArticles.map((obj, index) =>(
-                                    <>
-                                    <PrivateFramePost 
-                                        idArticle = {obj.id}
-                                        onClickDelete = {handleDeleteArticle}
-                                        onClickUpdate = {handleRouteToUpdate}
-                                        {...obj}
-                                    />
-                                    <hr/>
-                                    </>
-                                )) : ''
-                            }
-                            
-                        </div>
+                        {
+                            loading ? "" :
+                            <div>
+                                {
+                                    allArticles ? 
+                                    allArticles.map((obj, index) =>(
+                                        <>
+                                        <PrivateFramePost 
+                                            isOwner = {isOwner}
+                                            idArticle = {obj.id}
+                                            onClickDelete = {handleDeleteArticle}
+                                            onClickUpdate = {handleRouteToUpdate}
+                                            {...obj}
+                                        />
+                                        </>
+                                    )) : ''
+                                }
+                                {
+                                    countResult == 0 ? '' :  
+                                    <Pagination onChange = {changePage} defaultCurrent={currentPage} total={countResult} />
+
+                                }
+                            </div>
+                        }
                     </TabPane>
                     <TabPane tab="Following" key="2">
                     <Collapse bordered={false} defaultActiveKey={['1']}>

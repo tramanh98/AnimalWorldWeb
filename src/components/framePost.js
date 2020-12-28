@@ -2,30 +2,48 @@ import React from "react";
 import './style.css'
 import { Link } from "react-router-dom";
 import { DeleteOutlined, EditOutlined, HeartOutlined, EyeOutlined, CommentOutlined } from '@ant-design/icons';
-import { Button, Popconfirm } from 'antd';
+import { Button, Popconfirm, Divider, Tag  } from 'antd';
 import "antd/dist/antd.css"
 import ReactHtmlParser from 'react-html-parser'
 {/*** đây là frame cho các bài viết, chứa thông tin cơ bản****/ }
 const FramePost1 = (props) =>{
+    const {user} = props
     return(
         <div className = "row frameInforBasic">  
             <div className = "col-md-6">
                <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
             </div>
             <div className = "col-md-6 sumtp1">
-                    <Link to ={`/detail/${props.id}`}><h4 className="fontANW">{props.title}</h4></Link>
-                    <p className = "description">{ReactHtmlParser(props.content)}</p>
+                {/* <Tag color="default">default</Tag>
+                <Tag color="default">default</Tag> */}
+                <Link to ={`/detail/${props.id}`}><h4 className="fontANW">{props.title}</h4></Link>
+                <div className="my-2 fontIcon">
+                    <span> <i class="far fa-user"></i></span> {user.username}
+                    <Divider type="vertical" style = {{color: "black"}} />
+                    <span> <i class="far fa-comments"></i> </span> {props.comment}
+                    <Divider type="vertical" style = {{color: "black"}} />
+                    <span> <i class="far fa-clock"></i> </span> july
+                </div>
+                <p className = "description">{ReactHtmlParser(props.content)}</p>
             </div>
         </div>
     )
 }
 
 const FramePost2 = (props) =>{
+    const {user} = props
     return(
         <div className = "framepost-type2">
             <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
 
             <Link to ={`/detail/${props.id}`}><h5 className="fontANW">{props.title}</h5></Link>
+            <div className="my-2 fontIcon">
+                <span> <i class="far fa-user"></i></span> {user.username}
+                <Divider type="vertical" style = {{color: "#ccc"}}/>
+                <span> <i class="far fa-comments"></i> </span> {props.comment}
+                <Divider type="vertical" style = {{color: "#ccc"}} />
+                <span> <i class="far fa-clock"></i> </span> july
+            </div>
             <p className = "description">
                     {ReactHtmlParser(props.content)}
             </p>
@@ -34,25 +52,34 @@ const FramePost2 = (props) =>{
 }
 
 const FramePost3 = (props) =>{
+    const {user} = props
     return(
         <div className = "frameInforBasic row">  {/*** đây là frame cho các bài viết, chứa thông tin cơ bản****/ }
             <div className = "col-md-4">
                 <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
             </div>
-            <div className = "col-md-8 pl-1">
+            <div className = "col-md-8 pl-3">
                 <Link to ={`/detail/${props.id}`}><h6  className="fontANW">{props.title}</h6></Link>
-                {/* <p className = "description">
-                    {ReactHtmlParser(props.content)}
-                </p> */}
+                <div className="my-2 fontIcon">
+                    <span> <i class="far fa-clock"></i> </span> july
+                </div>
             </div>
         </div>
     )
 }
 const FramePost4 = (props) =>{
+    const {user} = props
     return (
         <div className = " ">
             <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
             <Link to ={`/detail/${props.id}`}><h5 className="fontANW">{props.title}</h5></Link>
+            <div className="my-2 fontIcon">
+                <span> <i class="far fa-user"></i></span> {user.username}
+                <Divider type="vertical" style = {{color: "#ccc"}}/>
+                <span> <i class="far fa-comments"></i> </span> {props.comment}
+                <Divider type="vertical" style = {{color: "#ccc"}}/>
+                <span> <i class="far fa-clock"></i> </span> july
+            </div>
             <p className = "description">
                 {ReactHtmlParser(props.content)}
             </p>
@@ -86,22 +113,26 @@ export const PrivateFramePost = (props) =>{
                     <span><CommentOutlined style={{ fontSize: '14px' }}/> {props.comment} </span>
                 </div>
             </div>
-            <div className = "col-md-1 m-0 p-0 delete-edit">
-                <div >
-                    <Button shape="circle" icon={<EditOutlined />} onClick = {onclickEdit}/>
-                </div>
-                <div className = "mt-3">
-                    <Popconfirm
-                        title="Are you sure to delete this article?"
-                        onConfirm={onClickDelete}
-                        onCancel={()=>{ console.log("cancle")}}
-                        okText="Yes"
-                        cancelText="No"
-                    > 
-                        <Button shape="circle" icon={<DeleteOutlined />} />
-                    </Popconfirm>
-                </div>
-            </div>
+            {
+                props.isOwner ? 
+                <div className = "col-md-1 m-0 p-0 delete-edit">
+                    <div >
+                        <Button shape="circle" icon={<EditOutlined />} onClick = {onclickEdit}/>
+                    </div>
+                    <div className = "mt-3">
+                        <Popconfirm
+                            title="Are you sure to delete this article?"
+                            onConfirm={onClickDelete}
+                            onCancel={()=>{ console.log("cancle")}}
+                            okText="Yes"
+                            cancelText="No"
+                        > 
+                            <Button shape="circle" icon={<DeleteOutlined />} />
+                        </Popconfirm>
+                    </div>
+                </div> : ''
+            }
+            
         </div>
     );
 }

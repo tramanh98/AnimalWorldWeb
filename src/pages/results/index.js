@@ -4,7 +4,9 @@ import queryString from 'query-string'
 import { Pagination, Spin } from 'antd';
 import {trendingPost, favoritePost, animalClassPost, filterAnimal} from '../../api/api'
 import { FramePost1, FramePost2, FramePost3, FramePost4} from '../../components/framePost'
-// import Pagination  from './pagination';
+import classes from '../../data/classes.json'
+import featureFilter from '../../data/featureFilter.json'
+import '../style.css'
 const TrendingPost = () =>{
     const [article, setArticle] = useState(null)
     useEffect( async () =>{
@@ -19,13 +21,12 @@ const TrendingPost = () =>{
 return(
     article ? 
     <div>
-        <div className = "topicName"><h5>Được xem nhiều</h5></div>
+        <div className = "topicName"><h5 className="fontANW">Được xem nhiều</h5></div>
             <div className = "fourPart">
                     {
                         article.slice(0,6).map((obj,index)=>(
                             <div className = "">
                                 <RightCol {...obj}/>
-                                <hr/>
                             </div>
 
                         ))
@@ -51,33 +52,29 @@ const  FavoritePost = () =>{
     
 return(
     article ? 
-    <div>
-        <div className = "topicName topicName-postnew"><h5>Bài yêu thích</h5></div>
-            <div className = "fourPart">
-                
-                   
-                    {
-                        article.slice(0,6).map((obj,index)=>(
-                            <div>
-                                <RightCol {...obj}/>
-                                <hr/>
-                            </div>
+    <div className="mt-5 ">
+        <div className = "topicName topicName-postnew "><h5 className="fontANW">Bài yêu thích</h5></div>
+        <div className = "fourPart">
+                {
+                    article.slice(0,6).map((obj,index)=>(
+                        <div>
+                            <RightCol {...obj}/>
+                        </div>
 
-                        ))
-                    }
-                   
-            </div>
+                    ))
+                }
+                
+        </div>
     </div> : ''
     );
 
 }
 export const Results = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(10);
+    const [idResult, setIdResult] = useState(null);
     const [article, setArticle] = useState(null)
     const [countResult, setCountResult] = useState(null)
     const [loading, setLoading] = useState(true)
-    const [pageSize, setPageSize] = useState(0)
     useEffect( () =>{
     console.log("this is result page")
     async function fetchData() {
@@ -92,7 +89,10 @@ export const Results = (props) => {
                 const {data} = res
                 setArticle(data.results)
                 setCountResult(data.count)
-                setPageSize(parseInt(1 + data.count/10))
+                setIdResult({
+                    id: value.idClass,
+                    name: "class-animal"
+                })
             }
         }
         else if(value.sa != undefined)
@@ -103,11 +103,25 @@ export const Results = (props) => {
                 const {data} = res
                 setArticle(data.results)
                 setCountResult(data.count)
-                setPageSize(parseInt(1 + data.count/10))
+                setIdResult({
+                    id: value.sa,
+                    name: "feature"
+                })
             }
         }
         else if(value.q != undefined){
-
+            if(value.q === "top"){
+                const res = await trendingPost(1)
+                if(res.status === 200){
+                    console.log(res)
+                    const {data} = res
+                    setArticle(data.results)
+                    setCountResult(data.count)
+                }
+            }
+            else{
+                
+            }
         }
         setCurrentPage(1)
         setLoading(false)
@@ -126,7 +140,6 @@ export const Results = (props) => {
                 const {data} = res
                 setArticle(data.results)
                 setCountResult(data.count)
-                // setPageSize(parseInt(1 + data.count/10))
             }
         }
         else if(value.sa != undefined)
@@ -137,44 +150,89 @@ export const Results = (props) => {
                 const {data} = res
                 setArticle(data.results)
                 setCountResult(data.count)
-                // setPageSize(parseInt(1 + data.count/10))
             }
         }
-        else if(value.q != undefined){
-            console.log("...")
+        else if(value.q !== undefined){
+            if(value.q === "top"){
+                const res = await trendingPost(1)
+                if(res.status === 200){
+                    console.log(res)
+                    const {data} = res
+                    setArticle(data.results)
+                    setCountResult(data.count)
+                }
+            }
+            else{
+                
+            }
         }
         setCurrentPage(page)
         setLoading(false)
     }
 
-    // const indexOfLastPost = currentPage * postsPerPage;
-    // const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    // const paginate = pageNumber => setCurrentPage(pageNumber);
     return(
         loading ? 
         <Spin tip="Loading..." size="large" ></Spin> :
         <div>
-            <h1>NGÀNH CHÂN KHỚP</h1>
-            <div className = "row">
-                <div className = "col-md-8">
-                    {
-                        article.map((obj,index)=>(
-                            <div>
-                                <FramePost1 {...obj}/>
-                                <hr/>
-                            </div>
-                        ))
-                    }
-                    {
-                        countResult == 0 ? '' :  
-                        <Pagination onChange = {changePage} defaultCurrent={currentPage} total={pageSize} />
+            
+                {
+                    idResult ? 
+                    <div className="infor-tilte  mt-5 mx-2 px-5 py-3">
+                        {
+                            idResult.name === "class-animal" ?
+                            <>
+                                <h2 className="fontANW">{classes[idResult.id].name}</h2>
+                                <p className="font-roboto">{classes[idResult.id].Intro}</p>
+                            </> 
+                            : 
 
-                    }
-                </div>
-                <div className ="col-md-4">
-                   <TrendingPost/>
-                   <FavoritePost/>
-                </div>
+                            featureFilter.map((obj, index) =>(
+                                obj.feature === idResult.id ? 
+                                <>
+                                    <h2 className="fontANW">{obj.name}</h2>
+                                    <p className="font-roboto">{obj.Intro}</p>
+                                </>
+                                :''
+                                
+                            ))
+                        }
+                        
+                    </div> : ''
+                }
+                
+            
+            
+            <div className = "row mt-5">
+                {
+                    article ? 
+                    <>
+                        <div className = "col-md-8 pr-3">
+                            {
+                                article.map((obj,index)=>(
+                                    <div>
+                                        <FramePost1 {...obj}/>
+                                        {
+                                            countResult !== index + 1 ?   <hr/> : ''
+                                        }
+                                    </div>
+                                ))
+                            }
+                            {
+                                countResult == 0 ? '' :  
+                                <div className="my-5">
+                                    <Pagination onChange = {changePage} defaultCurrent={currentPage} total={countResult} />
+                                </div>
+
+                            }
+                        </div>
+                        <div className ="col-md-4 pl-2">
+                            <TrendingPost/>
+                            <FavoritePost/>
+                        </div>
+                    </>
+                    :''
+                }
+                
             </div>
         </div>
     );

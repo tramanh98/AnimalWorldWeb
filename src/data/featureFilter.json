@@ -1,62 +1,43 @@
 [
     {
-        "type": 0,
+        "type":"0",
         "name": "Tất cả"
     },
     {
-        "type": 1,
-        "name": "Lớp Bò sát",
+        "type":"A",
+        "name": "ĐỘNG VẬT NGUY HIỂM",
+        "feature": "danger",
         "Intro": "Động vật bò sát (danh pháp khoa học: Reptilia) là các loài động vật bốn chân có màng ối (nghĩa là các phôi thai được bao bọc trong màng ối). Ngày nay, chúng còn lại các đại diện của 4 bộ còn sống sót là: Crocodilia; Sphenodontia; Squamata; Testudines. Phần lớn các loài bò sát là động vật đẻ trứng. Tuy nhiên, nhiều loài trong nhóm Squamata lại có khả năng sinh ra con non."
     },
 
     {
-        "type": 2,
-        "name": "Lớp cá",
+        "type":"B",
+        "name": "NƯỚC - ĐẠI DƯƠNG",
+        "feature": "underwater",
         "Intro": "Cá là những loài động vật sống dưới nước (bao gồm sông, hồ, ao, đại dương…), tính đến nay có khoảng 32.000 loài khác nhau và chúng trở thành loài đa dạng nhất trong số các loài động vật dây sống được tìm thấy. Chúng được phân vào ngành động vật có dây sống và là loài động vật máu lạnh trong thế giới các loài động vật."
     },
     {
-        "type": 3,
-        "name": "Lớp chim",
+        "type":"C",
+        "name": "TRÊN CẠN",
+        "feature": "terrestrial",
         "Intro": "Chim (danh pháp khoa học: Aves) là tập hợp các loài động vật có xương sống, máu nóng, đi đứng bằng hai chân, có mỏ, đẻ trứng, có cánh, có lông vũ và biết bay (phần lớn). Có khoảng 10.000 loài chim còn tồn tại, điều này biến chúng trở thành lớp đa dạng cũng như phong phú nhất trong các loài động vật bốn chi ở thế giới động vật muôn loài."
     },
     {
-        "type": 4,
-        "name": "Lớp côn trùng",
+        "type":"D",
+        "name": "THÚ NUÔI TRONG NHÀ",
+        "feature": "pets",
         "Intro": "Côn trùng (Sâu bọ) là những loài động vật thuộc ngành không xương sống, chúng thuộc chủng loại động vật đa dạng về số loài và số lượng lớn nhất hành tinh này. Theo thống kê thì hiện tại có hơn 10 triệu loài tồn tại trong thế giới động vật, chúng có thể sống ở phần lớn các môi trường từ đất liền cho tới các đại dương."
     },
     {
-        "type": 5,
-        "name": "Lớp thú",
+        "type":"E",
+        "name": "ĐỘNG VẬT HOANG DÃ",
+        "feature": "wild",
         "Intro": "Lớp Thú còn gọi là Lớp Động Vật Có Vú là một nhánh động vật có màng ối nội nhiệt được phân biệt với chim bởi sự xuất hiện của lông mao, ba xương tai giữa, tuyến vú, và vỏ não mới. Não bộ điều chỉnh thân nhiệt và hệ tuần hoàn, bao gồm cả một trái tim bốn ngăn. Lớp Thú bao gồm các động vật lớn nhất còn sinh tồn (như cá voi xanh và một vài loài cá voi khác), cũng như những động vật thông minh nhất – như voi, vài loài linh trưởng và cá voi."
     },
     {
-        "type": 6,
-        "name": "Lớp Giáp xác",
+        "type":"F",
+        "name": "ĐỘNG VẬT QUÝ HIẾM",
+        "feature": "rare",
         "Intro": "Lớp động vật Giáp Xác hay còn gọi là lớp vỏ giáp, thân giáp thuộc ngành động vật chân khớp sống ở dưới môi trường nước và hô hấp bằng mang. Phần lớn chúng sống ở khu vực biển và một số loài cũng xuất hiện ở khu vực nước ngọt. Một vài nhóm giáp xác sống ở trên cạn không phải là những động vật thực sự thành công về mặt tiến hóa vì hầu hết chúng vẫn đòi hỏi một môi trường ẩm ướt để tồn tại."
-    },
-    {
-        "type": 7,
-        "name": "Lớp Hình nhện",
-        "Intro": "Lớp Hình nhện là một lớp động vật chân khớp, bao gồm những loài động vật có 8 chân đốt. Phần lớn các loài động vật trong lớp này đều sống tại đất liền chỉ có một số ít sống trong môi trường nước ngọt và đại dương. Theo thống kê số lượng loài hình nhện đang tồn tại thì có hơn 10.000 loài bao gồm Nhện, bọ cạp, bọ ve…."
-    },
-    {
-        "type": 8,
-        "name": "Lớp Lưỡng cư",
-        "Intro": "Động vật lưỡng cư là những loài có xương sống và thuộc dòng động vật máu lạnh. Những loài lưỡng cư đều phải trải qua quá trình chuyển đổi từ ấu trùng dưới nước tới dạng trưởng thành có phổi thở không khí. Da được dùng như cơ quan hô hấp phụ, một số loài kỳ giông và ếch thiếu phổi thì việc hô hấp phụ thuộc hoàn toàn vào da."
-    },
-    {
-        "type": 9,
-        "name": "Lớp Nhiều chân",
-        "Intro": "Động vật nhiều chân là những giống loài thuộc ngành chân khớp, tính đến hiện nay đã có khoảng 13.000 loài được phát hiện tồn tại và tất cả đều sống trên cạn trong thế giới động vật tự nhiên."
-    },
-    {
-        "type": 10,
-        "name": "Lớp Sao biển",
-        "Intro": "Sao biển là những động vật thuộc ngành da gai, có tổng cộng tất cả 1.800 loài sao biển còn sống trong tất cả các đại dương của thế giới, bao gồm cả Đại Tây Dương, Thái Bình Dương, Ấn Độ Dương, Bắc Cực và các vùng đại dương phía Nam. Chúng có một loạt kiểu thân và phương pháp ăn đa dạng."
-    },
-    {
-        "type": 11,
-        "name": "Lớp San hô",
-        "Intro": "Lớp San Hô hay Anthozoa được chia thành hai phụ lớp Octocorallia và Hexacorallia. Hexacorallia là các loài tạo rạn san hô quan trọng như san hô cứng (Scleractinia), Actiniaria và các họ hàng của nó Ceriantharia, và Zoantharia. Các nghiên cứu di truyền về ribosomal DNA cho thấy Ceriantharia là một nhóm đơn ngành và là nhóm cổ nhất hoặc nhánh cơ sở trong số các bộ. Octocorallia bao gồm Pennatulacea, san hô mềm (Alcyonacea), và san hô lam (Helioporacea). Gorgonian là một phần của Alcyonacea và chúng từng được chia thành các bộ riêng biệt."
     }
 ]

@@ -23,23 +23,22 @@ function App() {
         <Route path="/login" component={LoginForm} />
         <Redirect exact path="/" to="/register" />
         <Route path="/register" component={RegisterForm} />
+
         <Redirect exact path="/" to="/manage/account/:idUser" />
         <Route path="/manage/account/:idUser" component={ManageAccount} />
         <Redirect exact path="/" to="/setting" />
         <Route path="/setting" component={SetProFile} />
-        {/* <Redirect exact path="/" to="/profile" /> */}
+
+
         <Redirect exact path="/" to="/update/:idBlog" />
         <Route path="/update/:idBlog" component={UpdatePost} />
+
         {/* <ProtectedRoute path="/profile/edit" component={EditProfile} />
         <ProtectedRoute path="/profile/index" component={ListRoom} /> */}
-
-        {/* <Redirect exact path="/" to="/posting" /> */}
 
         <Redirect exact path="/" to="/posting" />
         <Route path="/posting" component={Posting} />
 
-        {/* <Redirect exact path="/" to="/update/post/:idPost" />
-        <ProtectedRoute path="/update/post/:idPost" component={Posts} /> */}
       </Switch>
     </DefaultLayout>
   );

@@ -344,10 +344,16 @@ const GetInforUser = async (idUser) =>{
 }
 
 // lấy tất cả các bài báo của user đó ( của mình hoặc của người khác)
-const GetAllUserArticle = async (idUser) =>{
+const GetAllUserArticle = async (page, idUser) =>{
     try{
-        const response = await httpClient.get(`api/get/all/articles/?idUser=${idUser}`)
-        return response
+        if(page == 1){
+            const response = await httpClient.get(`api/get/all/articles/?idUser=${idUser}`);
+            return response
+        }
+        else{
+            const res = await httpClient.get(`api/get/all/articles/?idUser=${idUser}&page=${page}`);
+            return res
+        }
     }
     catch(error){
         return error
