@@ -30,20 +30,21 @@ export const TagAnimal = (props) => {
     }
 
     return(
-        <div className= "d-inline-flex mr-5 mb-5 p-0 col-md-4">
-            <div>
-                <img src = {props.img} style={{width: "90%"}}/>
+        <div className= "pr-5 pb-5 p-0 col-md-6">
+            <div className="d-flex flex-row">
+                <div className="col-md-5">
+                    <img src = {props.img} style={{width: "100%"}}/>
+                </div>
+                <div className="p-0 col-md-7">
+                    <h6>{props.name}</h6>
+                    {
+                        follow ? 
+                        <Button type="primary" onClick={handleUnfollowAnimal} icon ={<CheckOutlined />}>Following</Button> :
+                        <Button type="primary" onClick={handleFollowAnimal} ghost icon ={<PlusOutlined />}>Follow</Button> 
+                    }    
+                </div>
             </div>
-            <div className="p-0">
-                <h6>{props.name}</h6>
-                {
-                    follow ? 
-                    <Button type="primary" onClick={handleUnfollowAnimal} icon ={<CheckOutlined />}>Following</Button> :
-                    <Button type="primary" onClick={handleFollowAnimal} ghost icon ={<PlusOutlined />}>Follow</Button> 
-                }    
-            </div>
-           
-
+            
         </div>
     
     );

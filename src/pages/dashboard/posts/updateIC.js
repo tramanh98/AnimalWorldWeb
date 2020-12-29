@@ -40,7 +40,7 @@ class TagFollowing extends Component{
         //});
         return(
             this.state.allowRender ? 
-            <div className="edit-contact-info row">
+            <div className="row">
                 {
                     classes.map((obj, index) =>(
                         index != 0 ?

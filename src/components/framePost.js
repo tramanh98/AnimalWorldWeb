@@ -8,6 +8,8 @@ import ReactHtmlParser from 'react-html-parser'
 {/*** đây là frame cho các bài viết, chứa thông tin cơ bản****/ }
 const FramePost1 = (props) =>{
     const {user} = props
+    const res = Date.parse(props.created_at)
+    const d = new Date(res);
     return(
         <div className = "row frameInforBasic">  
             <div className = "col-md-6">
@@ -22,7 +24,7 @@ const FramePost1 = (props) =>{
                     <Divider type="vertical" style = {{color: "black"}} />
                     <span> <i class="far fa-comments"></i> </span> {props.comment}
                     <Divider type="vertical" style = {{color: "black"}} />
-                    <span> <i class="far fa-clock"></i> </span> july
+                    <span> <i class="far fa-clock"></i> </span> {d.toLocaleDateString()}
                 </div>
                 <p className = "description">{ReactHtmlParser(props.content)}</p>
             </div>
@@ -32,6 +34,8 @@ const FramePost1 = (props) =>{
 
 const FramePost2 = (props) =>{
     const {user} = props
+    const res = Date.parse(props.created_at)
+    const d = new Date(res);
     return(
         <div className = "framepost-type2">
             <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
@@ -42,7 +46,7 @@ const FramePost2 = (props) =>{
                 <Divider type="vertical" style = {{color: "#ccc"}}/>
                 <span> <i class="far fa-comments"></i> </span> {props.comment}
                 <Divider type="vertical" style = {{color: "#ccc"}} />
-                <span> <i class="far fa-clock"></i> </span> july
+                <span> <i class="far fa-clock"></i> </span> {d.toLocaleDateString()}
             </div>
             <p className = "description">
                     {ReactHtmlParser(props.content)}
@@ -53,6 +57,8 @@ const FramePost2 = (props) =>{
 
 const FramePost3 = (props) =>{
     const {user} = props
+    const res = Date.parse(props.created_at)
+    const d = new Date(res);
     return(
         <div className = "frameInforBasic row">  {/*** đây là frame cho các bài viết, chứa thông tin cơ bản****/ }
             <div className = "col-md-4">
@@ -61,7 +67,7 @@ const FramePost3 = (props) =>{
             <div className = "col-md-8 pl-3">
                 <Link to ={`/detail/${props.id}`}><h6  className="fontANW">{props.title}</h6></Link>
                 <div className="my-2 fontIcon">
-                    <span> <i class="far fa-clock"></i> </span> july
+                    <span> <i class="far fa-clock"></i> </span> {d.toLocaleDateString()}
                 </div>
             </div>
         </div>
@@ -69,6 +75,8 @@ const FramePost3 = (props) =>{
 }
 const FramePost4 = (props) =>{
     const {user} = props
+    const res = Date.parse(props.created_at)
+    const d = new Date(res);
     return (
         <div className = " ">
             <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
@@ -78,7 +86,7 @@ const FramePost4 = (props) =>{
                 <Divider type="vertical" style = {{color: "#ccc"}}/>
                 <span> <i class="far fa-comments"></i> </span> {props.comment}
                 <Divider type="vertical" style = {{color: "#ccc"}}/>
-                <span> <i class="far fa-clock"></i> </span> july
+                <span> <i class="far fa-clock"></i> </span> {d.toLocaleDateString()}
             </div>
             <p className = "description">
                 {ReactHtmlParser(props.content)}
