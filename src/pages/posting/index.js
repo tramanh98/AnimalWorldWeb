@@ -5,8 +5,12 @@ import QuillEditor from '../../components/editor/QuillEditor';
 import classes from '../../data/classes.json'
 import CropperIMG from '../../components/IMGcropper/cropper'
 import {uploadImg, postBlog} from '../../api/api'
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+
 const { Title } = Typography;
 const { Option } = Select;
+
 
 export const Posting = () => {
     const [content, setContent] = useState("")
@@ -14,6 +18,7 @@ export const Posting = () => {
     const [avaImg, setAvaImg] = useState([])
     const [visible, setVisible] = useState(false);
     const [urlImg, setUrlImg] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const hiddenFileInput = useRef(null);
     // Programatically click the hidden file input element
@@ -53,13 +58,15 @@ export const Posting = () => {
         setVisible(false)
     }
 
-
+    setLoading(false)
     const onSubmit = async (event) =>{
         console.log(event)
+        setLoading(true)
         const response = await postBlog(event, urlImg, content)
         console.log(response)
     }
         return(
+            loading ? <Spin tip="Loading..." size="large"></Spin> :
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center' }}>
                 <Title level={2} > Đăng bài viết của bạn</Title>
@@ -84,6 +91,9 @@ export const Posting = () => {
                             }
                         </Select>
                     </Form.Item>
+
+                    <div className="row">
+                    <div className="col-sm-6">
                     <Form.Item name="dangerous" label="Nguy hiểm" rules={[{ required: true}]}>
                         <Radio.Group>
                             <Radio value={false}>Không</Radio>
@@ -102,7 +112,8 @@ export const Posting = () => {
                             <Radio value={true}>Có</Radio>
                         </Radio.Group>
                     </Form.Item>
-                    
+                    </div>
+                    <div className="col-sm-6">
                     <Form.Item name="pets" label="Thú nuôi" rules={[{ required: true}]}>
                         <Radio.Group>
                             <Radio value={false}>Không</Radio>
@@ -123,7 +134,8 @@ export const Posting = () => {
                             <Radio value={true}>Có</Radio>
                         </Radio.Group>
                     </Form.Item>
-
+                    </div>
+                </div>
                     <Form.Item
                         className="avatar"
                         label="Ảnh đại diện bài viết"
@@ -161,6 +173,7 @@ export const Posting = () => {
                     
 
                     <Form.Item >
+                        l
                         <div style={{ textAlign: 'center', margin: '2rem', }}>
                             <Button size="large" type="primary" htmlType="submit">
                                 Đăng bài
