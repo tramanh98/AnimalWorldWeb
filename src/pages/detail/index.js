@@ -102,7 +102,7 @@ class Detail extends Component {
                 <div className = "col-md-7 m-0 p-0">
                     <div className = "d-flex justify-content-between my-4">
                         <div className="p-2 my-auto" style={{width: '30%'}}>
-                            <div className= "d-flex justify-content-between">
+                            <div className= "d-flex">
                                 <div className ="p-2" >
                                     <Link to = {`/manage/account/${ownerArticle.id}`}>
                                     {
@@ -112,10 +112,8 @@ class Detail extends Component {
                                         <Avatar size={50} icon={<UserOutlined />} />
                                     }
                                     </Link>
-                                    
-                                    
                                 </div>
-                                <div className ="p-2" >
+                                <div className ="pl-3" >
                                     <Link to = {`/manage/account/${ownerArticle.id}`}>
                                         {`${ownerArticle.first_name} ${ownerArticle.last_name}`}
                                     </Link>

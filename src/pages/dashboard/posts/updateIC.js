@@ -41,7 +41,7 @@ class TagFollowing extends Component{
                         index != 0 ?
                             arrTag.includes(index) ?
                             <TagAnimal idFollow = {arrObj[arrTag.indexOf(index)].id} key ={index}
-                            idTag={index} name = {obj.name} isFollow = {true}/> :
+                            idTag={index} name = {obj.name} isFollow = {true} /> :
                             <TagAnimal idFollow = {null} key ={index}
                             idTag={index} name = {obj.name} isFollow = {false}/>
                         : ''
