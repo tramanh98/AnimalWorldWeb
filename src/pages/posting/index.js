@@ -84,6 +84,9 @@ export const Posting = () => {
                             }
                         </Select>
                     </Form.Item>
+
+                    <div className="row">
+                    <div className="col-sm-6">
                     <Form.Item name="dangerous" label="Nguy hiểm" rules={[{ required: true}]}>
                         <Radio.Group>
                             <Radio value={false}>Không</Radio>
@@ -102,7 +105,8 @@ export const Posting = () => {
                             <Radio value={true}>Có</Radio>
                         </Radio.Group>
                     </Form.Item>
-                    
+                    </div>
+                    <div className="col-sm-6">
                     <Form.Item name="pets" label="Thú nuôi" rules={[{ required: true}]}>
                         <Radio.Group>
                             <Radio value={false}>Không</Radio>
@@ -123,7 +127,8 @@ export const Posting = () => {
                             <Radio value={true}>Có</Radio>
                         </Radio.Group>
                     </Form.Item>
-
+                    </div>
+                </div>
                     <Form.Item
                         className="avatar"
                         label="Ảnh đại diện bài viết"
