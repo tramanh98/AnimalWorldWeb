@@ -58,12 +58,16 @@ export const Posting = () => {
         setVisible(false)
     }
 
-    setLoading(false)
+    
     const onSubmit = async (event) =>{
         console.log(event)
         setLoading(true)
         const response = await postBlog(event, urlImg, content)
         console.log(response)
+        setLoading(false)
+        if(response.status==200){
+            message.success('This is a success message');
+        }
     }
         return(
             loading ? <Spin tip="Loading..." size="large"></Spin> :
