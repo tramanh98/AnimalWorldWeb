@@ -33,19 +33,26 @@ class TagFollowing extends Component{
     render(){
         console.log(this.state.arrTag)
         const {arrObj, arrTag} = this.state
+        // const array = ["bosat", "ca", "chim", "contrung", "giapxac", "thu","hinhnhen", "luongcu", "nhieuchan", "saobien", "thu", "sanho"];
+
+        // const images = array.map(image => {
+        //    return <img key={image} src={require(`./icons/${image}.png`)} className="img-responsive" />
+        //});
         return(
             this.state.allowRender ? 
-            <div className="edit-contact-info">
+            <div className="row">
                 {
                     classes.map((obj, index) =>(
                         index != 0 ?
                             arrTag.includes(index) ?
-                            <TagAnimal idFollow = {arrObj[arrTag.indexOf(index)].id} key ={index}
-                            idTag={index} name = {obj.name} isFollow = {true}/> :
-                            <TagAnimal idFollow = {null} key ={index}
-                            idTag={index} name = {obj.name} isFollow = {false}/>
-                        : ''
+                                <TagAnimal idFollow = {arrObj[arrTag.indexOf(index)].id} key ={index}
+                                idTag={index} name = {obj.name} img={obj.avt} isFollow = {true}/> :
+                                <TagAnimal idFollow = {null} key ={index}
+                                idTag={index} name = {obj.name} img={obj.avt} isFollow = {false}/>
+                            
+                        :''
                     ))
+                    
                 }
             </div>
             : 

@@ -21,6 +21,7 @@ export const ManageAccount = (props) => {
     }
     useEffect( async () => {
         // call API
+
         setLoading(true)
         const res1 = await GetInforUser(props.match.params.idUser)
         console.log(res1)
