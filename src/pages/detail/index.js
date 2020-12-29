@@ -24,6 +24,7 @@ class Detail extends Component {
             comments: [],
             visibleComment: false,
             ownerArticle: {},
+            date: ''
         } 
         this.handleVoteArticle = this.handleVoteArticle.bind(this)
         this.handleUnvoteArticle = this.handleUnvoteArticle.bind(this)
@@ -54,11 +55,13 @@ class Detail extends Component {
     async componentDidMount() {
         const res1 = await getDetailBlog(this.props.match.params.idBlog)
         const res2 = await GetCommentsArticle(this.props.match.params.idBlog)
+        
         console.log(res1)
         console.log(res2)
         const {votes} = res1.data
         const {user} = res1.data
         console.log(user)
+
         if(res1.status === 200 && res2.status === 200){
             for(var x of votes){
                 if(x.user == this.props.user.idUser){
@@ -73,7 +76,8 @@ class Detail extends Component {
                 results: res1.data,
                 comments: res2.data.results,
                 visibleComment: true,
-                ownerArticle: user
+                ownerArticle: user,
+                date: new Date(Date.parse(res1.data.created_at)).toLocaleDateString()
             })
         }   
     }
@@ -125,7 +129,7 @@ class Detail extends Component {
                             </div>
                         </div>
                         <div className="p-2">
-                            Published on {this.state.results.created_at}
+                            Published on {this.state.date}
                             <div className = "d-flex justify-content-end">
                                 <div className = "ml-3">
                                     <HeartOutlined style={{ fontSize: '14px' }}/> {this.state.results.like} 
