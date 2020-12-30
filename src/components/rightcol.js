@@ -18,12 +18,15 @@ return(
     article ? 
     <div >
         <div className = "topicName"><h4>Được xem nhiều</h4></div>
-        <div className = "fourPart">
+        <div className = "mt-4">
             {
                 article.slice(0,6).map((obj,index)=>(
-                    <div className = "">
-                        <FramePost3 {...obj}/>
-                        {/* <hr/> */}
+                    <div>
+                        <FramePost3 {...obj} t={"popular"}/>
+                        {
+                            (index + 1) !== 6 ? 
+                            <hr/> :''  
+                        }
                     </div>
 
                 ))
@@ -50,12 +53,15 @@ return(
     article ? 
     <div className="mt-5">
         <div className = "topicName topicName-postnew"><h4>Bài yêu thích</h4></div>
-        <div className = "fourPart">
+        <div className = "mt-4">
                 {
                     article.slice(0,6).map((obj,index)=>(
                         <div>
-                            <FramePost3 {...obj}/>
-                            {/* <hr/> */}
+                            <FramePost3 {...obj} t={"like"}/>
+                            {
+                                (index + 1) !== 6 ? 
+                                <hr/> :''  
+                            }
                         </div>
 
                     ))

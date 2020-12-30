@@ -105,7 +105,7 @@ class Detail extends Component {
 
                 <div className = "col-md-7 pr-4">
                     <div className = "d-flex justify-content-between ">
-                        <div className="p-2 my-auto" style={{width: '30%'}}>
+                        <div className="p-2 my-auto" style={{width: '50%'}}>
                             <div className= "d-flex">
                                 <div className ="p-2" >
                                     <Link to = {`/manage/account/${ownerArticle.id}`}>
@@ -117,9 +117,9 @@ class Detail extends Component {
                                     }
                                     </Link>
                                 </div>
-                                <div className ="pl-3" >
+                                <div className ="pl-3 fontIcon" >
                                     <Link to = {`/manage/account/${ownerArticle.id}`}>
-                                        {`${ownerArticle.first_name} ${ownerArticle.last_name}`}
+                                        <b>{`${ownerArticle.first_name} ${ownerArticle.last_name}`}</b>
                                     </Link>
                                     <div>
                                         <EditOutlined style={{ fontSize: '14px' }}/> {ownerArticle.posts}
@@ -128,7 +128,7 @@ class Detail extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="p-2">
+                        <div className="p-2 fontIcon">
                             Published on {this.state.date}
                             <div className = "d-flex justify-content-end">
                                 <div className = "ml-3">
@@ -143,8 +143,8 @@ class Detail extends Component {
                             </div>
                         </div>
                     </div>
-                    <h2 className="mt-3">{this.state.results.title}</h2>
-                    <div className="contentBlog">
+                    <h2 className="mt-3 fontANW">{this.state.results.title}</h2>
+                    <div className="contentBlog fontIcon">
                         {ReactHtmlParser(this.state.results.content)}
                     </div>
                     {
@@ -154,7 +154,7 @@ class Detail extends Component {
                     }
                 </div>
 
-                <div className = "col-md-4 pr-3">
+                <div className = "col-md-4 pl-4">
                     <TrendingPost/>
                     <FavoritePost/>
                 </div>

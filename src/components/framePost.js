@@ -11,7 +11,7 @@ const FramePost1 = (props) =>{
     const res = Date.parse(props.created_at)
     const d = new Date(res);
     return(
-        <div className = "row frameInforBasic">  
+        <div className = "row my-4">  
             <div className = "col-md-6">
                <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
             </div>
@@ -40,7 +40,7 @@ const FramePost2 = (props) =>{
         <div className = "framepost-type2">
             <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
 
-            <Link to ={`/detail/${props.id}`}><h5 className="fontANW">{props.title}</h5></Link>
+            <Link to ={`/detail/${props.id}`}><h5 className="fontANW mt-2">{props.title}</h5></Link>
             <div className="my-2 fontIcon">
                 <span> <i class="far fa-user"></i></span> {user.username}
                 <Divider type="vertical" style = {{color: "#ccc"}}/>
@@ -60,40 +60,27 @@ const FramePost3 = (props) =>{
     const res = Date.parse(props.created_at)
     const d = new Date(res);
     return(
-        <div className = "frameInforBasic row">  {/*** đây là frame cho các bài viết, chứa thông tin cơ bản****/ }
+        <div className = "row my-3 p-0">  {/*** đây là frame cho các bài viết, chứa thông tin cơ bản****/ }
             <div className = "col-md-4">
                 <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
             </div>
             <div className = "col-md-8 pl-3">
                 <Link to ={`/detail/${props.id}`}><h6  className="fontANW">{props.title}</h6></Link>
                 <div className="my-2 fontIcon">
-                    <span> <i class="far fa-clock"></i> </span> {d.toLocaleDateString()}
+                    {
+                        props.t ? 
+                        props.t === "like" ? <span className = "mr-2"> <i className="far fa-heart"></i> {props.like}</span> :
+                                            <span className = "mr-2"> <i className="far fa-eye"></i> {props.view} </span>
+                        : ''
+                    }
+                    
+                    <span> <i className="far fa-clock"></i> </span> {d.toLocaleDateString()}
                 </div>
             </div>
         </div>
     )
 }
-const FramePost4 = (props) =>{
-    const {user} = props
-    const res = Date.parse(props.created_at)
-    const d = new Date(res);
-    return (
-        <div className = " ">
-            <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
-            <Link to ={`/detail/${props.id}`}><h5 className="fontANW">{props.title}</h5></Link>
-            <div className="my-2 fontIcon">
-                <span> <i class="far fa-user"></i></span> {user.username}
-                <Divider type="vertical" style = {{color: "#ccc"}}/>
-                <span> <i class="far fa-comments"></i> </span> {props.comment}
-                <Divider type="vertical" style = {{color: "#ccc"}}/>
-                <span> <i class="far fa-clock"></i> </span> {d.toLocaleDateString()}
-            </div>
-            <p className = "description">
-                {ReactHtmlParser(props.content)}
-            </p>
-        </div>
-    )
-}
+
 
 export const PrivateFramePost = (props) =>{
     const onClickDelete = () =>{
@@ -102,7 +89,8 @@ export const PrivateFramePost = (props) =>{
     const onclickEdit = () =>{
         props.onClickUpdate(props.idArticle)
     }
-    
+    const res = Date.parse(props.created_at)
+    const d = new Date(res);
     return(
         <div className = "row frameInforBasic">  
             <div className = "col-md-4">
@@ -118,7 +106,8 @@ export const PrivateFramePost = (props) =>{
                 <div className="mt-4">
                     <span className ="mr-3"><EyeOutlined style={{ fontSize: '14px' }}/> {props.view} </span>
                     <span className ="mr-3"><HeartOutlined style={{ fontSize: '14px' }}/> {props.like} </span>
-                    <span><CommentOutlined style={{ fontSize: '14px' }}/> {props.comment} </span>
+                    <span className ="mr-3"><CommentOutlined style={{ fontSize: '14px' }}/> {props.comment} </span>
+                    <span> <i className="far fa-clock"></i> </span> {d.toLocaleDateString()}
                 </div>
             </div>
             {
@@ -146,6 +135,6 @@ export const PrivateFramePost = (props) =>{
 }
 
 export{
-    FramePost1, FramePost2, FramePost3, FramePost4
+    FramePost1, FramePost2, FramePost3
 
 }

@@ -107,20 +107,28 @@ export const ManageAccount = (props) => {
                                     allArticles ? 
                                     allArticles.map((obj, index) =>(
                                         <>
-                                        <PrivateFramePost 
-                                            isOwner = {isOwner}
-                                            idArticle = {obj.id}
-                                            onClickDelete = {handleDeleteArticle}
-                                            onClickUpdate = {handleRouteToUpdate}
-                                            {...obj}
-                                        />
+                                            <PrivateFramePost 
+                                                isOwner = {isOwner}
+                                                idArticle = {obj.id}
+                                                onClickDelete = {handleDeleteArticle}
+                                                onClickUpdate = {handleRouteToUpdate}
+                                                {...obj}
+                                            />
+                                            {
+                                                (index + 1)%10 !==0 ?  
+                                                    (index + 1) !== allArticles.length ? 
+                                                    <hr/> :''  
+                                                : ''
+                                            }
                                         </>
                                     )) : ''
                                 }
                                 {
-                                    countResult == 0 ? '' :  
-                                    <Pagination onChange = {changePage} defaultCurrent={currentPage} total={countResult} />
 
+                                    countResult == 0 ? '' :  
+                                    <div className="my-5">
+                                        <Pagination onChange = {changePage} defaultCurrent={currentPage} total={countResult} />
+                                    </div>
                                 }
                             </div>
                         }

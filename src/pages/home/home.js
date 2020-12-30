@@ -9,12 +9,18 @@ import { TrendingPost, FavoritePost } from '../../components/rightcol'
 const LastestPost = (props) =>{
 
     const [article, setArticle] = useState(null)
+    const [date, setDate] = useState(null)
     useEffect( async () =>{
         const res = await latestPost(1)
         if(res.status === 200){
+
             console.log(res)
             const {data} = res
             setArticle(data.results)
+
+            // const dt = Date.parse(props.created_at)
+            // const d = new Date(dt);
+            // setDate(d.toLocaleDateString())
         }
 
     }, []);
@@ -27,7 +33,7 @@ const LastestPost = (props) =>{
                        
                          <Link to ={`/detail/${article[0].id}`}><img src={article[0].image} alt="Notebook" style={{width: "100%"}}/></Link>
                          <div className = "content fontANW">
-                             <span className="date">Dec 25, 2016</span>
+                             <span className="date mb-2">{new Date(Date.parse(article[0].created_at)).toDateString()}</span>
                              <Link to ={`/detail/${article[0].id}`}><h3>{article[0].title}</h3></Link>
                              {/* <span className="category">Inspirational</span> */}
                          {/* <span>
@@ -42,7 +48,7 @@ const LastestPost = (props) =>{
                     <Link to ={`/detail/${article[1].id}`}><img src={article[1].image} alt="Notebook" style={{width: "100%"}}/></Link>
                         
                         <div className = "content fontANW">
-                            <span className="date">Dec 25, 2016</span>
+                            <span className="date mb-2">{new Date(Date.parse(article[1].created_at)).toDateString()}</span>
                             <Link to ={`/detail/${article[1].id}`}><h4>{article[1].title}</h4></Link>
                             {/* <span className="category">Inspirational</span> */}
                         </div>
@@ -51,7 +57,7 @@ const LastestPost = (props) =>{
                     <Link to ={`/detail/${article[2].id}`}><img src={article[2].image} alt="Notebook" style={{width: "100%"}}/></Link>
                     
                         <div className = "content fontANW">
-                            <span className="date">Dec 25, 2016</span>
+                            <span className="date mb-2">{new Date(Date.parse(article[2].created_at)).toDateString()}</span>
                             <Link to ={`/detail/${article[2].id}`}><h4>{article[2].title}</h4></Link>
                             {/* <span className="category">Inspirational</span> */}
                         </div>
@@ -87,7 +93,10 @@ const MammaliaPost = () =>{
                         article.slice(0,4).map((obj,index)=>(
                             <>
                                 <FramePost1 {...obj}/>
-                                {/* <hr className="my-4"/> */}
+                                {
+                                    (index + 1) !== 4 ? 
+                                    <hr/> :''  
+                                }
                             </>
 
                         ))
@@ -150,16 +159,19 @@ const MammaliaPost = () =>{
                         <div className = "topicName"><h4>Lớp Cá</h4></div>
                         <div className = "thirdPart">
                             <div className = "row">
-                                <div className = "col-md-6">
+                                <div className = "col-md-6 pr-2">
                                     <FramePost2 {...article[0]} />
                                 </div>
-                                <div className = "col-md-6">
+                                <div className = "col-md-6 pl-2 mt-3">
                                     <div>
                                     {
                                         article.slice(1,5).map((obj,index)=>(
                                         <>
                                             <FramePost3 {...obj}/>
-                                            {/* <hr className=""/> */}
+                                            {
+                                                (index + 1) !== 4 ? 
+                                                <hr/> :''  
+                                            }
                                         </>
                                         ))
                                     }
