@@ -212,7 +212,10 @@ export const Results = (props) => {
                                     <div>
                                         <FramePost1 {...obj}/>
                                         {
-                                            countResult !== index + 1 ?   <hr/> : ''
+                                            (index + 1)%10 !==0 ?  
+                                                (index + 1) !== article.length ? 
+                                                <hr/> :''  
+                                            : ''
                                         }
                                     </div>
                                 ))

@@ -2,10 +2,10 @@
 import React, {useState, useEffect} from "react";
 import '../style.css';
 import Aux from '../../services/auxiliary'
-import {RightCol} from '../../components/rightcol'
-import {latestPost, trendingPost, favoritePost, animalClassPost} from '../../api/api'
-import { FramePost1, FramePost2, FramePost3, FramePost4} from '../../components/framePost'
+import {latestPost, animalClassPost} from '../../api/api'
+import { FramePost1, FramePost2, FramePost3} from '../../components/framePost'
 import { Link } from "react-router-dom";
+import { TrendingPost, FavoritePost } from '../../components/rightcol'
 const LastestPost = (props) =>{
 
     const [article, setArticle] = useState(null)
@@ -210,69 +210,6 @@ const MammaliaPost = () =>{
 
     }
 
-    const TrendingPost = () =>{
-            const [article, setArticle] = useState(null)
-            useEffect( async () =>{
-                const res = await trendingPost(1)
-                if(res.status === 200){
-                    console.log(res)
-                    const {data} = res
-                    setArticle(data.results)
-                }
-        
-            }, []);
-        return(
-            article ? 
-            <div >
-                <div className = "topicName"><h4>Được xem nhiều</h4></div>
-                <div className = "fourPart">
-                    {
-                        article.slice(0,6).map((obj,index)=>(
-                            <div className = "">
-                                <RightCol {...obj}/>
-                                {/* <hr/> */}
-                            </div>
-
-                        ))
-                    }
-                        
-                </div>
-            </div> : ''
-            );
-    
-        }
-       
-        const  FavoritePost = () =>{
-            const [article, setArticle] = useState(null)
-            useEffect( async () =>{
-                const res = await  favoritePost(1)
-                if(res.status === 200){
-                    console.log(res)
-                    const {data} = res
-                    setArticle(data.results)
-                }
-        
-            }, []);
-        return(
-            article ? 
-            <div className="mt-5">
-                <div className = "topicName topicName-postnew"><h4>Bài yêu thích</h4></div>
-                <div className = "fourPart">
-                        {
-                            article.slice(0,6).map((obj,index)=>(
-                                <div>
-                                    <RightCol {...obj}/>
-                                    {/* <hr/> */}
-                                </div>
-
-                            ))
-                        }
-                        
-                </div>
-            </div> : ''
-            );
-    
-        }
 export const Home = () => {
     return(
     

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import AllComments from './comment'
-import {RightCol} from '../../components/rightcol'
+import { TrendingPost, FavoritePost } from '../../components/rightcol'
 import {NameTag} from '../../components/badge'
 import {EyeOutlined} from '@ant-design/icons';
 import { Avatar, Affix, Button, Tooltip } from 'antd';
@@ -85,9 +85,9 @@ class Detail extends Component {
     render(){
         const {ownerArticle} = this.state
         return(
-            <div className = "row">
+            <div className = "row my-5">
 
-                <div className="col-md-1 vote-article">
+                <div className="col-md-1 vote-article p-0">
                     <Affix offsetTop={200} >
                         {this.state.vote  ? 
                             <Tooltip title="Unvote">
@@ -103,8 +103,8 @@ class Detail extends Component {
                     </Affix>
                 </div>
 
-                <div className = "col-md-7 m-0 p-0">
-                    <div className = "d-flex justify-content-between my-4">
+                <div className = "col-md-7 pr-4">
+                    <div className = "d-flex justify-content-between ">
                         <div className="p-2 my-auto" style={{width: '30%'}}>
                             <div className= "d-flex">
                                 <div className ="p-2" >
@@ -143,7 +143,7 @@ class Detail extends Component {
                             </div>
                         </div>
                     </div>
-                    <h2>{this.state.results.title}</h2>
+                    <h2 className="mt-3">{this.state.results.title}</h2>
                     <div className="contentBlog">
                         {ReactHtmlParser(this.state.results.content)}
                     </div>
@@ -154,11 +154,11 @@ class Detail extends Component {
                     }
                 </div>
 
-                <div className = "col-md-4">
-                    <RightCol/>
+                <div className = "col-md-4 pr-3">
+                    <TrendingPost/>
+                    <FavoritePost/>
                 </div>
                 
-    
             </div>
         );
     }

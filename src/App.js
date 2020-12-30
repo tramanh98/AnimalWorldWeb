@@ -15,10 +15,10 @@ function App() {
       <Switch>
         <Redirect exact path="/" to="/home" />
         <Route path="/home" component={HomePage} />
-        <Redirect exact path="/" to="/detail" />
-        <Route path="/detail/:idBlog" component={Detail} />
+        <Redirect exact path="/" to="/detail" /> 
+        <Route path="/detail/:idBlog" render={(props) => <Detail {...props} key={Date.now()}/>} />
         <Redirect exact path="/" to="/result" />
-        <Route path="/result" component={Results} />
+        <Route path="/result" render={(props) => <Results {...props} key={Date.now()}/>} />
         <Redirect exact path="/" to="/login" />
         <Route path="/login" component={LoginForm} />
         <Redirect exact path="/" to="/register" />
