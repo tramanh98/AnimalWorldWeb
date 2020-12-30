@@ -19,43 +19,43 @@ const LastestPost = (props) =>{
 
     }, []);
     return(
-        
-        
         article ? 
         <aside id="hero">
             <div className="row">
                 <div className="col-md-8 col-sm-12">
                     <div className ="ss1-container-bn">
-                        
-                        <Link to ={`/detail/${props.id}`}><img src={article[0].image} alt="Notebook" style={{width: "100%"}}/></Link>
-                        <div className = "content fontANW">
-                            <span className="date">Dec 25, 2016</span>
-                            <h3>{article[0].title}</h3>
-                            {/* <span className="category">Inspirational</span> */}
-                        {/* <span>
-                        <span className="view"><i class="fa fa-eye" aria-hidden="true">120</i></span>
-                            <span className="like"><i class="fa fa-heart" aria-hidden="true">102</i></span>
-                        </span> */}
-                        </div>
+                       
+                         <Link to ={`/detail/${article[0].id}`}><img src={article[0].image} alt="Notebook" style={{width: "100%"}}/></Link>
+                         <div className = "content fontANW">
+                             <span className="date">Dec 25, 2016</span>
+                             <Link to ={`/detail/${article[0].id}`}><h3>{article[0].title}</h3></Link>
+                             {/* <span className="category">Inspirational</span> */}
+                         {/* <span>
+                         <span className="view"><i class="fa fa-eye" aria-hidden="true">120</i></span>
+                             <span className="like"><i class="fa fa-heart" aria-hidden="true">102</i></span>
+                         </span> */}
+                         </div>
+                        )}
+                       
                        
                     </div>
                 </div>
                 <div className="col-md-4 col-sm-6">
                     <div className ="ss1-container-bn">
-                        <img src={article[1].image} alt="Notebook" style={{width: "100%"}}/>
+                    <Link to ={`/detail/${article[1].id}`}><img src={article[1].image} alt="Notebook" style={{width: "100%"}}/></Link>
                         
                         <div className = "content fontANW">
                             <span className="date">Dec 25, 2016</span>
-                            <h4>{article[1].title}</h4>
+                            <Link to ={`/detail/${article[1].id}`}><h4>{article[1].title}</h4></Link>
                             {/* <span className="category">Inspirational</span> */}
                         </div>
                     </div>
                     <div className ="ss1-container-bn">
-                        <img src={article[2].image} alt="Notebook" style={{width: "100%"}}/>
+                    <Link to ={`/detail/${article[2].id}`}><img src={article[2].image} alt="Notebook" style={{width: "100%"}}/></Link>
                     
                         <div className = "content fontANW">
                             <span className="date">Dec 25, 2016</span>
-                            <h4>{article[2].title}</h4>
+                            <Link to ={`/detail/${article[2].id}`}><h4>{article[2].title}</h4></Link>
                             {/* <span className="category">Inspirational</span> */}
                         </div>
                     </div>
