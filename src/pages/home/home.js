@@ -35,9 +35,6 @@ const LastestPost = (props) =>{
                              <span className="like"><i class="fa fa-heart" aria-hidden="true">102</i></span>
                          </span> */}
                          </div>
-                        )}
-                       
-                       
                     </div>
                 </div>
                 <div className="col-md-4 col-sm-6">
