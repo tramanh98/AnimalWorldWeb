@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Form, Input, Button, DatePicker, Gender, Checkbox } from 'antd';
+import { Form, Input, Button, Spin, message } from 'antd';
 import './style.css';
 import 'react-phone-input-2/lib/style.css'
 export const UpdatePassword = () =>{

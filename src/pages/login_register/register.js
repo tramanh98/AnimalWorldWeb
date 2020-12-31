@@ -1,9 +1,10 @@
 import { Tabs, Typography } from 'antd';
 import '../style.css'
-import { Form, Input, Button, InputNumber, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox, message, Spin } from 'antd';
 import {Register_sv, getProfile} from '../../api/api'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from "react-router-dom";
+import {useState, useEffect} from "react"
 const { TabPane } = Tabs;
 const { Title } = Typography;
 const validateMessages = {
@@ -17,16 +18,16 @@ const validateMessages = {
     },
   };
 export const RegisterForm = () => {
+    const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
     const history = useHistory();
     const onFinish = async (values) => {
-        // console.log(values);
+        setLoading(true)
         const rgt = await Register_sv(values)
         console.log(rgt)
         const profiledt = await getProfile(`Token ${rgt.data.key}`)
         localStorage.setItem("token",rgt.data.key)
         localStorage.setItem("typetoken", 'Token')
-
         const {data} = profiledt
         const storetoRedux = {
             isLogin: true,
@@ -41,10 +42,12 @@ export const RegisterForm = () => {
             type: 'LOGIN_USER',
             payload: storetoRedux
         })
+        setLoading(false)
         history.push("/home");
       };
     
     return(
+        loading ? <Spin tip="Login..." size="large" style={{textAlign: 'center'}}></Spin> :
         <div className ="lg-rgt-form py-5 px-4" style={{ maxWidth: '600px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center' }}>
                 <Title level={2} >Register</Title>

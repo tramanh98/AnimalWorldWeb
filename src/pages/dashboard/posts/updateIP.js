@@ -1,7 +1,7 @@
 import React, {Component, useState, useRef, useEffect} from 'react';
-import { Form, Input, Button, DatePicker, Avatar, Checkbox, Modal } from 'antd';
+import { Form, Input, Button, Spin, Avatar, message, Modal } from 'antd';
 import './style.css';
-import { UserOutlined, EditOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import CropperIMG from '../../../components/IMGcropper/cropper'

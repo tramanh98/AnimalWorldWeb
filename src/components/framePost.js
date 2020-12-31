@@ -11,7 +11,7 @@ const FramePost1 = (props) =>{
     const res = Date.parse(props.created_at)
     const d = new Date(res);
     return(
-        <div className = "row my-4">  
+        <div className = "row my-4 mx-0">  
             <div className = "col-md-6">
                <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
             </div>
@@ -60,7 +60,7 @@ const FramePost3 = (props) =>{
     const res = Date.parse(props.created_at)
     const d = new Date(res);
     return(
-        <div className = "row my-3 p-0">  {/*** đây là frame cho các bài viết, chứa thông tin cơ bản****/ }
+        <div className = "row mx-0 my-3 p-0">  {/*** đây là frame cho các bài viết, chứa thông tin cơ bản****/ }
             <div className = "col-md-4">
                 <Link to ={`/detail/${props.id}`}><img src={props.image} alt="Notebook" style={{width: "100%"}}/></Link>
             </div>

@@ -106,3 +106,20 @@ body{
         display: none;
     }
   }
+
+
+a.subnav_link:link {
+    color: #212529;
+}
+  
+a.subnav_link:hover {
+    cursor: pointer;
+    color: #2ac5ae !important;
+    text-decoration: none;
+ }
+  
+a.subnav_link:visited {
+    color: #4b7cad; }
+  
+a.subnav_link:active {
+    color: black; }

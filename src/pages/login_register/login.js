@@ -1,6 +1,7 @@
+import React, { useEffect, useState, useRef } from 'react';
 import { Tabs, Typography } from 'antd';
 import '../style.css'
-import { Form, Input, Button, Checkbox, Divider } from 'antd';
+import { Form, Input, Button, Checkbox, Divider, message, Spin } from 'antd';
 import { createFromIconfontCN, GoogleOutlined } from '@ant-design/icons';
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
@@ -14,13 +15,14 @@ const { TabPane } = Tabs;
 const { Title } = Typography;
 
 export const LoginForm = () => {
+    const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
     const history = useHistory();
     const lgFacebook = async (response) =>{
         console.log(response)
+        setLoading(true)
         const res = await Login_Fb(response.accessToken)  // chuyển đổi token 
         const {data} = res
-
         localStorage.setItem("token",data.access_token)
         localStorage.setItem("typetoken", data.token_type)
         // lưu riêng avatar của user 
@@ -29,9 +31,6 @@ export const LoginForm = () => {
         // lưu token và loại token xuống local storage 
 
         console.log(res)
-        
-        // const {data} = profiledt.data
-        // console.log(data)
         const storetoRedux = {
             isLogin: true,
             idUser: profiledt.data.id,
@@ -41,26 +40,23 @@ export const LoginForm = () => {
             lname: profiledt.data.last_name,
             email: profiledt.data.email,
         }
-        // do something to redux
         dispatch({
             type: 'LOGIN_USER',
             payload: storetoRedux
         })
+        setLoading(false)
         history.push("/home");
 
     }
     const lgGoogle = async (response) =>{
         console.log(response)
+        setLoading(true)
         const res = await Login_GG(response.tokenObj.access_token)
         const {data} = res
         localStorage.setItem("token",data.access_token)
         localStorage.setItem("typetoken", data.token_type)
         const avt = await updateAvatar(response.profileObj.imageUrl )
         const profiledt = await getProfile(`${data.token_type} ${data.access_token}`)
-
-
-        // const {profile} = profiledt.data
-        // console.log(profile)
         const storetoRedux = {
             isLogin: true,
             idUser: profiledt.data.id,
@@ -70,11 +66,11 @@ export const LoginForm = () => {
             lname: profiledt.data.last_name,
             email: profiledt.data.email,
         }
-        // do something to redux
         dispatch({
             type: 'LOGIN_USER',
             payload: storetoRedux
         })
+        setLoading(false)
         history.push("/home");
     }
 
@@ -82,13 +78,12 @@ export const LoginForm = () => {
 
     const onFinish = async (values) => {
         console.log('Success:', values);
+        setLoading(true)
         const lg = await Login_sv(values.email, values.password)
         console.log(lg)
         const profiledt = await getProfile(`Token ${lg.data.key}`)
         localStorage.setItem("token",lg.data.key)
         localStorage.setItem("typetoken", 'Token')
-
-        // const {profile} = profiledt.data
         const storetoRedux = {
             isLogin: true,
             idUser: profiledt.data.id,
@@ -98,11 +93,11 @@ export const LoginForm = () => {
             lname: profiledt.data.last_name,
             email: profiledt.data.email,
         }
-        // do something to redux
         dispatch({
             type: 'LOGIN_USER',
             payload: storetoRedux
         })
+        setLoading(false)
         history.push("/home");
 
     };
@@ -118,6 +113,7 @@ export const LoginForm = () => {
     margin:"10px 30px"
   }
     return(
+        loading ? <Spin tip="Login..." size="large" style={{textAlign: 'center'}}></Spin> :
         <div className ="lg-rgt-form py-5 px-4" style={{ maxWidth: '500px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center' }}>
                 <Title level={2} >Login</Title>

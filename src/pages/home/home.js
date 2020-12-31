@@ -6,21 +6,16 @@ import {latestPost, animalClassPost} from '../../api/api'
 import { FramePost1, FramePost2, FramePost3} from '../../components/framePost'
 import { Link } from "react-router-dom";
 import { TrendingPost, FavoritePost } from '../../components/rightcol'
-const LastestPost = (props) =>{
+const LastestPost = () =>{
 
     const [article, setArticle] = useState(null)
     const [date, setDate] = useState(null)
     useEffect( async () =>{
         const res = await latestPost(1)
         if(res.status === 200){
-
             console.log(res)
             const {data} = res
             setArticle(data.results)
-
-            // const dt = Date.parse(props.created_at)
-            // const d = new Date(dt);
-            // setDate(d.toLocaleDateString())
         }
 
     }, []);
@@ -34,7 +29,7 @@ const LastestPost = (props) =>{
                          <Link to ={`/detail/${article[0].id}`}><img src={article[0].image} alt="Notebook" style={{width: "100%"}}/></Link>
                          <div className = "content fontANW">
                              <span className="date mb-2">{new Date(Date.parse(article[0].created_at)).toDateString()}</span>
-                             <Link to ={`/detail/${article[0].id}`}><h3>{article[0].title}</h3></Link>
+                             <Link to ={`/detail/${article[0].id}`} className="subnav_link"><h3>{article[0].title}</h3></Link>
                              {/* <span className="category">Inspirational</span> */}
                          {/* <span>
                          <span className="view"><i class="fa fa-eye" aria-hidden="true">120</i></span>
@@ -49,7 +44,7 @@ const LastestPost = (props) =>{
                         
                         <div className = "content fontANW">
                             <span className="date mb-2">{new Date(Date.parse(article[1].created_at)).toDateString()}</span>
-                            <Link to ={`/detail/${article[1].id}`}><h4>{article[1].title}</h4></Link>
+                            <Link to ={`/detail/${article[1].id}`} className="subnav_link"><h4>{article[1].title}</h4></Link>
                             {/* <span className="category">Inspirational</span> */}
                         </div>
                     </div>
@@ -58,7 +53,7 @@ const LastestPost = (props) =>{
                     
                         <div className = "content fontANW">
                             <span className="date mb-2">{new Date(Date.parse(article[2].created_at)).toDateString()}</span>
-                            <Link to ={`/detail/${article[2].id}`}><h4>{article[2].title}</h4></Link>
+                            <Link to ={`/detail/${article[2].id}`} className="subnav_link"><h4>{article[2].title}</h4></Link>
                             {/* <span className="category">Inspirational</span> */}
                         </div>
                     </div>
@@ -219,7 +214,7 @@ const MammaliaPost = () =>{
 
     }
 
-export const Home = () => {
+export const HomePage = (props) => {
     return(
     
         <Aux>

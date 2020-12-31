@@ -72,17 +72,5 @@ return(
     );
 
 }
-export const RightCol = (props) => {
-    return(
-        <>
-            <div className = "">
-                <div className = "">
-                    <FramePost3 {...props} />
-                </div>
-            </div>
-           
-        </>
-    );
-}
 
 export { TrendingPost, FavoritePost }

@@ -1,13 +1,63 @@
 import './style.css';
 import React, { Component, useEffect, useState, useRef } from 'react';
-import { Collapse, Tabs, message, Avatar, Pagination } from 'antd';
+import { Collapse, Tabs, message, Avatar, Pagination, Empty  } from 'antd';
 import { Link } from "react-router-dom";
 import { UserOutlined } from '@ant-design/icons';
 import {PrivateFramePost} from '../../../components/framePost'
-import {ApiDeleteArticle, GetInforUser, GetAllUserArticle} from '../../../api/api'
+import {ApiDeleteArticle, GetInforUser, GetAllUserArticle, getTagsFollowing} from '../../../api/api'
 import { useSelector, useDispatch } from 'react-redux';
+import {TagAnimal} from '../../../components/tagAnimal'
+import classes from '../../../data/classes.json'
 const { TabPane } = Tabs;
 const { Panel } = Collapse;
+
+
+const FollowingTag = (props) =>{
+    const user = useSelector((state) => state.currentUser);
+    const [arrTag, setArrTag] = useState(null)
+    const [arrObj, setArrObj] = useState(null)
+    const [loading, setLoading] = useState(true)
+
+
+    useEffect( async () => {
+        setLoading(true)
+        const response = await getTagsFollowing(props.match.params.idUser)
+        const {followingtag} = response.data
+        const arr = []
+        if(response.status === 200)
+        {
+            for( var item of followingtag){
+                arr.push(item.animal)
+            }
+            setArrTag(arr)
+            setArrObj(followingtag)
+        }
+        setLoading(false)
+      }, []);
+
+      return(
+          loading ? '' :
+          arrObj.length === 0 ? 
+            <div className="my-5">
+                <Empty description={'There is nothing here.'}/>
+            </div> 
+            :
+            <div className="row">
+                {
+                    classes.map((obj, index) =>(
+                        index != 0 ?
+                            arrTag.includes(index) ?
+                                <TagAnimal idFollow = {arrObj[arrTag.indexOf(index)].id} key ={index}
+                                idTag={index} name = {obj.name} img={obj.avt} isFollow = {true}/> : ''
+                            
+                        :''
+                    ))
+                    
+                }
+            </div>
+      );
+}
+
 export const ManageAccount = (props) => {
     const user = useSelector((state) => state.currentUser);
     const [profile, setProfile] = useState(null)
@@ -104,7 +154,10 @@ export const ManageAccount = (props) => {
                             loading ? "" :
                             <div>
                                 {
-                                    allArticles ? 
+                                    allArticles.length === 0 ?  
+                                    <div className="my-5">
+                                        <Empty description={'There is nothing here.'}/>
+                                    </div> :
                                     allArticles.map((obj, index) =>(
                                         <>
                                             <PrivateFramePost 
@@ -121,8 +174,9 @@ export const ManageAccount = (props) => {
                                                 : ''
                                             }
                                         </>
-                                    )) : ''
+                                    )) 
                                 }
+                                
                                 {
 
                                     countResult == 0 ? '' :  
@@ -133,70 +187,17 @@ export const ManageAccount = (props) => {
                             </div>
                         }
                     </TabPane>
-                    <TabPane tab="Following" key="2">
-                    <Collapse bordered={false} defaultActiveKey={['1']}>
-                                <Panel header="Chân khớp (1/51)" key="1">
-                                    Chuồn chuồn <button className="follow">Follow</button>
-                                </Panel>
-                                <Panel header="Có vú (3/157)" key="2">
-                                    <a>Sư Tử </a><button className="follow">Follow</button>
-                                    <a>Chó </a><button className="follow">Follow</button>
-                                    <a>Báo </a><button className="follow">Follow</button>
-                                </Panel>
-                                <Panel header="Cá" key="3">
-                                    Cá mập <button className="follow">Follow</button>
-                                </Panel>
-                            </Collapse>
+                    <TabPane tab="Tag" key="2">
+                        <FollowingTag {...props}/>
                     </TabPane>
-                    
                 </Tabs>
+
                 </div>
                 <div className = "col-md-3">
                         
                 </div>
 
             </div>
-
-            {/* <div className="container mt-2">
-                <br />
-                
-                <ul className=" nav nav-tabs ">
-                    <li className="nav-item">
-                        <a className="nav-link active" data-toggle="tab" href="tab-post"> <i className="fas fa-pen" style={{ fontSize: "70%" }}></i> Post</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" data-toggle="tab" href="#tab-follow">Follow</a>
-                    </li>
-                </ul>
-
-
-                <div className="tab-content">
-                    <div id="tab-post" className="container tab-pane active">
-                        <div>No post.</div>
-                    </div>
-
-                    <div id="tab-follow" className="container tab-pane fade">
-
-                        <div>
-
-                            <Collapse bordered={false} defaultActiveKey={['1']}>
-                                <Panel header="Chân khớp (1/51)" key="1">
-                                    Chuồn chuồn <button className="follow">Follow</button>
-                                </Panel>
-                                <Panel header="Có vú (3/157)" key="2">
-                                    <a>Sư Tử </a><button className="follow">Follow</button>
-                                    <a>Chó </a><button className="follow">Follow</button>
-                                    <a>Báo </a><button className="follow">Follow</button>
-                                </Panel>
-                                <Panel header="Cá" key="3">
-                                    Cá mập <button className="follow">Follow</button>
-                                </Panel>
-                            </Collapse>
-
-                        </div>
-                    </div>
-                </div>
-            </div> */}
         </div>
     );
 }

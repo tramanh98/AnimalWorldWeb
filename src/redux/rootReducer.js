@@ -2,12 +2,6 @@
  
 const initialState = {
     currentUser: null,
-    // isLogin: false,
-    // username: '',
-    // fname: '',
-    // lname: '',
-    // urlImg: '',
-    // email: '',
   }
   
   export const reducer = (state = initialState, action) => {

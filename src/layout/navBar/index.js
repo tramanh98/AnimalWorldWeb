@@ -1,6 +1,6 @@
 import React from "react"
 import NavHead from './navHead'
-import NavFoot from './navbarfoot'
+import NavFoot from './navFoot'
 import Aux from '../../services/auxiliary'
 
 

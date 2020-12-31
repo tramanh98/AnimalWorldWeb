@@ -1,5 +1,5 @@
 import React, {Component, useState} from 'react';
-import { Form, Input, Button, DatePicker, Gender, Checkbox } from 'antd';
+import { Form } from 'antd';
 import './style.css';
 import 'react-phone-input-2/lib/style.css'
 import {TagAnimal} from '../../../components/tagAnimal'
@@ -16,7 +16,6 @@ class TagFollowing extends Component{
         }
       };
     async componentDidMount(){
-        // console.log(this.props.user)
         const response = await getTagsFollowing(this.props.user.idUser)
         const {followingtag} = response.data
         const arr = []
@@ -33,11 +32,6 @@ class TagFollowing extends Component{
     render(){
         console.log(this.state.arrTag)
         const {arrObj, arrTag} = this.state
-        // const array = ["bosat", "ca", "chim", "contrung", "giapxac", "thu","hinhnhen", "luongcu", "nhieuchan", "saobien", "thu", "sanho"];
-
-        // const images = array.map(image => {
-        //    return <img key={image} src={require(`./icons/${image}.png`)} className="img-responsive" />
-        //});
         return(
             this.state.allowRender ? 
             <div className="row">

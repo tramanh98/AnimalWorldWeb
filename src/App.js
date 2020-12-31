@@ -4,11 +4,13 @@ import {LoginForm} from './pages/login_register/login'
 import {RegisterForm} from './pages/login_register/register'
 import {Results} from './pages/results/index'
 import Detail from './pages/detail/index'
-import {HomePage} from './pages/home/mainHome'
+import {HomePage} from './pages/home/home'
 import {Posting} from './pages/posting/index'
 import SetProFile from "./pages/dashboard/posts/index"
 import {ManageAccount} from './pages/dashboard/profile/index'
 import {UpdatePost} from './pages/posting/updatePost'
+import { Page403} from './pages/Page403/index'
+import {ProtectedRoute, VerifiedRoute} from './services/service.route'
 function App() {
   return (
     <DefaultLayout>
@@ -19,25 +21,23 @@ function App() {
         <Route path="/detail/:idBlog" render={(props) => <Detail {...props} key={Date.now()}/>} />
         <Redirect exact path="/" to="/result" />
         <Route path="/result" render={(props) => <Results {...props} key={Date.now()}/>} />
+
         <Redirect exact path="/" to="/login" />
-        <Route path="/login" component={LoginForm} />
+        <VerifiedRoute path="/login" component={LoginForm} />
         <Redirect exact path="/" to="/register" />
-        <Route path="/register" component={RegisterForm} />
+        <VerifiedRoute path="/register" component={RegisterForm} />
 
         <Redirect exact path="/" to="/manage/account/:idUser" />
-        <Route path="/manage/account/:idUser" component={ManageAccount} />
+        <ProtectedRoute path="/manage/account/:idUser" component={ManageAccount} />
         <Redirect exact path="/" to="/setting" />
-        <Route path="/setting" component={SetProFile} />
-
-
+        <ProtectedRoute path="/setting" component = {SetProFile} />
         <Redirect exact path="/" to="/update/:idBlog" />
-        <Route path="/update/:idBlog" component={UpdatePost} />
-
-        {/* <ProtectedRoute path="/profile/edit" component={EditProfile} />
-        <ProtectedRoute path="/profile/index" component={ListRoom} /> */}
-
+        <ProtectedRoute path="/update/:idBlog" component = {UpdatePost} />
         <Redirect exact path="/" to="/posting" />
-        <Route path="/posting" component={Posting} />
+        <ProtectedRoute path="/posting" component = {Posting} />
+
+        <Redirect exact path="/" to="/page/403" />
+        <Route path="/page/403" render={(props) => <Page403 {...props} key={Date.now()}/>}/>
 
       </Switch>
     </DefaultLayout>

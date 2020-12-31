@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
 import Cropper from 'react-cropper';
-import 'cropperjs/dist/cropper.css'; // see installation section above for versions of NPM older than 3.0.0
-// If you choose not to use import, you need to assign Cropper to default
-// var Cropper = require('react-cropper').default
+import 'cropperjs/dist/cropper.css';
 import { Button } from 'antd'; 
-import {uploadImg} from '../../api/api'
-import axios from 'axios';
 export default class CropperIMG extends Component {
     _crop() {
         console.log("cutted")

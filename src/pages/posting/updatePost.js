@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Typography, Button, Form, message, Select, Input, Modal, Radio } from 'antd';
+import { Typography, Button, Form, message, Select, Input, Modal, Radio, Spin } from 'antd';
 import QuillEditor from '../../components/editor/QuillEditor';
 import classes from '../../data/classes.json'
 import { UploadOutlined } from '@ant-design/icons';
@@ -17,6 +17,7 @@ export const UpdatePost = (props) => {
     const [isRender, setIsRender] = useState(false)
     const [initialData, setInitialData ] = useState(null)
     const [initContent, setInitContent ] = useState(null)
+    const [loading, setLoading] = useState(false)
     useEffect( async () => {
         // call API
         const response = await GetArticleToUpdate(props.match.params.idBlog)
@@ -43,7 +44,6 @@ export const UpdatePost = (props) => {
       setFiles(event.target.files[0])
       setAvaImg(event.target.files)
       setVisible(true)
-    //   props.handleFile(fileUploaded);
     };
 
 
@@ -54,19 +54,10 @@ export const UpdatePost = (props) => {
     }
     const onFilesChange = (files) => {
         console.log("image changed")
-        // setFiles(files)
     }
     const handleCancel = () =>{
         setVisible(false)
     }
-    // const onImageChange = event => {
-    //     console.log("image changed")
-    //     console.log(event.target.files[0])
-    //     setFiles(event.target.files[0])
-    //     setAvaImg(event.target.files)
-    //     setVisible(true)
-
-    // };
     const handleCropImg = async (img) =>{
         const file = new File([img], `${files.name}`, { type: img.type })
         const response = await uploadImg(file)
@@ -76,10 +67,17 @@ export const UpdatePost = (props) => {
     }
     const onSubmit = async (event) =>{
         console.log(event)
+        setLoading(true)
         const response = await updatePost(props.match.params.idBlog, event, urlImg, content)
         console.log(response)
+
+        setLoading(false)
+        if(response.status==200){
+            message.success('Updated successfully');
+        }
     }
         return(
+        loading ? <Spin tip="Updating..." size="large" style={{textAlign: 'center'}}></Spin> :
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center' }}>
                 <Title level={2} > Sửa bài viết</Title>
@@ -116,46 +114,51 @@ export const UpdatePost = (props) => {
                                 }
                             </Select>
                         </Form.Item>
-                        <Form.Item name="dangerous" label="Nguy hiểm" rules={[{ required: true}]}>
-                            <Radio.Group>
-                                <Radio value={false}>Không</Radio>
-                                <Radio value={true}>Có</Radio>
-                            </Radio.Group>
-                        </Form.Item>
-                        <Form.Item name="underwater" label="Sống dưới nước" rules={[{ required: true}]}>
-                            <Radio.Group>
-                                <Radio value={false}>Không</Radio>
-                                <Radio value={true}>Có</Radio>
-                            </Radio.Group>
-                        </Form.Item>
-                        <Form.Item name="terrestrial" label="Sống trên cạn" rules={[{ required: true}]}>
-                            <Radio.Group>
-                                <Radio value={false}>Không</Radio>
-                                <Radio value={true}>Có</Radio>
-                            </Radio.Group>
-                        </Form.Item>
-                        
-                        <Form.Item name="pets" label="Thú nuôi" rules={[{ required: true}]}>
-                            <Radio.Group>
-                                <Radio value={false}>Không</Radio>
-                                <Radio value={true}>Có</Radio>
-                            </Radio.Group>
-                        </Form.Item>
-                        
-                        <Form.Item name="wild" label="Hoang dã" rules={[{ required: true}]}>
-                            <Radio.Group>
-                                <Radio value={false}>Không</Radio>
-                                <Radio value={true}>Có</Radio>
-                            </Radio.Group>
-                        </Form.Item>
-                        
-                        <Form.Item name="rare" label="Quý hiếm" rules={[{ required: true}]}>
-                            <Radio.Group>
-                                <Radio value={false}>Không</Radio>
-                                <Radio value={true}>Có</Radio>
-                            </Radio.Group>
-                        </Form.Item>
-    
+                        <div className="row m-0">
+                            <div className="col-md-6">
+                                <Form.Item name="dangerous" label="Nguy hiểm" rules={[{ required: true}]}>
+                                    <Radio.Group>
+                                        <Radio value={false}>Không</Radio>
+                                        <Radio value={true}>Có</Radio>
+                                    </Radio.Group>
+                                </Form.Item>
+                                <Form.Item name="underwater" label="Sống dưới nước" rules={[{ required: true}]}>
+                                    <Radio.Group>
+                                        <Radio value={false}>Không</Radio>
+                                        <Radio value={true}>Có</Radio>
+                                    </Radio.Group>
+                                </Form.Item>
+                                <Form.Item name="terrestrial" label="Sống trên cạn" rules={[{ required: true}]}>
+                                    <Radio.Group>
+                                        <Radio value={false}>Không</Radio>
+                                        <Radio value={true}>Có</Radio>
+                                    </Radio.Group>
+                                </Form.Item>
+                            </div>
+                            <div className="col-md-6">
+                                <Form.Item name="pets" label="Thú nuôi" rules={[{ required: true}]}>
+                                    <Radio.Group>
+                                        <Radio value={false}>Không</Radio>
+                                        <Radio value={true}>Có</Radio>
+                                    </Radio.Group>
+                                </Form.Item>
+                                
+                                <Form.Item name="wild" label="Hoang dã" rules={[{ required: true}]}>
+                                    <Radio.Group>
+                                        <Radio value={false}>Không</Radio>
+                                        <Radio value={true}>Có</Radio>
+                                    </Radio.Group>
+                                </Form.Item>
+                                
+                                <Form.Item name="rare" label="Quý hiếm" rules={[{ required: true}]}>
+                                    <Radio.Group>
+                                        <Radio value={false}>Không</Radio>
+                                        <Radio value={true}>Có</Radio>
+                                    </Radio.Group>
+                                </Form.Item>
+                            </div>
+
+                        </div>
                         <Form.Item
                             className="avatar"
                             label="Ảnh đại diện bài viết"

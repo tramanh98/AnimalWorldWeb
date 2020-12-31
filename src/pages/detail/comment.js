@@ -163,20 +163,19 @@ export default class AllComments extends React.Component {
 
     return (
       <>
-        
         <Comment
             avatar={
                 <Avatar
-                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                    src= ''
                     alt="Han Solo"
                 />
             }
             content={
                 <Editor
-                onChange={this.handleChange}
-                onSubmit={this.handleSubmit}
-                submitting={submitting}
-                value={value}
+                  onChange={this.handleChange}
+                  onSubmit={this.handleSubmit}
+                  submitting={submitting}
+                  value={value}
                 />
             }
         />

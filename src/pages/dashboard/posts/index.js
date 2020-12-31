@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import { Form, Input, Button, DatePicker, Gender, Checkbox } from 'antd';
+import { Form } from 'antd';
 import './style.css';
 import TagFollowing from './updateIC'
 import {UpdateInforPersonal} from './updateIP'

@@ -66,11 +66,11 @@ export const Posting = () => {
         console.log(response)
         setLoading(false)
         if(response.status==200){
-            message.success('This is a success message');
+            message.success('Created post successfully');
         }
     }
         return(
-            loading ? <Spin tip="Loading..." size="large"></Spin> :
+            loading ? <Spin tip="Posting..." size="large"></Spin> :
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center' }}>
                 <Title level={2} > Đăng bài viết của bạn</Title>
@@ -96,50 +96,50 @@ export const Posting = () => {
                         </Select>
                     </Form.Item>
 
-                    <div className="row">
-                    <div className="col-sm-6">
-                    <Form.Item name="dangerous" label="Nguy hiểm" rules={[{ required: true}]}>
-                        <Radio.Group>
-                            <Radio value={false}>Không</Radio>
-                            <Radio value={true}>Có</Radio>
-                        </Radio.Group>
-                    </Form.Item>
-                    <Form.Item name="underwater" label="Sống dưới nước" rules={[{ required: true}]}>
-                        <Radio.Group>
-                            <Radio value={false}>Không</Radio>
-                            <Radio value={true}>Có</Radio>
-                        </Radio.Group>
-                    </Form.Item>
-                    <Form.Item name="terrestrial" label="Sống trên cạn" rules={[{ required: true}]}>
-                        <Radio.Group>
-                            <Radio value={false}>Không</Radio>
-                            <Radio value={true}>Có</Radio>
-                        </Radio.Group>
-                    </Form.Item>
+                    <div className="row m-0">
+                        <div className="col-sm-6">
+                            <Form.Item name="dangerous" label="Nguy hiểm" rules={[{ required: true}]}>
+                                <Radio.Group>
+                                    <Radio value={false}>Không</Radio>
+                                    <Radio value={true}>Có</Radio>
+                                </Radio.Group>
+                            </Form.Item>
+                            <Form.Item name="underwater" label="Sống dưới nước" rules={[{ required: true}]}>
+                                <Radio.Group>
+                                    <Radio value={false}>Không</Radio>
+                                    <Radio value={true}>Có</Radio>
+                                </Radio.Group>
+                            </Form.Item>
+                            <Form.Item name="terrestrial" label="Sống trên cạn" rules={[{ required: true}]}>
+                                <Radio.Group>
+                                    <Radio value={false}>Không</Radio>
+                                    <Radio value={true}>Có</Radio>
+                                </Radio.Group>
+                            </Form.Item>
+                        </div>
+                        <div className="col-sm-6">
+                            <Form.Item name="pets" label="Thú nuôi" rules={[{ required: true}]}>
+                                <Radio.Group>
+                                    <Radio value={false}>Không</Radio>
+                                    <Radio value={true}>Có</Radio>
+                                </Radio.Group>
+                            </Form.Item>
+                            
+                            <Form.Item name="wild" label="Hoang dã" rules={[{ required: true}]}>
+                                <Radio.Group>
+                                    <Radio value={false}>Không</Radio>
+                                    <Radio value={true}>Có</Radio>
+                                </Radio.Group>
+                            </Form.Item>
+                            
+                            <Form.Item name="rare" label="Quý hiếm" rules={[{ required: true}]}>
+                                <Radio.Group>
+                                    <Radio value={false}>Không</Radio>
+                                    <Radio value={true}>Có</Radio>
+                                </Radio.Group>
+                            </Form.Item>
+                        </div>
                     </div>
-                    <div className="col-sm-6">
-                    <Form.Item name="pets" label="Thú nuôi" rules={[{ required: true}]}>
-                        <Radio.Group>
-                            <Radio value={false}>Không</Radio>
-                            <Radio value={true}>Có</Radio>
-                        </Radio.Group>
-                    </Form.Item>
-                    
-                    <Form.Item name="wild" label="Hoang dã" rules={[{ required: true}]}>
-                        <Radio.Group>
-                            <Radio value={false}>Không</Radio>
-                            <Radio value={true}>Có</Radio>
-                        </Radio.Group>
-                    </Form.Item>
-                    
-                    <Form.Item name="rare" label="Quý hiếm" rules={[{ required: true}]}>
-                        <Radio.Group>
-                            <Radio value={false}>Không</Radio>
-                            <Radio value={true}>Có</Radio>
-                        </Radio.Group>
-                    </Form.Item>
-                    </div>
-                </div>
                     <Form.Item
                         className="avatar"
                         label="Ảnh đại diện bài viết"
@@ -174,10 +174,8 @@ export const Posting = () => {
                             onFilesChange={onFilesChange}
                         />
                     </Form.Item>
-                    
 
                     <Form.Item >
-                        l
                         <div style={{ textAlign: 'center', margin: '2rem', }}>
                             <Button size="large" type="primary" htmlType="submit">
                                 Đăng bài

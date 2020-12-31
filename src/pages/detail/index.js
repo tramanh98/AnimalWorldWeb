@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import AllComments from './comment'
 import { TrendingPost, FavoritePost } from '../../components/rightcol'
-import {NameTag} from '../../components/badge'
 import {EyeOutlined} from '@ant-design/icons';
 import { Avatar, Affix, Button, Tooltip } from 'antd';
 import { UserOutlined, EditOutlined, HeartOutlined, HeartFilled, CommentOutlined } from '@ant-design/icons';
@@ -149,7 +148,7 @@ class Detail extends Component {
                     </div>
                     {
                         this.state.visibleComment ? 
-                        <AllComments comment = {this.state.comments} idPost = {this.state.results.id}/> :
+                            <AllComments comment = {this.state.comments} idPost = {this.state.results.id}/> :
                         ''
                     }
                 </div>

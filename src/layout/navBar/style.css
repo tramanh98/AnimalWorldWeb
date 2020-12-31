@@ -1,3 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+.fontANW{
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 700;
+  line-height: 1.3em;
+}
+.font-roboto-nav{
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 400;
+  line-height: 1.5em;
+  font-size: 14px;
+}
+.fontIcon{
+  font-family: 'Open Sans';
+  line-height: 1.85;
+}
+
 #wrap-navbar{
     z-index: 99;
     display: flex;

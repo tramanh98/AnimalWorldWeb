@@ -1,6 +1,4 @@
 import httpClient from './http-client';
-import { message, notification } from 'antd';
-import { useDispatch, useSelector } from 'react-redux'
 
 const Login_Fb = async (token) =>{
     try {
@@ -346,7 +344,7 @@ const GetInforUser = async (idUser) =>{
 // lấy tất cả các bài báo của user đó ( của mình hoặc của người khác)
 const GetAllUserArticle = async (page, idUser) =>{
     try{
-        if(page == 1){
+        if(page === 1){
             const response = await httpClient.get(`api/get/all/articles/?idUser=${idUser}`);
             return response
         }
@@ -408,7 +406,7 @@ const UnvoteArticle = async (idVote) =>{
 
 const latestPost = async (page) =>{
     try {
-        if(page == 1){
+        if(page === 1){
             const response = await httpClient.get(`api/latest/article`);
             return response
         }
@@ -424,7 +422,7 @@ const latestPost = async (page) =>{
 const trendingPost = async (page) =>{
 
     try {
-        if(page == 1){
+        if(page === 1){
             const response = await httpClient.get(`api/trending/article`);
             return response
         }
@@ -440,7 +438,7 @@ const trendingPost = async (page) =>{
 const favoritePost = async (page) =>{
 
     try {
-        if(page == 1){
+        if(page === 1){
             const response = await httpClient.get(`api/favorite/article`);
             return response
         }
@@ -469,12 +467,42 @@ const animalClassPost = async (page, idClass) =>{
 }
 const filterAnimal = async (page, idType) =>{
     try {
-        if(page == 1){
+        if(page === 1){
             const response = await httpClient.get(`api/filter/article/?option=${idType}`);
             return response
         }
         else{
             const res = await httpClient.get(`api/filter/article/?option=${idType}&page=${page}`);
+            return res
+        }
+    } catch (error) {
+        return error
+    }  
+}
+
+
+const GetArticleFollowingTag = async (page) =>{
+    const token = window.localStorage.getItem('token');
+    const typetoken = window.localStorage.getItem('typetoken'); 
+    try {
+        if(page === 1){
+            const response = await httpClient.get(`api/filter/article/following/tag`,
+            {
+                headers: {
+                    Authorization: `${typetoken} ${token}`,
+                }
+            }
+            );
+            return response
+        }
+        else{
+            const res = await httpClient.get(`api/filter/article/following/tag/?page=${page}`,
+            {
+                headers: {
+                    Authorization: `${typetoken} ${token}`,
+                }
+            }
+            );
             return res
         }
     } catch (error) {
@@ -488,5 +516,5 @@ export {
     apiUnfollowTag, uploadImg, postBlog, getDetailBlog, apiComment, 
     likeComment, dislikeComment, updatePost, EditProfile, GetArticleToUpdate, ApiDeleteArticle,
     GetInforUser, GetAllUserArticle, GetCommentsArticle, VoteArticle, UnvoteArticle, latestPost,
-    trendingPost, favoritePost,animalClassPost, filterAnimal
+    trendingPost, favoritePost,animalClassPost, filterAnimal, GetArticleFollowingTag
 }
