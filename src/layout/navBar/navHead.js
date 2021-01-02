@@ -9,7 +9,7 @@ import { logout } from '../../api/api'
 import { connect, useDispatch, useSelector } from "react-redux";
 
 const ThongBao = () => {
-    const text = <span>Thông báo</span>;
+    const text = <span className="font-roboto-nav">Thông báo</span>;
     const content = (
         <div>
             <p>Không có thông báo nào</p>
@@ -32,7 +32,7 @@ const loginButton = (props) =>{
         props.history.push('/login');
     }
     return(
-        <Button type="link" className="btnlgin" onClick = {routeToLogin}>ĐĂNG NHẬP</Button>
+        <Button type="link" className="btnlgin font-roboto-nav" value="large" onClick = {routeToLogin}>ĐĂNG NHẬP</Button>
     );
 }
 
@@ -42,7 +42,7 @@ const registerButton = (props) =>{
     }
     return(
 
-        <Button type="link" className="btnlgin" onClick = {routeToRegister} >ĐĂNG KÍ</Button>
+        <Button type="link" className="btnlgin font-roboto-nav" value="large" onClick = {routeToRegister} >ĐĂNG KÍ</Button>
     );
 }
 const Profile = (props) => {

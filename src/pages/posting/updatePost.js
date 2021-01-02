@@ -70,10 +70,10 @@ export const UpdatePost = (props) => {
         setLoading(true)
         const response = await updatePost(props.match.params.idBlog, event, urlImg, content)
         console.log(response)
-
         setLoading(false)
         if(response.status==200){
             message.success('Updated successfully');
+            
         }
     }
         return(
@@ -198,7 +198,7 @@ export const UpdatePost = (props) => {
                         <Form.Item >
                             <div style={{ textAlign: 'center', margin: '2rem', }}>
                                 <Button size="large" type="primary" htmlType="submit">
-                                    Đăng bài
+                                    Cập nhập
                                 </Button>
                             </div>
                         </Form.Item>

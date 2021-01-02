@@ -159,6 +159,7 @@ export const LoginForm = () => {
                             callback={lgFacebook} 
                             cssClass="my-facebook-button-class"
                             textButton="Facebook"
+                            icon={<i className="fab fa-facebook-f mr-2"></i>}
                         />
                         <GoogleLogin
                             clientId="311307780250-ns2lg1103qoblsnbmklpr3f8c6d1v53e.apps.googleusercontent.com"
@@ -167,12 +168,9 @@ export const LoginForm = () => {
                             className="google-button"
                             render={renderProps => (
                                 <Button style = {{width: '45%'}} onClick={renderProps.onClick}><GoogleOutlined />Google</Button>
-                                // <button onClick={renderProps.onClick} style={customStyle}>Google</button>
                             )}
                         >
                         </GoogleLogin>
-                        {/* <Button style = {{width: '45%'}} onClick={lgFacebook}><IconFont type="icon-facebook" />Facebook</Button>
-                        <Button style = {{width: '45%'}} onClick={lgGoogle}><GoogleOutlined />Google</Button> */}
                     </div>
                 </Form>
             </div>

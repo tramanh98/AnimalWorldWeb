@@ -57,7 +57,11 @@
     -webkit-box-orient: vertical;  
     line-height: 1.85;
     font-family: 'Open Sans';
-  }
+}
+
+.description h1, .description h2, .description h3{
+    font-size: 16px;
+}
 
 
 /******* NAME TAG *********/

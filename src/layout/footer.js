@@ -13,7 +13,7 @@ export const Footer = () =>
 
                     <div className="col-6 col-md-6 col-lg-5 text-md-left  contact-with-us">
                       <h6 className="mb-0">KẾT NỐI VỚI CHÚNG TÔI</h6>
-                      <img src="../images/logo.png" className="foot-logo"/>
+                      <img src="../images/logo.png" className="foot-logo1"/>
                     </div>
                     <div className="col-6 col-md-6 col-lg-7 text-right icon-social">
                       <a className="fb-ic">
@@ -44,28 +44,14 @@ export const Footer = () =>
                 <div className="row ">
 
                   <div className="col-12 col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 footer-react">
-
-                    {/* <h6 className="text-uppercase font-weight-bold" >2HOME</h6>
-                    <hr style={{width: '60px'}}/> */}
-                    <img src="../images/logo.png" className="foot-logo"/>
-                    <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-                      consectetur
-                      adipisicing elit.</p>
-
+                    <img src="../images/logo1.png" className="foot-logo"/>
                   </div>
                   <div className="col-6 col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 footer-react">
-
                     <h6 className="text-uppercase font-weight-bold" >Về Animal World</h6>
                     
-                    <hr style={{width: '60px'}}/>
+                    <hr />
                     <p >
                       <a href="#!">Giới thiệu</a>
-                    </p>
-                    <p>
-                      <a href="#!">Tuyển dụng</a>
-                    </p>
-                    <p>
-                      <a href="#!">Truyền thông</a>
                     </p>
                     <p>
                       <a href="#!">Blog</a>
@@ -75,13 +61,7 @@ export const Footer = () =>
                   <div className="col-6 col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 footer-react">
 
                     <h6 className="text-uppercase font-weight-bold">Hỗ trợ</h6>
-                    <hr style={{width: '60px'}}/>
-                    <p>
-                      <a href="#!">Trung tâm trợ giúp</a>
-                    </p>
-                    <p>
-                      <a href="#!">An toàn mua bán</a>
-                    </p>
+                    <hr style={{width: "70px"}} className="mx-0"/>
                     <p>
                       <a href="#!">Quy định cần biết</a>
                     </p>
@@ -91,9 +71,8 @@ export const Footer = () =>
 
                   </div>
                   <div className="col-12 col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-2 footer-react">
-
                     <h6 className="text-uppercase font-weight-bold">Liên lạc</h6>
-                    <hr style={{width: '60px'}}/>
+                    <hr style={{width: "70px"}} className="mx-0"/>
                     <p>
                       <i className="fas fa-home mr-3"></i> Khu phố 6, Phường Linh Trung, Quận Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam.</p>
                     <p>

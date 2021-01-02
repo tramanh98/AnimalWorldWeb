@@ -234,7 +234,6 @@ class NavFoot extends React.Component {
             bodyStyle={{ padding: 0 }}
             width={300}
             >
-                
                 <div className="my-account-mobile" onClick={this.handleClick}>
                 <If condition={!this.props.user} props={this.props} component={loginButton}  props={{
                         visible: false}
@@ -273,7 +272,6 @@ class NavFoot extends React.Component {
                                 <a onClick={(e) => this.classAnimalSearch(e, index)} className= "nav-foot-item">{obj.name}</a> 
                             </Menu.Item>
                             : ''
-
                         ))
                     }
                     </SubMenu>
@@ -281,9 +279,6 @@ class NavFoot extends React.Component {
                     <Menu.Item><a onClick={this.followingPost} className= "nav-foot-item">ĐANG THEO DÕI</a></Menu.Item>
                 </Menu>
             </Drawer>
-
-
-
 
             <div className="navother font-roboto-nav" id="wrap-navbar">
                 <div id="navbar-foot" 

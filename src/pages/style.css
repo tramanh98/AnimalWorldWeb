@@ -123,3 +123,15 @@ a.subnav_link:visited {
   
 a.subnav_link:active {
     color: black; }
+
+.my-facebook-button-class{
+    width: 100%;
+    border: 1px solid gainsboro;
+    border-radius: 1px;
+    background-color: white;
+    padding: 4px 70px ;
+}
+.my-facebook-button-class:hover{
+    border: 1px solid rgb(24, 144, 255);
+    color: rgb(24, 144, 255);
+}
