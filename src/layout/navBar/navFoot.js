@@ -210,7 +210,7 @@ class NavFoot extends React.Component {
     const { user } = this.context;
     return (
         
-        <nav className={this.state.classNm}  >
+        <nav >
             <div className="nav-mobile">
                 <div onClick={this.showDrawer} className="nav-icon-mobile" >
                     <div className="btn-menu-mobile"></div>
@@ -280,7 +280,7 @@ class NavFoot extends React.Component {
                 </Menu>
             </Drawer>
 
-            <div className="navother font-roboto-nav" id="wrap-navbar">
+            <div className="navother font-roboto-nav" id="wrap-navbar" style={{zIndex: "10"}}>
                 <div id="navbar-foot" 
                 style={{
                     padding: this.state.stylepd,
@@ -289,7 +289,8 @@ class NavFoot extends React.Component {
                     width: this.state.widthst,
                     borderBottom: this.state.border_navfoot,
                     borderTop: this.state.border_navfoot,
-                    boxShadow: this.state.box_shadow
+                    boxShadow: this.state.box_shadow,
+                    zIndex: '10'
                 }} >
                     
                     <a>

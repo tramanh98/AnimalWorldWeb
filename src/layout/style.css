@@ -5,7 +5,9 @@
 
 /*------------- This is for NAVBAR  --------------------*/
 
-
+.navother{
+  z-index: 100 !important;
+}
 
   .wrap-navbar-head{
     display: flex;
