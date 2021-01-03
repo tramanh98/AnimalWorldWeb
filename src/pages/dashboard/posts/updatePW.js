@@ -1,14 +1,28 @@
 import React, {Component} from 'react';
-import { Form, Input, Button, Spin, message } from 'antd';
+import { Form, Input, Button, Spin, message, notification  } from 'antd';
 import './style.css';
 import 'react-phone-input-2/lib/style.css'
-export const UpdatePassword = () =>{
+import { changePassWord } from '../../../api/api'
+export const UpdatePassword =  () =>{
+    const onChangePass = async (event) =>{
+        const res = await changePassWord(event)
+        if(res.status === 200){
+            message.success("Changed successfully")
+            notification['success']({
+                message: 'Changed successfully'
+              });
+            console.log(res)
+        }
+        else {
+            message.error(res.error)
+        }
+    }
     return(
         <div>
-            <Form layout="vertical" >
+            <Form layout="vertical" onFinish={onChangePass} >
                 <Input.Group>
                     <Form.Item
-                            name="passwordcurrent"
+                            name="oldpass"
                             label="Current Password"
                             rules={[
                             {
@@ -21,7 +35,7 @@ export const UpdatePassword = () =>{
                             <Input.Password />
                     </Form.Item>
                     <Form.Item
-                            name="password1"
+                            name="pass1"
                             label="New Password"
                             rules={[
                             {
@@ -35,9 +49,9 @@ export const UpdatePassword = () =>{
                     </Form.Item>
 
                     <Form.Item
-                        name="password2"
+                        name="pass2"
                         label="Confirm Password"
-                        dependencies={['password1']}
+                        dependencies={['pass1']}
                         hasFeedback
                         rules={[
                         {
@@ -46,7 +60,7 @@ export const UpdatePassword = () =>{
                         },
                         ({ getFieldValue }) => ({
                             validator(rule, value) {
-                            if (!value || getFieldValue('password1') === value) {
+                            if (!value || getFieldValue('pass1') === value) {
                                 return Promise.resolve();
                             }
 
@@ -61,10 +75,7 @@ export const UpdatePassword = () =>{
                     <Form.Item >
                         <div style={{ textAlign: 'right'}}>
                             <Button htmlType="submit" style={{ margin: '5px', }}>
-                                Cancel 
-                            </Button>
-                            <Button htmlType="submit" style={{ margin: '5px', }}>
-                            Update
+                                Update
                             </Button>
                         </div>
                     </Form.Item>

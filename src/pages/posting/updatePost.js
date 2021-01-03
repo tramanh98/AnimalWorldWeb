@@ -1,14 +1,17 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Typography, Button, Form, message, Select, Input, Modal, Radio, Spin } from 'antd';
+import { Typography, Button, Form, message, Select, Input, Modal, Radio, Spin, notification } from 'antd';
 import QuillEditor from '../../components/editor/QuillEditor';
 import classes from '../../data/classes.json'
 import { UploadOutlined } from '@ant-design/icons';
 import CropperIMG from '../../components/IMGcropper/cropper'
 import {uploadImg, updatePost, GetArticleToUpdate} from '../../api/api'
+import { connect, useDispatch, useSelector } from "react-redux";
+
 const { Title } = Typography;
 const { Option } = Select;
 
 export const UpdatePost = (props) => {
+    const user = useSelector((state) => state.currentUser);
     const [content, setContent] = useState("")
     const [files, setFiles] = useState([])
     const [avaImg, setAvaImg] = useState([])
@@ -73,7 +76,15 @@ export const UpdatePost = (props) => {
         setLoading(false)
         if(response.status==200){
             message.success('Updated successfully');
-            
+            setUrlImg('')
+            props.history.push(`/manage/account/${user.idUser}`)
+        }
+        else{
+            notification['error']({
+                message: 'Posted failed',
+                description: response.error
+            });
+            setUrlImg('')
         }
     }
         return(

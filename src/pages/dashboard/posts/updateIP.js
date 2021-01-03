@@ -1,5 +1,5 @@
 import React, {Component, useState, useRef, useEffect} from 'react';
-import { Form, Input, Button, Spin, Avatar, message, Modal } from 'antd';
+import { Form, Input, Button, Spin, Avatar, message, Modal, notification } from 'antd';
 import './style.css';
 import { UserOutlined } from '@ant-design/icons';
 import PhoneInput from 'react-phone-input-2'
@@ -44,21 +44,32 @@ export const UpdateInforPersonal = () =>{
         const uploadAvatar = await updateAvatar(urlImg)
         const response = await EditProfile(event)
         console.log(response)
-        const {data} = response
-
-        const storetoRedux = {
-            isLogin: true,
-            idUser: data.id,
-            avatar: data.avatar,
-            username: data.username, 
-            fname: data.first_name,
-            lname: data.last_name,
-            email: data.email,
+        if(response.status === 200){
+            notification['success']({
+                message: 'Updated profile successfully'
+              });
+            const {data} = response
+            const storetoRedux = {
+                isLogin: true,
+                idUser: data.id,
+                avatar: data.avatar,
+                username: data.username, 
+                fname: data.first_name,
+                lname: data.last_name,
+                email: data.email,
+            }
+            dispatch({
+                type: 'LOGIN_USER',
+                payload: storetoRedux
+            })
         }
-        dispatch({
-            type: 'LOGIN_USER',
-            payload: storetoRedux
-        })
+        else{
+            notification['error']({
+                message: 'Updated failed',
+                description: response.error
+            });
+        }
+        
     }
     return(
         <div className="edit-personal-info" >

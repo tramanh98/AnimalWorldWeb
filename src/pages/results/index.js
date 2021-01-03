@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react"
 import queryString from 'query-string'
-import { Pagination, Spin } from 'antd';
+import { Pagination, Spin, message } from 'antd';
 import {trendingPost, GetArticleFollowingTag, animalClassPost, filterAnimal} from '../../api/api'
 import { FramePost1} from '../../components/framePost'
 import classes from '../../data/classes.json'
@@ -29,6 +29,9 @@ export const Results = (props) => {
                     name: "class-animal"
                 })
             }
+            else{
+                message.error(res.error)
+            }
         }
         else if(value.sa != undefined)
         {
@@ -42,6 +45,9 @@ export const Results = (props) => {
                     name: "feature"
                 })
             }
+            else{
+                message.error(res.error)
+            }
         }
         else if(value.q != undefined){
             if(value.q === "top"){
@@ -51,6 +57,9 @@ export const Results = (props) => {
                     setArticle(data.results)
                     setCountResult(data.count)
                 }
+                else{
+                    message.error(res.error)
+                }
             }
             else{
                 const res = await GetArticleFollowingTag(1)
@@ -58,6 +67,9 @@ export const Results = (props) => {
                     const {data} = res
                     setArticle(data.results)
                     setCountResult(data.count)
+                }
+                else{
+                    message.error(res.error)
                 }
             }
         }
@@ -78,6 +90,9 @@ export const Results = (props) => {
                 setArticle(data.results)
                 setCountResult(data.count)
             }
+            else{
+                message.error(res.error)
+            }
         }
         else if(value.sa != undefined)
         {
@@ -86,6 +101,9 @@ export const Results = (props) => {
                 const {data} = res
                 setArticle(data.results)
                 setCountResult(data.count)
+            }
+            else{
+                message.error(res.error)
             }
         }
         else if(value.q !== undefined){
@@ -96,6 +114,9 @@ export const Results = (props) => {
                     setArticle(data.results)
                     setCountResult(data.count)
                 }
+                else{
+                    message.error(res.error)
+                }
             }
             else{
                 const res = await GetArticleFollowingTag(1)
@@ -103,6 +124,9 @@ export const Results = (props) => {
                     const {data} = res
                     setArticle(data.results)
                     setCountResult(data.count)
+                }
+                else{
+                    message.error(res.error)
                 }
                 
             }

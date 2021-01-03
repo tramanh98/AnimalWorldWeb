@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState, useRef } from 'react';
-import { Typography, Button, Form, message, Select, Input, Modal, Radio } from 'antd';
+import { Typography, Button, Form, message, Select, Input, Modal, Radio, notification } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import QuillEditor from '../../components/editor/QuillEditor';
 import classes from '../../data/classes.json'
@@ -7,12 +7,13 @@ import CropperIMG from '../../components/IMGcropper/cropper'
 import {uploadImg, postBlog} from '../../api/api'
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
 const { Title } = Typography;
 const { Option } = Select;
 
 
-export const Posting = () => {
+export const Posting = (props) => {
     const [content, setContent] = useState("")
     const [files, setFiles] = useState([])
     const [avaImg, setAvaImg] = useState([])
@@ -65,8 +66,17 @@ export const Posting = () => {
         const response = await postBlog(event, urlImg, content)
         console.log(response)
         setLoading(false)
-        if(response.status==200){
+        if(response.status === 201){
             message.success('Created post successfully');
+            setUrlImg('')
+            props.history.push('/posting')
+        }
+        else{
+            notification['error']({
+                message: 'Posted failed',
+                description: response.error
+            });
+            setUrlImg('')
         }
     }
         return(

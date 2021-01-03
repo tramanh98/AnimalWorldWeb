@@ -13,7 +13,8 @@ const EachComment = (props) =>{
     const [idVotecmt, setIdVotecmt] = useState(null);
     const user = useSelector((state) => state.currentUser);
     useEffect(() => {
-      for( var x of props.votes){
+      const {votes} = props
+      for( var x of Object.keys(votes)){
         if(x.user === user.idUser){
           console.log(user.idUser)
           setIdVotecmt(x.id)

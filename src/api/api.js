@@ -510,11 +510,32 @@ const GetArticleFollowingTag = async (page) =>{
     }  
 }
 
+
+const changePassWord = async (e) =>{
+    const token = window.localStorage.getItem('token');
+    const typetoken = window.localStorage.getItem('typetoken'); 
+    try {
+        const response = await httpClient.post(`auth/password/change/`,
+        {
+            new_password1: e.pass1,
+            new_password2: e.pass2,
+            old_password: e.oldpass
+        },
+        {
+            headers: {
+                Authorization: `${typetoken} ${token}`,
+            }
+        });
+        return response
+    } catch (error) {
+        return error
+    }
+}
 export { 
     Login_Fb, Login_GG, getProfile, updateAvatar, 
     logout, Login_sv, Register_sv, getTagsFollowing, apiFollowTag,
     apiUnfollowTag, uploadImg, postBlog, getDetailBlog, apiComment, 
     likeComment, dislikeComment, updatePost, EditProfile, GetArticleToUpdate, ApiDeleteArticle,
     GetInforUser, GetAllUserArticle, GetCommentsArticle, VoteArticle, UnvoteArticle, latestPost,
-    trendingPost, favoritePost,animalClassPost, filterAnimal, GetArticleFollowingTag
+    trendingPost, favoritePost,animalClassPost, filterAnimal, GetArticleFollowingTag, changePassWord
 }

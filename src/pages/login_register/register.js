@@ -25,25 +25,37 @@ export const RegisterForm = () => {
         setLoading(true)
         const rgt = await Register_sv(values)
         console.log(rgt)
-        const profiledt = await getProfile(`Token ${rgt.data.key}`)
-        localStorage.setItem("token",rgt.data.key)
-        localStorage.setItem("typetoken", 'Token')
-        const {data} = profiledt
-        const storetoRedux = {
-            isLogin: true,
-            avatar: data.avatar,
-            username: data.username, 
-            fname: data.first_name,
-            lname: data.last_name,
-            email: data.email,
+        if(rgt.status === 201){
+            const profiledt = await getProfile(`Token ${rgt.data.key}`)
+            if(profiledt.status === 200){
+                localStorage.setItem("token",rgt.data.key)
+                localStorage.setItem("typetoken", 'Token')
+                const {data} = profiledt
+                const storetoRedux = {
+                    isLogin: true,
+                    avatar: data.avatar,
+                    username: data.username, 
+                    fname: data.first_name,
+                    lname: data.last_name,
+                    email: data.email,
+                }
+                // do something to redux
+                dispatch({
+                    type: 'LOGIN_USER',
+                    payload: storetoRedux
+                })
+                history.push("/home");
+            }
+            else{
+                message.error(profiledt.error)
+            }
+            
         }
-        // do something to redux
-        dispatch({
-            type: 'LOGIN_USER',
-            payload: storetoRedux
-        })
+        else{
+            message.error(rgt.error)
+        }
         setLoading(false)
-        history.push("/home");
+        
       };
     
     return(

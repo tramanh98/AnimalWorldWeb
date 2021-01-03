@@ -32,6 +32,9 @@ const FollowingTag = (props) =>{
             setArrTag(arr)
             setArrObj(followingtag)
         }
+        else{
+            message.error(response.error)
+        }
         setLoading(false)
       }, []);
 
@@ -83,12 +86,16 @@ export const ManageAccount = (props) => {
             else{
                 setIsOwner(false)
             }
+        }else{
+            message.error(res1.error)
         }
         const res2 = await GetAllUserArticle(1, props.match.params.idUser)
         console.log(res2)
         if(res2.status === 200){
             setAllarticles(res2.data.results)
             setCountResult(res2.data.count)
+        }else{
+            message.error(res2.error)
         }
         setLoading(false)
       }, []);
@@ -115,6 +122,8 @@ export const ManageAccount = (props) => {
             console.log(res)
             const {data} = res
             setAllarticles(data.results)
+        }else{
+            message.error(res.error)
         }
         setCurrentPage(page)
         setLoading(false)

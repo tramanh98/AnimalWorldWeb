@@ -14,39 +14,54 @@ const IconFont = createFromIconfontCN({
 const { TabPane } = Tabs;
 const { Title } = Typography;
 
+
+
+
 export const LoginForm = () => {
     const [loading, setLoading] = useState(false)
     const dispatch = useDispatch()
     const history = useHistory();
-    const lgFacebook = async (response) =>{
-        console.log(response)
-        setLoading(true)
-        const res = await Login_Fb(response.accessToken)  // chuyển đổi token 
-        const {data} = res
-        localStorage.setItem("token",data.access_token)
-        localStorage.setItem("typetoken", data.token_type)
-        // lưu riêng avatar của user 
-        const avt = await updateAvatar(response.picture.data.url )
-        const profiledt = await getProfile(`${data.token_type} ${data.access_token}`)
-        // lưu token và loại token xuống local storage 
 
-        console.log(res)
+    const dataToRedux = (data) =>{
         const storetoRedux = {
             isLogin: true,
-            idUser: profiledt.data.id,
-            avatar: profiledt.data.avatar,
-            username: profiledt.data.username, 
-            fname: profiledt.data.first_name,
-            lname: profiledt.data.last_name,
-            email: profiledt.data.email,
+            idUser: data.id,
+            avatar: data.avatar,
+            username: data.username, 
+            fname: data.first_name,
+            lname: data.last_name,
+            email: data.email,
         }
         dispatch({
             type: 'LOGIN_USER',
             payload: storetoRedux
         })
-        setLoading(false)
-        history.push("/home");
-
+    }
+    const lgFacebook = async (response) =>{
+        console.log(response)
+        setLoading(true)
+        try{
+            const res = await Login_Fb(response.accessToken)  // chuyển đổi token 
+            const {data} = res
+            localStorage.setItem("token",data.access_token)
+            localStorage.setItem("typetoken", data.token_type)
+            // lưu riêng avatar của user 
+            const avt = await updateAvatar(response.picture.data.url )
+            const profiledt = await getProfile(`${data.token_type} ${data.access_token}`)
+            // lưu token và loại token xuống local storage 
+            if(profiledt.status === 200){
+                dataToRedux(profiledt.data)
+                history.push("/home");
+            }
+            else{
+                message.error(profiledt.error)
+            }
+            setLoading(false)
+        }
+        catch (error){
+            message.error(error)
+        }
+        
     }
     const lgGoogle = async (response) =>{
         console.log(response)
@@ -57,23 +72,15 @@ export const LoginForm = () => {
         localStorage.setItem("typetoken", data.token_type)
         const avt = await updateAvatar(response.profileObj.imageUrl )
         const profiledt = await getProfile(`${data.token_type} ${data.access_token}`)
-        const storetoRedux = {
-            isLogin: true,
-            idUser: profiledt.data.id,
-            avatar: profiledt.data.avatar,
-            username: profiledt.data.username, 
-            fname: profiledt.data.first_name,
-            lname: profiledt.data.last_name,
-            email: profiledt.data.email,
+        if(profiledt.status === 200){
+            dataToRedux(profiledt.data)
+            history.push("/home");
         }
-        dispatch({
-            type: 'LOGIN_USER',
-            payload: storetoRedux
-        })
+        else{
+            message.error(profiledt.error)
+        }
         setLoading(false)
-        history.push("/home");
     }
-
 
 
     const onFinish = async (values) => {
@@ -81,24 +88,25 @@ export const LoginForm = () => {
         setLoading(true)
         const lg = await Login_sv(values.email, values.password)
         console.log(lg)
-        const profiledt = await getProfile(`Token ${lg.data.key}`)
-        localStorage.setItem("token",lg.data.key)
-        localStorage.setItem("typetoken", 'Token')
-        const storetoRedux = {
-            isLogin: true,
-            idUser: profiledt.data.id,
-            avatar: profiledt.data.avatar,
-            username: profiledt.data.username, 
-            fname: profiledt.data.first_name,
-            lname: profiledt.data.last_name,
-            email: profiledt.data.email,
+        if(lg.status === 200){
+            const profiledt = await getProfile(`Token ${lg.data.key}`)
+            localStorage.setItem("token",lg.data.key)
+            localStorage.setItem("typetoken", 'Token')
+    
+            if(profiledt.status === 200){
+                dataToRedux(profiledt.data)
+                history.push("/home");
+            }
+            else{
+                message.error(profiledt.error)
+            }
+        } else
+        {
+            message.error(lg.error)
         }
-        dispatch({
-            type: 'LOGIN_USER',
-            payload: storetoRedux
-        })
         setLoading(false)
-        history.push("/home");
+        
+        
 
     };
 
@@ -106,12 +114,6 @@ export const LoginForm = () => {
         console.log('Failed:', errorInfo);
     };
     
-  const customStyle ={
-    padding: "10px 30px",
-    color: "black",
-    fontWeight: "bold",
-    margin:"10px 30px"
-  }
     return(
         loading ? <Spin tip="Login..." size="large" style={{textAlign: 'center'}}></Spin> :
         <div className ="lg-rgt-form py-5 px-4" style={{ maxWidth: '500px', margin: '2rem auto' }}>

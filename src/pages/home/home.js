@@ -6,6 +6,8 @@ import {latestPost, animalClassPost} from '../../api/api'
 import { FramePost1, FramePost2, FramePost3} from '../../components/framePost'
 import { Link } from "react-router-dom";
 import { TrendingPost, FavoritePost } from '../../components/rightcol'
+import {  message } from 'antd';
+
 const LastestPost = () =>{
 
     const [article, setArticle] = useState(null)
@@ -13,9 +15,11 @@ const LastestPost = () =>{
     useEffect( async () =>{
         const res = await latestPost(1)
         if(res.status === 200){
-            console.log(res)
             const {data} = res
             setArticle(data.results)
+        }
+        else{
+            message.error(res.error)
         }
     }, []);
     return(
@@ -63,9 +67,11 @@ const MammaliaPost = () =>{
     useEffect( async () =>{
         const res = await animalClassPost(1, 5)
         if(res.status === 200){
-            console.log(res)
             const {data} = res
             setArticle(data.results)
+        }
+        else{
+            message.error(res.error)
         }
 
     }, []);
@@ -98,9 +104,11 @@ const MammaliaPost = () =>{
         useEffect( async () =>{
             const res = await animalClassPost(1,1)
             if(res.status === 200){
-                console.log(res)
                 const {data} = res
                 setArticle(data.results)
+            }
+            else{
+                message.error(res.error)
             }
     
         }, []);
@@ -130,9 +138,11 @@ const MammaliaPost = () =>{
             useEffect( async () =>{
                 const res = await animalClassPost(1,2)
                 if(res.status === 200){
-                    console.log(res)
                     const {data} = res
                     setArticle(data.results)
+                }
+                else{
+                    message.error(res.error)
                 }
         
             }, []);
@@ -174,9 +184,13 @@ const MammaliaPost = () =>{
     const [article, setArticle] = useState(null)
     useEffect( async () =>{
             const res = await animalClassPost(1,3)
-            console.log(res)
-            const {data} = res
-            setArticle(data.results)
+            if(res.status === 200){
+                const {data} = res
+                setArticle(data.results)
+            }
+            else{
+                message.error(res.error)
+            }
         },
 
      []);
